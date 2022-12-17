@@ -1,0 +1,1587 @@
+Setup:-
+1.Install Nodejs, npm and Angular CLI.
+2.To install new angular app
+	-- npm new app_name
+
+Introduction:-
+1. Every Angular app consists of RootModule(AppModule)
+2. Each module consists of at least one component, by default root component and services
+3. Components contain HTML + CSS.
+	--> ng g c component_name
+4. Services have business logic.
+	-->ng g s service_name
+5. Modules return the view on the webpage.
+6. To restart the app use 
+	npm start (or) ng serve
+
+Data Types in TypeScript:-
+1. String
+2. number
+3. boolean
+4. array
+5. enum
+6. tuple
+7. any
+8. void
+9. never
+
+Class in TypeScript:-
+-> InTS class we have a constructor.
+-> In java, we have parameterized and default constructors in one class whereas in JS and TS we should contain only one constructor either parameterized or default constructor, if we try to implement both it will show an error.
+-> Constructors are responsible for creating an instance of the class.
+-> In classes, we have public, private (#), protected.
+
+Syntax:-
+class objName {
+	id!: number
+	//Without ! mark it shows an error up to it gets assigned to any value
+	name!: string
+	address!: string
+}
+
+Getters and Setters in TS:-
+Syntax:-
+get empId() {
+return this.id
+}
+
+set empId {
+
+}
+
+Interfaces in TS:-
+Syntax:-
+interface User {
+	parameters?: dataTypes
+}
+
+let userDetails =  new User('paramter values', ' ', ' ');
+
+or
+
+let userDetails : User = {' ', ' ', ' '}
+
+-> If we miss any property in the above line it will show an error for that we have to use the operator "?". Indicating with ? means that we are saying it is an optional.
+
+
+
+Modules:-
+Every angular app consists of at least one module known as the root module or app module.
+
+Component:-
+In this we have
+1. Template (View, HTML + CSS)
+2. Class (Code TS and data methods)
+3.MetaData (Information(selector, templateUrl, styleUrl), decorator)
+
+To generate a new component
+	--> npm g c component_name
+		where g - generate
+  			 c - component
+
+
+Getting Started:-
+To create a new angular app
+--> ng new angular_app_name
+
+To create a new component(generates HTML, CSS, .ts file)
+--> ng g c component-name
+
+To create a service
+--> ng g s service_name
+
+Interpolation {{property/expression}}:-
+Binding data from class to template using the double curly braces {{}}.
+
+In HTML
+Welcome {{name}}
+
+In ts file
+name = 'Akhil'
+
+Output?HTML view:-
+Welcome Akhil
+
+Using Interpolation:
+-->Mathematical operations
+<h1>{{2+2}}</h1>
+
+-->Concatenation
+<h1>{{'Welcome' + name}}</h1>
+
+-->Methods
+<h1>{{name.length}}</h1>
+<h1>{{name.toUpperCase}}</h1>
+
+-->Calliing Functions
+<h1>{{greetUser()}}</h1>
+
+In TS file
+name = 'Akhil'
+
+greetUser() {
+	return 'Hello' + name;
+}
+
+
+Output/HTML View:-
+4
+Welcome Akhil
+5
+AKHIL
+Hello Akhil
+
+
+Limitations:-
+-->We cannot do assignments
+<h1>{{a = 2 + 2}}</h1>
+
+Output:-
+Throws an error in the console.
+
+-->We cannot access global JavaScript variables like a window, screen, etc, directly. But we can get access dynamically by assigning to a variable. 
+<h1>{{window.location.href}}</h1>
+
+Output:-
+Error
+
+By dynamically
+In TS file
+
+let siteUrl = window.location.href
+
+In HTML
+<h1>{{siteUrl}}</h1>
+
+Output:-
+http://locahost:4200/
+
+
+Property Binding [property/expression] or bind-propertyName:-
+Property binding is the same as interpolation. Binding data from class to template using square brackets [ ].
+-->Interpolation allows only string values but not boolean values.
+-->Property binding allows both string and boolean values.
+
+In HTML 
+<input [id]="myId" value="Angular">
+
+In TS file
+let myId = "items"
+
+>>Now id = "items" that we can apply dynamically by using property binding. This is also, possible by interpolation using curly braces {{myId}}.
+
+Example:-
+<div [innerText]="dispayValue"></div>
+
+In TS file
+displayValue = 10;
+
+Output:-
+10
+
+Class Binding for CSS:-
+To bind the style classes to the template from the class.
+-->If there are two classes in one element one is a "normal class" and another is a"Bind class" then the normal class becomes a "Dummy" and only the bind class will apply.
+
+-->Bind class directly
+<h1 [class]="text-success">Angular</h1>
+
+-->Bind class using (.) => [class.clasName]= 'true or false'
+<h1 [class.text-danger]="true">Angular</h1>
+
+
+-->Binding objects to class using (ng) => [ngClass] = 'object'
+ <h1 [ngClass]="object">Angular</h1>
+
+
+In TS class file
+let object = {
+	text-danger: true,
+	text-success: false,
+	text-style: true
+}
+
+
+In CSS file
+.text-danger{
+	color: red
+}
+
+.text-success {
+	color: green
+}
+
+.text-style {
+	font-style: italic
+}
+
+
+Style Binding ("''"):-[style.cssProperty]
+We can bind styles to elements which are similar to the class binding.
+<h1 [style.color]="'orange'">Style Binding</h1>
+
+-->In this, we can pass conditional statements
+<h1 [style.color]="hasError ? 'red' : 'green'">Style Binding</h1>
+
+In the above, if hasError is true then red color applies otherwise green.
+
+-->By dynamically also we can apply styles
+<h1 [style.color]="'highlightColor'">Style Binding</h1>
+
+In TS file
+let highlightColor = 'red'
+
+-->We can also bind the objects to the style by using 'ngStyle' directive.
+<h1 [ngStyle]="'object'">Style Binding</h1>
+
+In TS file
+let object = {
+	color: 'red',
+	font-style: 'italic'
+}
+
+
+Event Binding (event ):-
+Events like click event, mouse events, etc. 
+<button (click)="onClick()">Click</button>
+
+In TS file
+onClick() {
+	console.log("Welcome")
+}
+
+In output by click, we get Welcome in the console.
+
+Example:-
+<button (click)="onClick()">Click</button>
+{{greeting}}
+
+In TS file
+let greeting = ""
+
+onClick() {
+	this.greeting = "Welcome to Angular Tutorial"
+}
+
+View:-
+Welcome to Angular Tutorial
+
+Template Reference Variables:-(#TRV)
+A template reference variable is used to refer to an HTML element and its DOM properties like value, ID, class, etc.
+
+Example:-
+<input #myInput type="text">
+<button (click)="onClick(myInput.value)">Click</button>
+
+In TS file
+onClick(inputValue) {
+	console.log(inputValue)
+}
+
+View:-
+When we click on the button then whatever text we given in input will display.
+
+Two-Way DataBinding [( ngModel)]:-
+Two-way binding is used to bind the property and at the same time display the value in the view.
+-->For two-way binding angular provides another directive called 'ngModel'.
+
+To work 'ngModel' directive we have to import the 'FormsModule' in the imports in the app.module.ts file
+
+imports: [
+	BrowserModule,
+	TestComponent
+]
+
+In HTML
+<input [(ngModel)]="name"  type="text">
+{{name}}
+
+In TS file
+let name = ""
+
+
+Directives in Angular:-
+They are of two type
+1. Structural Directives.
+	1. *ngIf
+	2. *ngFor
+	3. *ngSwitch
+
+2. Attribute Directives.
+	1. ngClass
+	2. ngStyle
+
+Structural Directives:-
+This structural directive are used to add or remove HTML elements. There are three types, they are:
+
+1. ngIf Structural Directive:-
+This if condition is used in the HTML element based on the given condition it will display the content in HTML
+Syntax:-     *ngIf = "condition"
+
+Example 1:- (only If block)
+<h1 *ngIf="true">Angular Tutoral</h1>
+If it is false then it will not display.
+
+Example 2:- (if-else block)
+This is achieved by using a template reference variable and <ng-template> element. The below code will run like if displayName is true then 'Angular Tutorial' will display otherwise 'Else Block' will display.
+
+<h1 *ngIf="displayName; else elseBlock">Angular Tutorial</h1>
+
+<ng-template  #elseBlock>
+  Else Block
+</ng-template>
+
+In TS file 
+displayName= false
+
+
+Example 3:- (If-then-else block)
+In this we have two block of codes then block and else block.
+The below code will run like if displayName is true then 'THEN BLOCK' will executes otherwise 'Else Block' will display.
+
+<div *ngIf="displayName; then thenBlock; else elseBlock"></div>
+
+<ng-template #thenBlock>
+  then block
+</ng-template>
+
+<ng-template #elseBlock>
+  else block
+</ng-template>
+
+2. ngSwitch Structural Directive:-
+Working is same as the languages like java, c, etc.
+Syntax:-
+[ngSwitch]=""
+*ngSwitchCase="case statement"
+*ngSwitchDefault
+
+Example:-
+<div [ngSwitch]="color">
+  <div *ngSwitchCase="'red'">picked red</div>
+  <div *ngSwitchCase="'blue'">picked blue</div>
+  <div *ngSwitchCase="'green'">picked green</div>
+  <div *ngSwitchDefault>pick again</div>
+</div>
+
+3. ngFor Structural Directive:-
+Mainly used to print the list of array or object items given in the class of typescript file
+
+Syntax:-  *ngFor="let element of elements"
+
+Example 1:-
+<div *ngFor="let color of colors">
+  <ul>
+    <li>{{color}}</li>
+  </ul>
+</div>
+
+In TS file
+public colors = ['red', 'green', 'blue', 'yellow']
+
+Output:-
+red
+green
+blue
+yellow
+
+Example 2:-
+We can also print the 
+1. index as i -  from 0
+<div *ngFor="let color of colors; index as i">
+  <h1>{{i}} - {{color}}</h1>
+</div>
+
+2. first as f  - which gives true for the first element remaining are false
+<div *ngFor="let color of colors; first as f">
+  <h1>{{f}} - {{color}}</h1>
+</div>
+
+3. last as l - Gives us true for the last element and the remaining are false.
+<div *ngFor="let color of colors; last as l">
+  <h1>{{l}} - {{color}}</h1>
+</div>
+
+4. odd as o and even as e - gives odd elements as true others are false
+<div *ngFor="let color of colors; odd as o">
+  <h1>{{o}} - {{color}}</h1>
+</div>
+
+5. 
+<table>
+    <tr>
+        <th>Index</th>
+        <th>Even/Odd</th>
+        <th>Room Number</th>
+        <th>Room Type</th>
+        <th>Amenities</th>
+        <th>Price</th>
+        <th>Check-In Time</th>
+        <th>Check-Off Time</th>
+    </tr>
+    <tr *ngFor="let room of rooms; let e=even; let o=odd; let i=index">
+        <td>{{i + 1}}</td>
+        <td>{{e ? "Even" : "Odd"}}</td>
+        <td>{{room.roomNo}}</td>
+        <td>{{room.roomType}}</td>
+        <td>{{room.amenities}}</td>
+        <td>{{room.price}}</td>
+        <td>{{room.checkInTime | date: 'short'}}</td>
+        <td>{{room.checkOffTime | date: 'short'}}</td>
+    </tr>
+</table>
+
+
+Output:-
+index as i
+0 - red
+1 - green
+2 - blue
+3 - yellow
+
+first as f
+true - red
+false - green
+false - blue
+false - yellow
+
+last as l
+false - red
+false - green
+false - blue
+true - yellow
+
+
+Component Interaction:-
+Component interaction means sending data from parent to child component and child to parent component.
+App component is the parent component and the test (user-created component named a test) component is the child component.
+
+--> Using @Input and @Output
+--> Using @ViewChild and @ContentChild
+--> Using Services
+
+Here we have two cases
+1. Sending Data from Parent(app) to Child(test) Component:-
+In app.ts file
+public name = 'Akhil'
+
+In app.html
+<app-test [parentData]="name"></app-test>
+
+In test.component.ts file
+ @Input() public parentData:any; 
+
+or
+
+//Creating instance for parentData as name
+ @Input('parentData') public name:any; 
+
+
+In test.html file
+<h1>This is Child Compt, I am <span style="color: red;">{{parentData}}</span></h1>
+
+or
+
+<h1>This is Child Compt, I am <span style="color: red;">{{name}}</span></h1>
+
+Output:-
+This is Child Compt, I am Akhil
+
+
+2. Sending Data from Child to Parent Component:-
+It is in a different way because in parent-to-child data transfer we have a child components selector (<app-test></app-test>) but in data transfer from child to parent we didn't have a parent selector in child.html
+By using the events we can send data from parent to child.
+
+In test.ts file
+ @Output() public childEvent = new EventEmitter()
+
+fireEvent() {
+  this.childEvent.emit('Hey Angular')
+ }
+
+In test.html file
+<h1 (click)="fireEvent()">Click Here</h1>
+
+In app.html file
+<h1>{{message}}</h1>
+<app-test (childEvent)="message=$event" [parentInfo]="name"></app-test>
+
+In app.ts file
+public message:any
+
+
+Pipes:-
+Pipes are used to change the view of an element but not change the value of the elements.
+
+Examples:-
+<h1>Normal Name: {{name}}</h1>
+<h1>lowercase: {{name | lowercase}}</h1>
+<h1>uppercase: {{name | uppercase}}</h1>
+<h1>titlecase: {{name | titlecase}}</h1>
+
+<!-- Slice(remove)  from index 3 -->
+<h1>Slice from 3: {{name | slice: 3}}</h1>
+<h1>Slice from 3: from 5: {{name | slice: 3:5}}</h1>
+<h1>JSON format: {{name | json}}</h1>
+
+<!-- Before decimal not more than 1 digit after decimal not more than 3 less than 2-->
+<h1>5.678: {{5.678 | number:'1.2-3'}}</h1>
+<h1>5.678: {{5.678 | number:'3.4-5'}}</h1>
+<h1>5.678: {{5.678 | number:'3.1-2'}}</h1>
+
+<h1>0.25 in %: {{0.25 | percent }}</h1>
+<h1>{{0.25 | currency }}</h1>
+<h1>{{0.25 | currency: 'GDP' }}</h1>
+<h1>{{0.25 | currency: 'EUR': 'code' }}</h1>
+
+<h1>{{date}}</h1>
+<h1>{{date | date: 'short'}}</h1>
+<h1>{{date | date: 'shortDate'}}</h1>
+<h1>{{date | date: 'shortTime'}}</h1>
+
+Output:-
+Normal Name: Angular Tutorial
+lowercase: angular tutorial
+uppercase: ANGULAR TUTORIAL
+titlecase: Angular Tutorial
+Slice from 3: ular Tutorial
+Slice from 3: from 5: ul
+JSON format: "Angular Tutorial"
+5.678: 5.678
+5.678: 005.6780
+5.678: 005.68
+0.25 in %: 25%
+$0.25
+GDP0.25
+EUR0.25
+Fri Nov 18 2022 19:38:32 GMT+0530 (India Standard Time)
+11/18/22, 7:38 PM
+11/18/22
+7:38 PM
+
+Calling Component Dynamically:-
+Calling a component without using th selector tag in the html by using the <ng-template #user></ng-template>, template reference variable, and @viewchild().
+
+Step 1:-
+<ng-template #user></ng-template>
+
+Step 2:-
+  @ViewChild('user', {read: ViewContainerRef}) vcr!: ViewContainerRef 
+
+where
+user - Template Reference Variable
+vce - instance
+
+Step 3:-
+  ngAfterViewInit() {
+//Calling roomsComponent dynamically
+    let compref = this.vcr.createComponent(RoomsComponent)
+
+//Sending data dynamically
+    compref.instance.roomsDetails.totalRooms = 500
+  }
+
+
+@ViewChild() and @ViewChildren() in Angular:-
+
+
+<ng-content></ng-content> tag in Angular:-
+Suppose if we want to display one component as a header and another as a footer and one is at middle of the browser page then this tag will be useful.
+
+Example:-
+In container component
+//Header
+<ng-content></ng-content>
+//Footer
+<ng-content select="app-rooms"></ng-content>
+
+In app.html
+<app-container>
+    <app-rooms></app-rooms>    
+    <h1>HEllO Welcome To HotelTranslania</h1>
+</app-container>
+
+
+Angular Life Cycle Hooks:-
+There are few life-cycle hooks in angular
+1. ngOnChanger
+It is used to transform the data.
+
+2. ngOnInit
+
+3. ngDoCheck
+It gets executed every time whenever the changes occurred in the entire angular application.
+Note:-
+Should not use ngOnChanger and ngDoCheck on the same component.
+
+4. ngAfterContentInit
+To understand this learn @ViewChild
+5. ngAfterContentChecked
+6. ngAfterViewInit
+7. ngAfterViewChecked
+
+8. ngOnDestroy
+Whenever the component is removed/hidden then only ngOnDestroy() method is called.
+
+Dependency Injection(DI):-
+1. Angular has built-in Dependency Injection support.
+2. It is a design pattern.
+
+Providers:-
+--> CLass based providers
+--> Value Providers
+--> Factory 
+
+Resolution Modifiers:-
+1. Self
+2. SkipSelf
+3. Optional
+4. Host
+
+
+Services:-
+>A service is a class with the @injectible decorator.
+>Why do we need services in angular?
+1. To share the commonly used data across multiple components.
+2. To implement application logic.
+3. External Interactions like connecting to DataBases.
+>Services are of three types
+1. Class based providers.
+2. Value Providers
+3. Factory
+
+-->Now we are implementing Class Based Providers Services.
+
+>Dependency Injection(DI) as a framework for services in angular design pattern is introduced for services.
+Step 1:-
+Create the service in angular using
+	--> ng g s service_name
+		where g - generate
+		              s - service
+
+Step 2:-
+Register with Injector (Service)
+In app.module.ts file import employees.service.ts file and mention in the providers array.
+
+import { EmployeeService } from './employee.service';
+
+providers: [EmployeeService],
+
+Step 3:-
+Declare as a dependency in EmpList and EmpDetails.
+
+
+Fetch Data Using HTTP Request:-
+Fetching data from dataBase(DB) using the HTTP get() request. Here we didn't have database for that we can create a .JSON file having employees details in JSON format.
+
+Steps do follow:-
+1. In app.module file import HttpClientModule and insert into a imports.
+
+import { HttpClientModule } from "@angular/common/http";
+
+imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
+  ],
+  
+2. Create an instance in the constructor by importing the HttpClient, create an URL and create a method getEmployees() in service.ts file.
+class {
+  private url:string = "/assets/data/employees.json"
+  constructor(private http: HttpClient) { }
+
+  getEmployees() {  
+    return this.http.get(this.url);
+  }
+}
+
+
+3. We have to subscribe to the observable
+Crate employee.ts file
+export interface IEmployee {
+    id:number,
+    name:string,
+    age:number
+}
+
+//Casting observable into an employee array i.e IEmployee
+ getEmployees(): Observable<IEmployee[]> {
+
+    return this.http.get<IEmployee[]>(this.url)
+
+ }
+
+4. Subscribe to the observable created in the service.ts file in emp-details and emp-list components.
+  ngOnInit(): void {
+    this.empDetails.getEmployees()
+    .subscribe(data => this.employees = data)
+  }
+
+Pipe() Function:-
+We have already a pipes concept related to angular and pipe() function is related to RxJS.
+The pipe() function takes as its arguments the functions you want to combine, and returns a new function that, when executed, runs the composed functions in sequence. 
+
+
+HTTP Error Handling:-
+If the given URL is incorrect then there is an HTTP error handling response on the view by using the 'catchError' and 'throwError'.
+
+In service.ts file
+export class EmployeeService {
+
+  private url:string = "/assets/data/employees1.json"
+  constructor(private http: HttpClient) { }
+
+  getEmployees(): Observable<IEmployee[]> {
+
+    return this.http.get<IEmployee[]>(this.url)
+    .pipe(catchError(this.errorHandler));
+  }
+
+  errorHandler(error : HttpErrorResponse) {
+    return throwError(error.message || "server Error")
+  }
+
+}
+
+In emp-details and emp-list components
+export class EmpDetailsComponent implements OnInit {
+  
+  public employees:any = []
+  public errorMsg:any
+
+  constructor( private _empService: EmployeeService) {}
+  ngOnInit() {
+    this._empService.getEmployees()
+    .subscribe(data => this.employees = data,
+              error => this.errorMsg = error)
+  }
+}
+
+
+In HTML
+<h1>Employee List</h1>
+<h1>{{errorMsg}}</h1>
+<div *ngFor="let emp of employees" style="color: red;">
+
+    <div>{{emp.name}}</div>
+</div>
+
+
+Routing and Navigation in Angular:-
+In a single-page app, you change what the user sees by showing or hiding portions of the display that correspond to particular components, rather than going out to the server to get a new page. As users perform application tasks, they need to move between the different views that you have defined.
+
+To handle the navigation from one view to the next, you use the Angular Router. The Router enables navigation by interpreting a browser URL as an instruction to change the view.
+
+<router-outlet></router-outlet> in Angular Routing:-
+Which is used to get view while navigating between the views or different components. Should be always mentioned in the app.modue.html file then only the routing component will get the view in the browser.
+
+
+Steps for Routing:-
+Create two buttons and navigate between the components. When clicking on the button we have to navigate to that component view.
+
+Step 1:-
+Create two components
+> departmentsList Component,
+> employeesList Component
+
+Step 2:-
+In app-routing.module.ts file create routes
+const routes: Routes = [
+  { path: 'departments', component: DepartmentsListComponent },
+  { path: 'employees', component: EmployeesListComponent }
+];
+
+->We are creating our own paths('departments', 'employees') for both the 'DepartmentListComponent' and ' EmployeesListComponent' .
+
+Make sure to import AppRoutingModule in app.module.ts file.
+
+Step 3:-
+In app.component.ts file 
+<h1>Routing and Navigation</h1>
+<nav>
+<a routerLink="/departments">Departments</a>
+<a routerLink="/employees">Employees</a>
+</nav>
+<router-outlet></router-outlet>
+
+
+Note:- 
+1. Instead of 'routeLink' we also use 'href' attribute also. By that, we can navigate the departments and employees paths.
+2. <router-outlet></router-outlet> is a very important tag to place in the app.html otherwise the view will not display when we make navigation.
+
+
+
+Wildcard Route and Redirecting Routes :-
+Wildcard Route (**):-
+If we navigate to some other component which is not in over app then routing will throw an error. For this we have to display 'Page-not-Found' in the browser view.
+Wildcard route is also the path mention in the app.routing.ts file which.
+
+Note:- Should always place last in the 'routes array' in app.routing.ts file. If we place at the starting position then the reamaining paths will not get navigate on pagaNOtFound path only get executed.
+
+Redirecting Routes:-
+Which is used to redirect to other paths. or for suppose if we open any app by default if we want to display a path directly then redirecting is used.
+Example:-
+Before redirecting
+--> localhost:4200
+
+After redirecting as below example by default departments path is open automatically
+--> localhost:4200/departments
+
+const routes: Routes = [
+  { path: '', redirectTo: '/departments', pathMatch: 'full' },
+  { path: 'departments', component: DepartmentsListComponent },
+  { path: 'employees', component: EmployeesListComponent },
+
+ //Should place at last only otherwise it dominates other components i.e displays only pgNotFound Component
+  { path: '**',  component: PgNotFoundComponent }
+];
+
+
+Route Parameters:-
+Route parameters are the most important concept in angular which is used for the navigation mostly used in the e-commerce applications to navigate to a particular product like for example 'http://amazon/trimmers/phillips'. 
+
+Pre-Requisites:-
+1. Import Router Module
+2. navigate Method:-
+
+3. ActivatedRoute Module:-
+Provides access to information about a route associated with a component that is loaded in an outlet.
+
+Example:-
+We have a departmentList component (Angular, node js, java, etc.) with specific IDs.
+Task: When we click on Angular having id, then that idd should display, and that ID will be a path like 
+-->    http://localhost:4200/departments/1
+View: 
+You have selected the Angular with id=1
+
+Step 1:-Create a new component 'Department-detail component' and insert into a routes array by creating the path.
+
+const routes: Routes = [
+  { path: '', redirectTo: '/departments', pathMatch: 'full' },
+  { path: 'departments', component: DepartmentsListComponent },
+  { path: 'departments/:id', component:DepartmentDetailsComponent },
+  { path: 'employees', component: EmployeesListComponent },
+  { path: '**',  component: PgNotFoundComponent }
+];
+
+Step 2:- 
+In the department-list.component file
+export class DepartmentsListComponent {
+  departments = [
+    {'id': 1, 'name': 'Angular',},
+    {'id': 2, 'name': 'NodeJS',},
+    {'id': 3, 'name': 'ReactJS',},
+    {'id': 4, 'name': 'SQL',},
+    {'id': 5, 'name': 'Java',},
+  ]
+
+  constructor(private router: Router) {}
+
+  onSelect(department:any) {
+    // It navigates to departments/:id component
+    // /.navigate(['path want navigate to', routeParameter])
+
+    this.router.navigate(['/departments', department.id])
+  }
+}
+
+Step 3:- 
+In department.html file
+<ul>
+    <li (click)="onSelect(department)" *ngFor="let department of departments">
+        <a><span>{{department.id}}</span> {{department.name}}</a>
+    </li>
+</ul>
+
+Upto this we are able to pass parameter into URL but we also want to display it in the view.
+
+Step 4:-
+For this open department-detail component import ActivatedRoute module.
+ActivatedRoute and snapshot is used to read the parameters of URL
+export class DepartmentDetailsComponent implements OnInit{
+
+  public departmentId:any 
+  constructor(protected route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+     let id= Number(this.route.snapshot.paramMap.get('id'))
+     this.departmentId = id;
+  }
+}
+
+By this, we can read the id which is in the URL(departments/:id), and display it in the view.
+
+Note:-
+Using the snapshot to read the parameters of the URL there is a drawback.
+
+Drawback of Snapshot in Angular:-
+As the name suggests, the parameter would only be accessed once, when the component loads. Hence, it won't be updated, even if you change its value from within the same component
+
+From the above example, adding a task, i.e adding a Previous and Next button to the view by clicking on buttons the id should get an update in the URL as well as in the view.
+
+Step 5:-
+Instead of snapshot use the "paramMap observable" by that it gets updated the id parameter in URL and as well in view. If we snapshot then there is no change in the view.
+
+
+export class DepartmentDetailsComponent implements OnInit{
+
+  public departmentId:any
+  constructor(private route: ActivatedRoute, private router: Router) {}
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      let id = params.get('id')
+      this.departmentId = Number(id)
+    })
+  }
+
+  goPrevious() {
+    let previousId = this.departmentId - 1
+    this.router.navigate(['/departments', previousId])
+  }
+
+  goNext() {
+    let nextId = this.departmentId + 1
+    this.router.navigate(['/departments', nextId])
+  }
+}
+
+
+Optional Route Parameters:-(Later)
+
+Relative Navigation:-
+What if the path changed from "departments" to "departments-list" or any other path name, then it will show "page Not Found". Because in department.component file we used '/department'.
+
+{ path: 'departments-list', component:DepartmentsListComponent },
+
+To overcome this, lets make small changes in navigate([], {}) method by using the 'ActivatedRoute' module and 'relativeTo:'
+
+In department-list component ts file
+  onSelect(department:any) {
+    this.router.navigate([department.id], {relativeTo: this.route})
+  }
+
+In department-details  for back button
+goBack() {
+    let goHome = this.departmentId ? this.departmentId : null
+    // this.router.navigate(['/departments', {goHome}])
+    this.router.navigate(['../', {id: goHome}], {relativeTo: this.route})
+}
+
+
+Child Routes:-
+Routes inside the routes are known as child routes.
+Syntax:-
+  { 
+    path: 'departments-list/:id', component:DepartmentDetailsComponent,
+    children: [
+      {path: , component:},
+      {path: , component:}
+    ]
+   },
+
+Angular Forms:-
+Introduction:-
+There are two types of angular forms, They are:
+1. Template-Driven Forms:-
+->Heavy coding logic in component templates than class. 
+->Also, easier and simpler to create template-driven forms.
+->Automatically tracks the form and form element's state and validity.
+-> Suitable for only simple forms.
+
+2. Reactive Forms:-
+Heavy coding logic in the component class. Those are very complex forms compared to template-driven forms.
+
+For the angular form elements, we have to apply below concepts
+1. Data binding
+2. Change tracking
+3. Validation
+4. Visual Feedback
+5. Error Messages
+6. Form Submission
+7. Submitted data posting to the server
+
+Template-Driven Forms (TDF):-
+Pre-requisites:-
+->ngForm Directive:-
+Binding from input data by using ngForm and assign to a TRV.
+
+->ngModel Directive:-
+After binding using ngForm Angular doesn't no which input element to bind, so we have to tell angular to bind a particular element using the 'ngModel' directive by implementing each input element.
+
+->ngModelGroup Directive:-
+It is used to create a group of properties(Street, CIty, State, postal code). and assign a name as the "address" to ngModelGroup directive.
+Now address is grouped by the set of properties
+address:{Street: "", city: "", state: "", postalCode: ""}
+
+1. Data Binding with ngForm:-
+<div>
+  <h1>Angular TDF Forms</h1>
+  <form #userForm="ngForm">
+    {{ userForm.value | json }}
+
+    <div ngModelGroup="address">
+      <div class="form-group">
+        <label for="">Street</label>
+        <input ngModel name="street" type="text" class="form-control">
+      </div><br>
+      
+      <div class="form-group">
+        <label for="">City</label>
+        <input ngModel name="city" type="text" class="form-control">
+      </div><br>
+
+      <div class="form-group">
+        <label for="">State</label>
+        <input ngModel name="State" type="text" class="form-control">
+      </div><br>
+
+      <div class="form-group">
+        <label for="">Postal Code</label>
+        <input ngModel name="postelCode" type="text" class="form-control">
+      </div><br>
+    </div>
+
+    <div class="form-group">
+      <label for="">Name</label>
+      <input ngModel type="text" name="name" class="form-control">
+    </div><br>
+
+    <div class="from-group">
+      <label for="">Email</label>
+      <input ngModel type="email" name="email" class="form-control">
+    </div><br>
+
+    <div class="from-group">
+      <label for="">Phone</label>
+      <input ngModel type="tel" name="Phone" class="form-control">
+    </div><br>
+
+    <div class="from-group">
+      <select ngModel name="CourseType" class="custom-select form-control">
+        <option selected>I am interested in</option>
+        <option *ngFor="let topic of topics" class="form-check-input">{{topic}}</option>
+      </select>
+    </div><br>
+
+    <div class="mb-3">
+      <label for="">Time Preference</label>
+      <div class="form-check">
+        <input ngModel type="radio" name="timePreference" value="morning" class="form-check-input">
+        <label for="" class="form-check-label">Morning (9AM - 12PM)</label>
+      </div>
+      <div class="from-check">
+        <input ngModel type="radio" name="timePreference" value="evening" class="form-check-input">
+        <label for="" class="form-check-label">Evening (5PM - 8PM)</label>
+      </div>
+    </div><br>
+
+    <div class="form check mb-3">
+      <input ngModel type="checkbox" name="subscription" class="form-check-input">
+      <label for="" class="form-check-label">
+        Send me promotional offers
+      </label>
+    </div><br>
+
+    <button type="submit" class="btn btn-primary">Submit From</button>
+  </form>
+</div>
+
+
+Binding Data to a Model:-
+This means sending data from class to the template, by using two-way data binding[()] we can also achieve data from template to the class.
+
+Firstly, create a class in separate ts file named as user.ts
+export class User {
+    constructor (
+        public street: string,
+        public city: string,
+        public state: string,
+        public postalCode: number,
+        public name: string,
+        public email: string,
+        public phone: number,
+        public topic: string,
+        public timePreference: string,
+        public subscribe: boolean
+    ) {}
+}
+
+In app.component.ts file
+Make sure to import 'User'
+
+ userModel = new User('Bakers Street', 'Vijayawada', 'Andhra', 52121, 'Rob', 'rob@test.com', 123123, 'Angular', 'morning', true);
+
+
+In HTML
+For every input element tag insert ngModel and bind userModel data either by dataBindindg or two-day binding if want.
+
+-->  [ngModel] = userModel.name - data binding
+--> [(ngModel)] = userModel.name - two-way data binding
+
+
+<div class="">
+  <h1>Angular TDF Forms</h1>
+  <form #userForm="ngForm">
+    {{ userForm.value | json }}
+    <hr>
+    {{ userModel | json }}
+
+    <div ngModelGroup="address">
+      <div class="form-group">
+        <label for="">Street</label>
+        <input [ngModel]="userModel.street" name="street" type="text" class="form-control">
+      </div><br>
+      
+      <div class="form-group">
+        <label for="">City</label>
+        <input [ngModel]="userModel.city" name="city" type="text" class="form-control">
+      </div><br>
+
+      <div class="form-group">
+        <label for="">State</label>
+        <input [ngModel]="userModel.state" name="State" type="text" class="form-control">
+      </div><br>
+
+      <div class="form-group">
+        <label for="">Postal Code</label>
+        <input [ngModel]="userModel.postalCode" name="postelCode" type="text" class="form-control">
+      </div><br>
+    </div>
+
+    <div class="form-group">
+      <label for="">Name</label>
+      <input [(ngModel)]="userModel.name" type="text" name="name" class="form-control">
+    </div><br>
+
+    <div class="from-group">
+      <label for="">Email</label>
+      <input [ngModel]="userModel.email" type="email" name="email" class="form-control">
+    </div><br>
+
+    <div class="from-group">
+      <label for="">Phone</label>
+      <input [ngModel]="userModel.phone" type="tel" name="Phone" class="form-control">
+    </div><br>
+
+    <div class="from-group">
+      <select [ngModel]="userModel.topic" name="CourseType" class="custom-select form-control">
+        <option selected>I am interested in</option>
+        <option *ngFor="let topic of topics" class="form-check-input">{{topic}}</option>
+      </select>
+    </div><br>
+
+    <div class="mb-3">
+      <label for="">Time Preference</label>
+      <div class="form-check">
+        <input [ngModel]="userModel.timePreference" type="radio" name="timePreference" value="morning" class="form-check-input">
+        <label for="" class="form-check-label">Morning (9AM - 12PM)</label>
+      </div>
+      <div class="from-check">
+        <input [ngModel]="userModel.timePreference" type="radio" name="timePreference" value="evening" class="form-check-input">
+        <label for="" class="form-check-label">Evening (5PM - 8PM)</label>
+      </div>
+    </div><br>
+
+    <div class="form check mb-3">
+      <input [ngModel]="userModel.subscribe" type="checkbox" name="subscription" class="form-check-input">
+      <label for="" class="form-check-label">
+        Send me promotional offers
+      </label>
+    </div><br>
+
+    <button type="submit" class="btn btn-primary">Submit From</button>
+  </form>
+</div>
+
+
+2. Change Tracking and Validation
+Tracking and validation are processed by the '#template reference variable'.
+Tracking state and Validity:-
+For every form field, there have ng-classes i.e validation classes. They are:
+
+ng-untouched - If the form element is not visited by the user
+ng-touched - If the form field is visited
+
+ng-pristine - When the value is not changed and remains their default value.
+ng-dirty - When the value is changed.
+
+ng-valid - If the input is filled with any value 
+ng-invalid - if the input is not filled with value, only if it is a 'required' field.
+
+For every tracking class there is properties used for validation by the boolean output, they are:
+ng-untouched	    -> untouched
+ng-touched 	    -> touched
+ng-pristine 	    -> pristine
+ng-dirty 	    -> dirty
+ng-valid 	    -> valid
+ng-invalid 	    -> invalid
+
+
+Example 1:-
+    <div class="form-group">
+      <label for="">Name</label>
+      <input #name required [(ngModel)]="userModel.name" type="text" name="name" class="form-control">
+    </div><br>
+    {{name.className}}
+
+
+Example 2:-
+Now if we want to access the properties we have to assign a ngModel directive to the TRV. Then we know about the form field validations by the boolean values.
+
+    <div class="form-group">
+      <label for="">Name</label>
+      <input #name="ngModel" required [(ngModel)]="userModel.name" type="text" name="name" class="form-control">
+    </div><br>
+    {{name.touched}}
+
+In the view initially, it shows the false because we haven't touched the input field, when we touched and navigate then it shows the true 
+
+
+Validation with Visual Feedback:-
+It is used for form validations when the user doesn't give any input then it will display the error message that this is a mandatory field, also, the form will not be submitted.
+
+Example 1:-
+For the name input field when the user is not given any name them remain it as empty.
+    <div class="form-group">
+      <label for="">Name</label>
+      <input #name="ngModel" [class.is-invalid]="name.invalid && name.touched" required [(ngModel)]="userModel.name" type="text" name="name" class="form-control">
+      <small class="text-danger" [class.d-none]="name.valid || name.untouched">This field is mandatory</small>
+    </div><br>
+
+
+Example 2:-
+Suppose, in the phone number input field when the phone number is not having 10 digits then there should display an error message.
+    <div class="from-group">
+      <label for="">Phone</label>
+      <input [ngModel]="userModel.phone" required #phone="ngModel" pattern="^\d{10}$" [class.is-invalid]="phone.invalid && phone.touched" type="tel" name="Phone" class="form-control">
+      <small class="text-danger" [class.d-none]="phone.valid || phone.untouched">Phone Nmber must be 10 digits</small>
+    </div><br>
+
+
+Select Tag Control Validation:-
+It is something more different in validation compared to input tag elements. Because the select tag considers  'I am Interested in' as an option but it is not an option it is just a title to indicate, this validation will fail.  
+By using (blur) and (change) events
+Example 1:-
+    <div class="from-group">
+      <select [ngModel]="userModel.topic" (blur)="validateTopic(topic.value)" (change)="validateTopic(topic.value)" #topic="ngModel" [class.is-invalid]="topicHasError && topic.touched" name="CourseType" class="custom-select form-control">
+        <option value="default">I am interested in</option>
+        <option *ngFor="let topic of topics" class="form-check-input">{{topic}}</option>
+      </select>
+      <small [class.d-none]="!topicHasError || topic.untouched" class="text-danger">Please select topic</small>
+    </div><br>
+
+In app.component.ts file
+  public topicHasError = false
+
+  validateTopic(topicValue:any) {
+    if(topicValue == 'default') {
+      this.topicHasError = true
+    } else {
+      this.topicHasError = false
+    }
+  }
+
+
+Form Validation:-
+If all the fields in the form are filled then it is true else it is false.
+
+Example:-
+If the form is filled then the submit button will be enabled else it is disabled.
+
+    <button [disabled]="userForm.form.invalid || topicHasError" type="submit" class="btn btn-primary">Submit From</button>
+
+
+Submitting Form data to the server:-
+Prerequisites
+1. novalidate Directive:-
+novalidate attribute is used to disable browser's native form validation.
+You can use it when you need do your own AngularJS custom validation.
+
+ngSubmit:-
+The ng-submit directive specifies a function to run when the form is submitted. If the form does not have an action ng-submit will prevent the form from being submitted.
+
+To submit the data to the server
+->Make form as 'novalidate' in html file.
+->Implement (ngSubmit) = "onSelect()" to the form element.
+->We have to create a new service file and server.js file.
+->Using nodejs we have to post data to the server.
+
+
+Error Handling:-
+
+
+Reactive Forms:-
+->Code and logic reside in the component class.
+->No two-way binding.
+->Dynamic form fields and validation.
+-> Those forms are complex.
+->Custom validation.
+
+
+Adding HTML:-
+<div class="container-fluid">
+  <h1>Reactive Form</h1>
+  <form action="">
+    <div class="form-group">
+      <label for="">Username</label>
+      <input type="text" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="">Password</label>
+      <input type="password" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="">Confirm Password</label>
+      <input type="password" class="form-control">
+    </div><br>
+
+    <button class="btn btn-primary">Register</button>
+  </form>
+</div>
+
+Creating the Form Model:-
+Import 'ReactiveFormsModule' in app.module.ts file
+
+-> In reactive forms, every HTML field is defined by the instance of 'FormControl' and the entire form is defined by the instance of 'FormGroup'.
+
+Example:-
+In app.component.ts file
+
+  registrationForm = new FormGroup({
+    userName: new FormControl('Akhil'),
+    password: new FormControl(''),
+    confirmPassword: new FormControl('')
+  })
+
+We have to make connection between the html elements and ts file formGroup.
+In HTML file
+
+[formGroup] - it is a predefined attribute making entire form to get control by FormGroup
+
+formControlName Attribute:- By this attribute we can define a each field by the FormControl.
+ 
+<div class="container-fluid">
+  <h1>Reactive Form</h1>
+  <form [formGroup]="registrationForm">
+    {{registrationForm.value | json}}
+    <div class="form-group">
+      <label for="">Username</label>
+      <input formControlName="userName" type="text" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="">Password</label>
+      <input formControlName="password" type="password" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="">Confirm Password</label>
+      <input formControlName="confirmPassword" type="password" class="form-control">
+    </div><br>
+
+    <button class="btn btn-primary">Register</button>
+  </form>
+</div>
+
+
+
+NestedForm Groups:-
+We can also create nested form groups. Suppose, postalCode, city, and street all come into the address, so we have to make all fields into the same group named as address.
+
+In app.component.ts file
+  registrationForm = new FormGroup({
+    userName: new FormControl('Akhil'),
+    password: new FormControl(''),
+    confirmPassword: new FormControl(''),
+    address: new FormGroup({
+      city: new FormControl(''),
+      state: new FormControl(''),
+      postalCode: new FormControl('')
+    })
+  })
+
+
+In HTML
+
+<div class="container-fluid">
+  <h1>Reactive Form</h1>
+  <form [formGroup]="registrationForm">
+    {{registrationForm.value | json}}
+    <div class="form-group">
+      <label for="">Username</label>
+      <input formControlName="userName" type="text" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="">Password</label>
+      <input formControlName="password" type="password" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="">Confirm Password</label>
+      <input formControlName="confirmPassword" type="password" class="form-control">
+    </div><br>
+    
+    <div formGroupName="address">
+      <div class="form-group">
+        <label for="">City</label>
+        <input formControlName="city" type="password" class="form-control">
+      </div><br>
+      
+      <div class="form-group">
+        <label for="">State</label>
+        <input formControlName="state" type="password" class="form-control">
+      </div><br>
+      
+      <div class="form-group">
+        <label for="">Postal Code</label>
+        <input formControlName="postalCode" type="password" class="form-control">
+      </div><br>
+    </div>
+    <button class="btn btn-primary">Register</button>
+  </form>
+</div>
+
+Managing Control Values:-
+This means loading all form values in the API by using the setValue({}) and patchValue({}) methods.
+
+In HTML
+    <button (click)="loadApiData()" class="btn btn-warning mx-3">Load API</button>
+
+In app.component.ts file
+Using setValue():-
+  loadApiData() {
+    this.registrationForm.setValue({
+      userName: 'Akhil Vinnakota',
+      password: 'akh',
+      confirmPassword: 'akh',
+      address: {
+        city: 'City',
+        state: 'State',
+        postalCode: '1233456'
+      }
+    })
+  }
+
+
+Using patchValue()
+  loadApiData() {
+    this.registrationForm.patchValue({
+      userName: 'Akhil Vinnakota',
+      password: 'akh',
+      confirmPassword: 'akh'
+    })
+  }
+}
+
+
+FormBuilder Service:-
+FormBuilder service is an alternative to FormControl and FormGroup, by using this also we can make reactive forms.
+Import FormBuilder service
+In app.component.ts
+ constructor(private fB: FormBuilder) {}
+
+  registrationForm = this.fB.group({
+    userName: ['Akhil'],
+    password: [''],
+    confirmPassword: [''],
+    address: this.fB.group({
+      city: [''],
+      state: [''],
+      postalCode: ['']
+    })
+  })
+
+The same result will occur.
+
+Simple Validation:-
+->Import 'Validators' in the app.component.ts file.
+->Apply validators.required rule to the form field.
+->Apply classes to the form elements.
+
+
+Example 1:-
+In HTML file
+    <div class="form-group">
+      <label for="">Username</label>
+      <input [class.is-invalid]="rForm.get('userName')?.invalid && 
+                                rForm.get('userName')?.touched" formControlName="userName" type="text" class="form-control">
+      <small class="text-danger" [class.d-none]="rForm.get('userName')?.valid || rForm.get('userName')?.untouched">This field is required</small>
+    </div>
+
+In app.component.ts file
+ rForm = this.fB.group({
+    userName: ['', Validators.required],
+    password: [''],
+    confirmPassword: [''],
+    address: this.fB.group({
+      city: [''],
+      state: [''],
+      postalCode: ['']
+    })
+  })
+
+
+Minimum Lenght for UserName:-
+We have to use a 'validator' for this by giving the rules to the form field in the app.component.ts file.
+
+In app.component.ts file
+  rForm = this.fB.group({
+    userName: ['', [Validators.required, Validators.minLength(3)]],
+    password: [''],
+    confirmPassword: [''],
+    address: this.fB.group({
+      city: [''],
+      state: [''],
+      postalCode: ['']
+    })
+  })
+
+In HTML
+    <div class="form-group">
+      <label for="">Username</label>
+      <input [class.is-invalid]="rForm.get('userName')?.invalid && rForm.get('userName')?.touched" formControlName="userName" type="text" class="form-control">
+      <div *ngIf="rForm.get('userName')?.invalid && rForm.get('userName')?.touched">
+        <small class="text-danger" [class.d-none]="rForm.get('userName')?.errors?.['required']">Username is required</small>
+        <small class="text-danger" [class.d-none]="rForm.get('userName')?.errors?.['minlength()']">Username must be atleat 3 characters</small>
+      </div>
+    </div>
+
+
+Custom Validation:-
+This concept is used to give restrictions to the input fields like for example, if we give userName as 'admin' it is not applicable as a name for this type we give some custom validations using validators in ts file.
+
+Cross-Field Validation:-
+This concept is used for the password and confirmPassword input fields.
+
+Conditional Validation:-
+Mostly used for the checkbox and radio buttons, for example if we have checkbox as 'permanent address same as present address' if we click on checkbox present address field will auto fill same as the permanent address.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

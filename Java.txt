@@ -1,0 +1,678 @@
+7:27 PM 10/7/2022
+
+Java Background:
+Parent Company: Sun Microsystem
+Releases on:1995
+
+Key Points:
+1. Object Oriented Programming Language
+2. Platform Independent Programming Language
+3. More than 3 billion devices run java
+
+How does Java code run?
+Source File  --> java Compiler(JDK) --> ByteCode(Class File) --> Interpreter(JVM) --> OS(Hardware)
+
+12:36 PM 10/8/2022
+
+Variable, Data Types, and Operators:-
+
+Variable:- It is used to store the data. There are three types
+1. Local Variable - Variables present in the method.
+2. Instance Variable - Variables present in the class or outside the method.
+
+DataTypes:-
+There are two types of datatypes
+1.Primitive DataTypes
+2. Non-Primitive Data Types
+
+1. Primitive Data Types:-
+int - 4bytes 
+	long - 8bytes
+	short - 2bytes
+	byte - 1byte
+double - 8bytes
+	float - 4bytes
+boolean - 1byte
+char - 2bytes
+
+Note:- 1byte = 8bits
+
+2. Non-Primitive Data Types:-
+1. Strings
+2. Arrays
+
+3. Operators:-
+Arithmetic Operators(+,-,*,/,%)
+Assignment Operators(=, ==)
+Relational Operators(>,<)
+Logical Operators(AND(&&), OR(||),...)
+Unary Operators
+BItwise Operators(<< , >>)
+Increment/Decrement Operators(++ , --)
+
+Short-Hand Operator:-
+Example:-
+a = a+1 ==> a += 1 or a++
+
+If-else Statement:-
+Syntax:
+if(condition) {
+	-------
+}
+else {
+	-------
+}
+
+Ternary Operator:-
+Condition ? if cond true: if cond false
+
+Loops:-
+1. For Loop
+Syntax:-
+for(Initialization; Condition Statements; Increment/Decrement){
+	------
+}
+Example:-
+public class first {
+    public static void main(String[] args) {
+        // int i = 1;
+        for(int i = 1; i<=4; i++) {
+            for(int j=1; j<=4; j++) {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+        
+    }
+}
+
+2. While Loop
+Syntax:-
+while(cond) {
+	--------
+}
+Example:-
+public class first {
+    public static void main(String[] args) {
+        int i = 1;
+        while(i<=9) {
+            if(i % 2 == 0) {
+                System.out.print(i+ " ");
+            }
+            i++;
+        }
+    }
+}
+Output:-
+2 4 6 8
+
+3. do-While Loop
+4. For each Loop(Enhanced For Loop)
+Syntax:-
+for(int a : k) {
+	--------
+}
+
+Break and Continue:-
+Continue:-
+Used to skip the iteration and continue remaining iterations of code.
+
+Example:-
+for(int i =1; i<=10; i++) {
+	if(i==7) {
+		continue;
+	{
+	Syso(i)
+}
+
+Here continue will skip when i=7 then the 7 will not print in the output and continues for the next iteration from 8. 
+Output:-
+1
+2
+3
+4
+5
+6
+8
+9
+10
+
+Break:-
+Where break will stop running the iteration when it reaches condition
+Example:-
+for(int i =1; i<=10; i++) {
+	if(i>5) { 		
+		continue;
+	{
+	Syso(i)
+}
+
+When i>5 i.e 6 then the itreation stops or running the code will stop.
+1
+2
+3
+4
+5
+
+Arrays:-
+There are three types of arrays
+1.One Dimensional Array.
+2.Multi Dimensional Array.
+3.Jagged Array.
+
+One Dimensional Array:-
+Syntax:-
+int num[] = {1,5,2,5,6};
+	or
+int num[] = new int[Array_Size];
+
+Multi-Dimensional Array:-
+int num[][] = new int[size][size];
+
+Jagged Ayyay:-
+int num[][] = new int[size][];
+
+Example:-
+row 1 --> 3,5,6
+row 2 --> 5,6,8,6,9
+row 3 --> 1,2
+In this example we have fixed 3 rows bu the columns are not fixed. So the col size is not mentioned in teh below example.
+
+int num[][] = new int[3][];
+//In the above i have mention rows i.e 3 but col size not mention bacaause there is no fixed size.
+
+num[0] = new int[3]; //row1 having 3 cols
+num[1] = new int[4];  //row 2 having 4 cols
+num[2] = new int[2];
+
+//Here metioning the no.of cols for each row
+
+num[0][0] = 3;
+num[0][1] = 5;
+num[0][2] = 6;
+//Row is filled with 3,5,6 elements because the col size 3.
+
+	(or)
+
+Another way to mention Jagged array
+
+int num[][] = {
+		{3,5,6},
+		{5,6,8,6,9},
+		{1,2}
+		}
+
+By not mentioning the size we declare the elements then it isa jagged array.
+
+Classes And Objects:-
+>To crate an object should use new keyword which allocates a memory in the heap. 
+>In java we have heap and stack memory. 
+>In the heap there is a memory for object with some address and in stack memory there is variables and address which points to heap memory.
+Syntax:-
+Class_Name obj = new Class_Name();
+Where 	obj - reference
+	new Class_Name() - Object
+
+11:23 AM 10/11/2022
+Constructor and Encapsulation
+Constructor:-
+1.Same name as class name.
+2.Never return anything.
+3.Constructor is member method.
+4.It will used to allocate memory.
+
+There are different constructors
+1.Default Constructor - Constructor have no arguments then it is default constructor.
+2.Parameterized Constructor - Passing the args then it is parameterized constructor.
+
+Constructor Overloading:-
+When the constructor having same name but different signature(having different number of parameters) then it is constructor overloading.
+
+Example:- 
+class A {
+	public void A(){......}		//Default constructor
+	public void A(int a, int b){......}	//Parameterized constructor
+	public void A(String a, int b){......}  //Parameterized but different signature
+	public void A(int x, int y){......} //Error occurs because same int, int 						  signature will already is used in the above.
+}
+main() {
+-----------------
+}
+
+Note:-
+If the constructor havig same name and same signature then it will get error.
+
+Merthod Overloading:-
+Same as the constructor overloading.
+
+This Keyword:-
+This keyword always points to the instance variable.
+class calc {
+	int num1;	//num1,num2,num3 are instance variables.
+	int num2;
+	int result;
+	
+	public calc(int num1 int num2) {
+		this.num1 = num1; 
+		this.num2 = num2;
+	}
+}
+In the above this.num1 and this.num2 is belongs to the class variables and num1 and num2 is belongs to the arguments. If we not declare this keyword then it will show error i.e JVM gets confusion to where num1 and num2 belongs either class or arguments.
+
+New Keyword:-
+When the 'new' keyword used it will create the memory in the heap memory. In java we have Stack and heap memory
+every variable adn references will store in the stack memory.
+
+Encapsulation:-
+Encapsulation means securing the data/variables by using the getter and setter methods. 
+			or
+Encapsulation means making data/variables private without accessing others.
+
+Varargs:-(Variable Arguments)
+
+Static Keyword:-
+1.Static Variable:-
+->If we declare the variable as static then it can be assignable at any position of the code. If we dont want  to access variables using object then we make variable as static. When we make variable/method as static is can create separate class area to story the static data.
+public class first {
+    public static void main(String[] args) {
+        emp obj1 = new emp();
+        obj1.name = "Akhil";
+        obj1.salary = 5000;
+        emp.ceo = "Raju";   	//Accessing using class name
+
+        obj1.display();
+        emp obj2 = new emp();
+        obj2.name = "Rajesh";
+        obj2.salary = 9000;
+        // obj2.ceo = "Ram";
+
+        obj2.display();
+    }      
+}
+
+class emp {
+    String name;
+    int salary;
+    static String ceo = "Kalyan";
+
+    public void display() {
+        System.err.println(name + " : " + salary + " : " + ceo);
+    }
+
+}
+
+2.Static Method:-
+If we want to call static method no need to create an object, by directly we can call by using class name. Thus, the main method will always the static.
+
+3.Static Block.
+It is the block of code in which we can declare anything either methods or variables.
+
+Inner Class:-
+1. Class which is created in the another class. To access inner class object before that we have to create the object of outer class.
+Syntax:- To create inner class object.
+Step 1:-
+outer obj = new outer();
+Step 2:-
+outer.inner obj1 = obj.new inner();
+
+2.If the inner class is static then
+Step 1:-
+outer obj = new outer();
+Step 2:-
+outer.inner obj1 = new outer.inner(); 	//No need obj referene only class
+
+Syntax:-
+Class outer {
+	--------
+	class inner {
+		-------
+	}
+}
+main() {
+	
+Example:-
+public class first {
+    public static void main(String[] args) {
+       Outer obj = new Outer();     //Outer class object
+       obj.show();
+
+       Outer.inner obj1 = obj.new inner();
+       obj1.show();
+    }      
+}
+
+class Outer {
+    public void show(){
+        System.out.println("Outer Class");
+    }
+    class inner {
+        public void show(){
+            System.out.println("inner Class");
+        }
+    }
+}
+
+Output:-
+Outer Class
+inner CLass
+
+Inheritance:-
+1.Single level inheritance. - Class A --> Class B
+2.Multi level inheritance. - Class A--> Class B --> Class C or --> Class A
+3.Multiple inheritance - Java does not support because - Class A --> Class B -- class A,B
+
+Polymorphism:-
+Poly means many and morph means forms. In this we can create a parent class reference 
+by using child class object. In polymorphism we have method overload and method overrinding.
+Example:-
+class A {
+
+}
+class B extends A {
+}
+class C extends B {
+}
+main() {
+A obj = new B();  -->Polymorphism
+}
+
+Method Overloading:-
+>Methods having same name and different signature(means having same number of parameters) is known as the method overloading.
+>If method have same name and parameters then it will show error. Same name with different parameters it will be supported.
+>It is done at the time of compile time.
+
+Constructing Overloading:-
+Constructor overloading is also same the method overloading.
+
+Super Method:-
+It is used to points out the pareant class methods.
+
+Method Overriding:-
+Child class method overriding the super/parent class method is known as the method overriding.
+Example:-
+class A {
+	public void show(){
+		print("In parent class")
+	}
+}
+class B extends A{
+	public void show(){
+		print("In child class");
+	}
+}
+main(){
+	B obj = new B();
+	obj.show();
+}
+
+Output:-
+In child class
+
+Child class show() method overrides the parent class show() method. To overcome this we have two ways
+1.Maintaining the different method names.
+2.Using Super Method.
+
+Example:- Using Super method
+class A {
+	public void show(){
+		print("In parent class")
+	}
+}
+class B extends A{
+	super.show();		//It points to super/parent class methods
+	public void show(){
+		print("In child class");
+	}
+}
+main(){
+	B obj = new B();
+	obj.show();
+}
+
+Output:-
+In parent class
+In child class
+
+Dynamic Method Dispatch/Polymorphism:-
+In this we have runtime polymorphism and compile time polymorphism.
+Example:-
+class A {
+	public void show(){
+		print("In A");
+	}
+}
+class B extends A{
+	public void show(){
+		print("In B");
+	}
+}
+
+class C extends A{
+	public void show(){
+		print("In C");
+	}
+}
+main(){
+	A obj = new B(); 	//This is runtime polymorphism. Object linking at runtime and decides which show() method should call at runtime only.
+	obj.show();		//Dynamic Method Dispatch
+
+	A obj = new C();
+	obj.show();
+	
+}
+
+Output:-
+In B
+In C
+
+
+Final Keyword:-
+1.Final Class
+If we declare class as final then it will not be inherited
+
+2.Final Method
+If we declare method as final then it will not be allowed method overriding.
+
+3.Final Variable
+If we declare variable as final then it will become constant. It will not change again.
+
+Abstract Keyword:-
+1.If we make "class" as abstract then we cannot create an object of that class.
+Syntax:-
+abstract class A {
+	-----
+}
+
+2.If we make "method" as abstract then there is no body of that method, if the method is abstract then class also should be abstract other it will show error. 
+Syntax:-
+abstract class A {
+	public abstract void eat() {
+		-------
+	}
+}
+
+3.If we extends the abstract class then the methods in the abstract class must be define in the child class otherwsie it will show error.
+Syntax:-
+abstract class human { 			//Abstract Class
+	public abstract void eat() {
+		-------
+	}
+	public void walk() {
+		-------
+	}
+}
+class man extends human { 		//Concrete Class
+	public void eat(){
+		print();
+	}
+}
+
+4.Here we cannot create object of abstract class or cannot create instance/reference, it is overcome by create the instance of child of the abstract class.
+main(){
+	human obj = new man(); 	
+}
+
+
+Interfaces:-
+>Interface is similar to the class but every method in the interface is abstract.
+>Interface will act like a blueprint.
+>Class will implements interface.
+>In interface every method/variable declared is by default, final and abstract.
+>Creating object of interface is not possible but creating reference is possible.
+>In interfaces writing body of the method is not possible but in the new version java there is an update like if we declare a method as 'default' we can able to wirte a body of the method.
+>In the latest version of java there is 'static' method in java.
+Note:-
+>After implementing interface by the class if we not declare the method which is 
+declared in the interface then it will shows error.
+>In class java will not support multiple inheritance but in interface java will support
+ multiple inheritance
+
+Example 1:-
+interface car {
+	void drive();
+}
+class alto implements car {
+	public void drive() {------------}  
+}
+
+Multiple Inheritance in case of interface
+Example 2:-
+interface car {void drive();}
+interface box{void stay();}
+class alto implements car,box{
+	public void drive(){}
+	public void stay(){}
+}
+
+Example 3:-Using default keyword
+interface demo {
+	void abc();
+	dafualt void show(){
+		syso('In show');
+	}
+}
+class intDemo implements demo {
+	public void abc{
+		syso('in abc');
+main() {
+	demo obj = new intDemo();
+	obj.abc();
+	obj.show();
+}
+
+Output:-
+in abc
+in show
+
+Packages:-
+Packages are nothing but a folders. In java there is a pakages with sub-packages.
+Example:-
+Akhil --> This is one package.
+Akhil.javaCourse --> Here javaCourse is the sub-package.
+
+Access Modifiers:-
+1.Public
+2.Private
+3.Protected
+4.Default
+
+Anonymous Class:-
+Anonymous class is created as below example
+Example 1:-
+mian() 
+{
+	A obj = new A()
+	{
+		public void show()
+		{
+			syso('Anonymous class');
+		}
+	};
+}
+
+Lamda Expression
+Example 2:- 
+mian() 
+{
+	A obj = () ->
+	{
+		syso('Anonymous class');
+	};
+}
+
+
+Exception Handling:-
+>Handling the exceptions by using the try, catch and finally block blockes.
+main() {
+	try{
+		int i = 9, j = 0;
+		int k = i/j;
+		syso(k);
+	}
+	catch(Arthematic aexception e) {
+		syso("Error Occured");
+	}
+	finally{		//It will execute at the end of the program
+		syso("Program Done");
+	}
+}
+
+Output:-
+Error Occured
+Program Done
+
+
+>In exception handling we have multiple catch blockes.
+main() {
+	try{
+		int i = 9, j = 0;
+		int k = i/j;
+		syso(k);
+	}
+	catch(ArthematicException e | ArrayIndexOutOFBoundException e) {
+		syso("Error Occured");
+	}
+	finally{		//It will execute at the end of the program
+		syso("Program Done");
+	}
+}
+
+User Defined Exceptions:-
+We can also create our exceotions by using 'throw new'.
+
+Multi Threading in Java:-
+>It is nothing but the multi tasking.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,131 @@
+HTML(Hyper Text Markup Language)
+
+1.Head Tag<head></head>
+2.Body Tag<body></body>
+3.Paragraph Tag<p></p>
+4.Line Breaks<br>
+5.Header Tags<h1>....<h6>
+6.Ordered<ol></ol> and UnOrdered List<ul></ul>
+7.Img Tag<img>
+8.Video Tag<video></video>
+9.Anchor Tag <a></a>
+10.Table Tag<table></table>
+
+11.HTML Link Creation:-
+<ahref="link">Example img tag</a> it will navigate to link website
+
+When navigating another website to open in new tab use the attribute 'target'
+Example:-
+<ahref="link" target>Click Here</a> 
+Result:- Link will open in new tab in browser.
+
+12.Merging Cells in the Table:-
+When to merge the two cols into one col by using the attribute colspan = 2.
+
+13.HTML Froms:- <form></from>
+Attributes - 1.action
+	      2.name
+14.Form Tags:-
+	1.Input text - <input type="text" name=""> 
+	2.Select option tag - <select> <option></option> </select>
+	3.Check box - <input type="checkbox" name="">
+	4.Radio Button - <input type="radio" name="">
+	5.Text area - <textarea cols="" rows=""></textarea>
+	6.Submit Buttons - <input type="button" name="">
+	7.Rest Button - <input type="reset" name="">
+	8.Number - <input type="number" min=""  max ="" name="">
+	9.Range - <input type="range" name="">
+
+
+CSS(Cascode Style Sheets)
+IDs and Classes in CSS:-
+IDs can call by "#".
+Classes can be call by ".".
+
+CSS Margins:-
+Margins are used to add spacing around the HTML elements in the view.
+Syntax:-
+margin: 0px(top margin) 1px(Right margin) 2px(Bottom margin) 3px(Left margin)
+	
+	(or)
+
+margin: 10px; ->It will apply on every side(i.e top, bottom, left, right)
+
+Padding:-
+The padding creates spacing for the HTML element.
+Syntax:-
+padding: 0px(Top) 1px(Right) 2px(Bottom) 3px(Left)
+
+	or
+
+padding: 20px; ->Which applies on every side.
+
+CSS Letter Spacing:-
+Increase the spacing between the letter of the paragraph.
+
+Work Spacing:-
+Increase the spacing between the words of the paragraph.
+
+CSS Positions:-
+1. Static Position:-
+It is a default position of an element if no position is specified. There will be no change in the position
+
+2. Relative Position:-
+It will always follow the parent div tag. 
+Suppose, for example
+<div class="div1"> Parent div tag(Having some parameters like width/padding etc..)
+	<div  class="div2"></div> Child div tag(The same width/padding/margins etc will be copied for parent div tag)
+</div>
+
+From the above example, class div1 has some styles that are
+<style>
+	.div1{
+		top:1px;
+		bottom:10px;
+		margin:50px;
+	}
+	.div2{
+		Height:50px;
+		Position:relative;
+	{
+
+-->.div2 will follows the parent div1 having margin, top, bottom values and laid on the same position as parent div1.
+-->Suppose if declare the top, bottom, margins etc in the child div2 then it will not follows the parent div1.
+
+3. Absolute Positioning:-
+If we keep the position as absolute then the parent div position will reamin in the same position with its child div tags.
+
+4. Fixed Position:-
+Same as absolute position but the fixed position will not allow to scroll.
+
+Float Property:-
+When we make a view with an image and paragraph the image with matter will float by using this float property
+
+Z-index:-
+If the value is higher then it will be at the top of the view otherwise at the bottom of the view
+
+CSS Styling Links:-
+1.a:link{
+}
+
+2. a: visited link{  //Change the color when we visited the link.
+}
+
+3. a:hover{
+}
+
+4. a:active link{
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
