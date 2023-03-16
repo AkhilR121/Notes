@@ -1,0 +1,1591 @@
+Introduction to NoSQL Databases:-
+What is an SQL Database?
+SQL databases store data using the relational data model.
+
+What is a NoSQL Database?
+A NoSQL database stores data differently from SQL, in a non tabular format.
+1. Document Databases(eg: MongoDB)
+2. Key-Value Databases
+3. Graph Databases
+etc...
+
+Note:-
+Document DB and key-value DB are similar.
+
+What is MongoDB?
+MongoDB is a document-type database. It stores values in the field-value based on the documents. Documents are stored inside collections and collections stored inside databases.
+In MongoDB, documents are polymorphic/flexible i.e they do not have a fixed structure. Changes can be made easily to a document.
+Example:-
+{
+	"id": "1212",
+	"name": "XYZ",
+	"email": "abc@gmail.com",
+	"address": "DoorNO: 512"
+}
+
+
+Documents in MongoDB:-
+Documents in the MongoDB are in JSON (JavaScript Object Notation) format. For each document have an id field like "_id":" 1212". In this we have an sub-documents.
+Example for Sub-Documents
+{
+	"_id": "123",
+	"phone": ["123456789","987654321"],
+	"address": {
+		"street": "xyz",
+		"town": "yyy town",
+		"postcode": "521515"
+	}
+}
+
+Note:-
+In the above address is the sub-document.
+
+
+Replica Sets and Clusters:-
+--> Replica Set consists of three instances.
+--> Sharded Cluster contains a group of replica sets.
+
+Advantages of MongoDB:-
+1. More Flexible
+2. Less complexity.
+3. Faster.
+4. Schema-Less.
+5. Easier to maintain.
+6. Easy to scale.
+
+MongoDB Query Language:-
+MQL is an imperative language.
+MQL is designed for simple queries across single collections.
+MQL can handle complex queries.
+
+Installation:-
+1. Create an account on mongoDB.com.
+2. Create a cluster and databases.
+3. Download MongoDB database tools and MongoDB shell.
+4. Copy the locations of both(mongosh from shell and mongotop from tools) and paste them into the environment variable on the desktop.
+5. Install MongoDB Compass.
+6. In MongoDB compass give a connection string generated from mongodb.com and connect the database.
+7. Create collections in the database by giving a names to each database.
+
+Connecting MongoDB to Command Prompt:-
+1. Click on the connect and select connect with the MongoDB Shell.
+2. Select "I have the MongoDB Shell installed" at the top.
+3. Select your mongo shell version "mongosh" option.
+4. It will generate a connection string below, copy that string in the command prompt and click enter.
+5. Command prompt will ask a password which is we previously created for the database.
+
+
+Command Line Basics:-
+dir - To get all the directories on the desktop.
+cd - To navigate to any folder/directory.
+cd .. - To navigate back from the folder.
+cls - To clear screen of cmd prompt.
+
+MongoExport:-
+Command Line for mongoexport
+--> mongoexport --uri="" --collection= --out=
+We have to URI and out(to where we export to) values.
+
+URI - Uniform Resourse Identifier
+Format of the uri is,
+mongodb+srv://
+user:password
+	@
+<cluster>.mongodb.net
+       /database
+
+1. Create a new database in MongoDB Compass named as import_export_db and create a collection named as import_export_coll1
+2. Go to mongoDB.com and click on 'connect' option select 'Connect using mongoDB compass' it will generate a link.
+3. By making some changes(password and DB name) in the connect link as below, paste it into CMD prompt.
+mongoexport --uri="mongodb+srv://user_1:akhil1998@firstcluster.094s0ki.mongodb.net/import_export_db" --collection=import_export_coll1 --out=import_export_coll1.json
+4. One record is exported to our PC location in JSON format, having JSON data.
+
+MongoImport:-
+1. Delete/Drop the import_export_coll1 collection in import_export_db database.
+2. By using same command
+mongoimport --uri="" --collection= --file=
+3. Fill the command and paste it in CMD prompt
+mongoimport --uri="mongodb+srv://user_1:akhil1998@firstcluster.094s0ki.mongodb.net/import_export_db" --collection=import_export_coll1 --file=import_export_coll1.json
+4. Check in MongoDB compass again the same collection is get import with the same data.
+
+MongoDump:-
+1. By using the command below
+--> mongodump --uri=""
+
+mongodump --uri="mongodb+srv://user_1:akhil1998@firstcluster.094s0ki.mongodb.net/import_export_db"
+2. Now it creates a dump folder with some metadata
+
+MongoRestore:-
+1. Delete any database for example delete 'import_export_db'.
+2.By the command
+mongorestore --uri="" dump/dataBase_name
+Before deleting any DB we have to dump it. mongodump acts like a data backup.
+3. Paste the command in CMD prompt 
+mongorestore --uri="mongodb+srv://user_1:akhil1998@firstcluster.094s0ki.mongodb.net/import_export_db" dump/import_export_db
+4. By checking in MongoDB compass import_export_db gets restored with the collections.
+
+Note:-
+MongoDump and mongoRestore use JSON Binary format.
+
+Creating and Deleting Database Collections:-
+Before that we have to learn some commands that are used on cmd
+1. show dbs - To get all the databases available in our mongodb
+output:-
+import_export_db   48.00 KiB
+sample_training    60.80 MiB
+admin             336.00 KiB
+local               5.69 GiB
+
+2. use sample_training - To navigate into smple_training DB.
+Output:-
+Atlas atlas-12ps8x-shard-0 [primary] sample_training>
+
+3. show collections - To get all the collections in particular database.
+Output:-
+companies
+grades
+inspections
+posts
+routes
+trips
+zips
+
+4. Suppose we didn't have a DB like test_db in our MongoDB then if we use
+test_db - then it will navigate to test_db even though if not have test_db DataBase. In this, we insert a collections test_db gets created as DB.
+Output:-
+Atlas atlas-12ps8x-shard-0 [primary] test_db>
+
+Creating a Collection:-
+Syntax:-
+db.createCollection('name', options)
+->Name parameter is mandatory and should be in single quotes('name')
+->options parameter is optional
+
+Example and Output:-
+Atlas atlas-12ps8x-shard-0 [primary] test_db> db.createCollection('test_col')
+{ ok: 1 }
+
+Check whether the collection is created or not
+Atlas atlas-12ps8x-shard-0 [primary] test_db> show dbs
+import_export_db   48.00 KiB
+sample_training    60.80 MiB
+test_db             8.00 KiB
+admin             336.00 KiB
+local               5.69 GiB
+
+Atlas atlas-12ps8x-shard-0 [primary] test_db> show collections
+test_2
+test_col
+
+
+Drop/Deleting a Collection:-
+Syntax:-
+db.collectionName.drop()
+
+Example:- Dropping Collection in test_db DB.
+->leting test_2 Collection from test_db DB.
+Atlas atlas-12ps8x-shard-0 [primary] test_db> show collections
+test_2
+test_col
+Atlas atlas-12ps8x-shard-0 [primary] test_db> db.test_2.drop()
+true
+->Only one collection is remaining after dropping test_2.
+Atlas atlas-12ps8x-shard-0 [primary] test_db> show collections
+test_col
+
+Example:-Dropping test_db Database
+Atlas atlas-12ps8x-shard-0 [primary] test_db> db.dropDatabase()
+{ ok: 1, dropped: 'test_db' }
+
+Note:-
+It will automatically drop the DB where we navigate. In the above we are navigate into test_db DB so it automatically drop the test_db DB.
+
+
+Using find and findOne Methods:-
+
+findOne() Method:-
+It finds ramdomly one data in the collection
+Syntax:-
+db.collection.findOne(query, projection)
+
+Example:-Naviagate to sample_training DB and get grades collection data using findOne() method?
+Atlas atlas-12ps8x-shard-0 [primary] sample_training> db.grades.findOne()
+{
+  _id: ObjectId("56d5f7eb604eb380b0d8d8ce"),
+  student_id: 0,
+  scores: [
+    { type: 'exam', score: 78.40446309504266 },
+    { type: 'quiz', score: 73.36224783231339 },
+    { type: 'homework', score: 46.980982486720535 },
+    { type: 'homework', score: 76.67556138656222 }
+  ],
+  class_id: 339
+}
+
+find() Method:-
+It gets all the data in the collection.
+Syntax:-
+db.collection.find(query, projection)
+
+Example 1:- To get all the data in the grades collection.
+Atlas atlas-12ps8x-shard-0 [primary] sample_training> db.grades.find()
+
+Example 2:- To get tha data which is having class_id: 419 using 'query' parameter.
+Atlas atlas-12ps8x-shard-0 [primary] sample_training> db.grades.find({"class_id":419})
+
+Example 3:- To get data having student_id: 1 and class_id: 270?
+Atlas atlas-12ps8x-shard-0 [primary] sample_training> db.grades.find({"student_id":1, "class_id":270})
+
+Output:-
+[
+  {
+    _id: ObjectId("56d5f7eb604eb380b0d8d8de"),
+    student_id: 1,
+    scores: [
+      { type: 'exam', score: 1.728412932853074 },
+      { type: 'quiz', score: 1.3302189163895362 },
+      { type: 'homework', score: 21.819607558947716 },
+      { type: 'homework', score: 2.885066735481989 }
+    ],
+    class_id: 270
+  }
+]
+
+Querying with the Data Explorer:-
+Goto MongoDB.com then go to collections and click on the filter then the same commands we can apply to get the data from the particular collections.
+
+Assignment Questions:-
+1. Use  the findOne method on the Inspections collections to return one document?
+Atlas atlas-12ps8x-shard-0 [primary] sample_training> db.inspection
+s.findOne()
+{
+  _id: ObjectId("56d61033a378eccde8a8354f"),
+  id: '10021-2015-ENFO',
+  certificate_number: 9278806,
+  business_name: 'ATLIXCO DELI GROCERY INC.',
+  date: 'Feb 20 2015',
+  result: 'No Violation Issued',
+  sector: 'Cigarette Retail Dealer - 127',
+  address: { city: 'RIDGEWOOD', zip: 11385, street: 'MENAHAN ST', number: 1712 }
+}
+
+2. Use the find method to filter for documents in the inspections collecvtion where the result field is "Violation Issued" and the sector field is "Home Improvement Cintractor - 100"?
+Atlas atlas-12ps8x-shard-0 [primary] sample_training> db.inspections.find({"result":"Violation Issued","sector":"Home Improvement Contractor - 100"})
+
+3. Filter the documents in the inspections collection where the sector is "Fuel Oil Dealer - 814"?
+Atlas atlas-12ps8x-shard-0 [primary] sample_training> db.inspections.find({"sector": "Fuel Oil Dealer - 814"})
+ 
+Use of $ in MQL(Mongo Query Language):-
+1. Precedes operators in MQL.
+Lessthan operator (>) in MQL - $lt
+
+Example:-
+
+
+Note in Windows Shell, we cannot able to use the > operator.
+
+2. Precedes Field Values
+3. Aggregation Pipeline
+
+
+Operators:-
+1. Comparision Operators:-
+1. $eq  =  EqualTo operator
+2. $gt   =  GreaterThan
+3. $gte =  GreaterThan or equalTo
+4. $lt    =  LessThan
+5. $lte  =  LessThan or equalTo
+6. $in   =   Gives only specific values that we want
+Example:-
+ db.trips.find({"start station id": {$in:[284,532]}})
+Output:-
+Only start station id values equal to 284 and 532 will get display.
+7. $nin =  Values except we given remaining will print.
+
+2. Logical Operators:-
+1.$and == Returns all docs that match all conditions.
+Syntax:-
+{operator: [{cond 1},{cond 2},....]}
+
+Example:-Tripduration > 400 and birth year > 1988 if both are true then thoes data gets display.
+{$and: [{"tripduration": {$gt:400}},{"birth year": {$gt:1988}}]}
+
+2. $or ==  Returns all docs that match any of one condition.
+Syntax:-
+{operator: [{cond 1},{cond 2},....]}
+
+Example:-
+db.trips.find({$or:[{"tripduration": {$gt:4000}},{"birth year": {$lt:1950}}]})
+
+3. $nor ==  Returns all docs that fail all of the conditions.
+Syntax:-
+{operator: [{cond 1},{cond 2},....]}
+ 
+Example:-
+db.trips.find({$nor:[{"tripduration": {$lte:4000}},{"birth year": {$gte:1950}}]})
+
+4. $not ==  Returns all docs that do not match the expression.
+Syntax:-
+{operator: {condition}}
+
+Example:-
+db.trips.find({"usertype":{$not:{$eq:"Subscriber"}}})
+
+Assignment Questions:-
+1. Return all docs in the inspections collection where the result is either "Unable to Locate" or "Violation Issued" - use the $in operator?
+ db.inspections.find({"result": {$in:["Unable to Locate","Violation Issued"]}})
+
+2. Return all docs in the inspections collection where the result is either "Unable to Locate" or "Violation Issued" - use the $or operator?
+db.inspections.find({$or: [{"result": {$eq:"Unable to Locate"}},{"result":{$eq:"Violation Issued"}}]})
+
+or
+
+db.inspections.find({$or: [{"result": "Unable to Locate"},{"result":"Violation Issued"}]})
+
+3. Return all the docs in the companies collection where the number of employees is less than or equal to 100 and the founded year is equal to 2009? 
+ number_of_employees: null,
+ founded_year: 2006,
+
+
+Introduction to $expr:-
+Syntax:-
+{$expr: {operator: [field, valur]}}
+
+Example1:-Return the docs that are having src_airport and dst_airport the same value using $expr.
+
+Atlas atlas-12ps8x-shard-0 [primary] sample_training> db.routes.find({$expr:{$eq:["$src_airport","$dst_airport"]}})
+[
+  {
+    _id: ObjectId("56e9b39c732b6122f8787c2d"),
+    airline: { id: 10121, name: 'Illinois Airways', alias: 'IL', iata: 'ILW' },
+    src_airport: 'PKN',
+    dst_airport: 'PKN',
+    codeshare: '',
+    stops: 0,
+    airplane: 'AT7'
+  }
+]
+
+
+Example 2:-Return the docs where airplane=CR2?
+ db.routes.find({$expr: {$eq:["$airplane", "CR2"]}})
+
+
+Element Operators:-
+1. $exists = Returns documents that contain the specific field.
+Syntax:-
+db.collection.find({field: {$exists: <boolean>}})
+
+Example:- Return whether the fields are present in the colletions or not. In companies collecton there is no 'ipo' field in all documents, so return only the docs containing ipo field using $exists operator
+ db.companies.find({"ipo": {$exists: true}})
+
+2. $type = Return fields that contain values of a specific data type.
+For every data type there is a specific number 
+Double: 1
+String: 2
+Null: 10
+
+By using that numbers we have check the fields data types by $type.
+Syntax:-
+db.collection.find({field: {$type: <BSON type>}})
+
+Example:- Return the docs by checking the datatypes of the fields using $type.
+ db.companies.find({"homepage_url":{$type:2}, "founded_year":{$type:10}})
+
+Cursor Methods:-
+1. Count - Returns the number of documents in the result set.
+Syntax:-
+db.collection.find({query}).count()
+
+Example 1:-
+ db.trips.find({"tripduration":{$gt:300}}).count()
+
+Output:-
+7976
+
+Example 2:-
+db.trips.find({"tripduration":{$gt:300, $lt:400}}).count()
+
+Output:-
+1214
+
+2. Sort - Orders the documents based on specified fields.
+Ascending order = 1
+Descending order = -1
+
+Syntax:-
+db.collection.find({query}).sort({parameters})
+
+and
+
+db.trips.find().sort({"start station name":-1})
+
+Example 1:-Return the data in descending order.
+db.trips.find({"tripduration":{$gt:300, $lt:400}}).sort({"triptduration":-1})
+
+Example 2:-
+db.trips.find({"tripduration":{$gt:300, $lt:400}}).sort({"start station name": 1,"triptduration":-1})
+
+3. Limit - Limits the number of documents returned
+Syntax:-
+db.collectons.find({query}).limit(number)
+
+Example 1:-
+db.trips.find().limit(5)
+
+Example 2:-
+Atlas atlas-12ps8x-shard-0 [primary] sample_training> db.trips.find().limit(5).count()
+5
+Atlas atlas-12ps8x-shard-0 [primary] sample_training> db.trips.find().limit(5).size()
+5
+
+4. Skip - Skips the first X number of documents
+Syntax:-
+db.collections.find({query}).skip(number)
+
+5. Size - Size is like count in that it returns a count of the documents, however it should be used when you've applied skip or limit to your records.
+
+
+Projection:-
+By using projection we can manupulate the key-values in the documents.
+Let go to find method where in the syntax of the find method 'projection' is a one of parameter.
+Syntax:-
+db.collection.find({query, projection})
+
+Example 1:- Cosider a companies collection and display only  name and founded_year from each document.
+ db.companies.find({},{"name":1, "founded_year":1})
+
+Output:-
+  {
+    _id: ObjectId("52cdef7c4bab8bd675297daa"),
+    name: 'Sparter',
+    founded_year: 2007
+  },
+  {
+    _id: ObjectId("52cdef7c4bab8bd675297dac"),
+    name: 'Veoh',
+    founded_year: 2004
+  },
+  {
+    _id: ObjectId("52cdef7c4bab8bd675297dae"),
+    name: 'Thoof',
+    founded_year: 2006
+  }
+
+Note:-
+_id field will display even thought we do not specify in the projection by default.
+
+Example 2:- Remove the id field
+db.companies.find({},{"name":1, "founded_year":1, "_id":0}).limit(3)
+
+Output:-
+[
+  { name: 'Wetpaint', founded_year: 2005 },
+  { name: 'Facebook', founded_year: 2004 },
+  { name: 'Omnidrive', founded_year: 2005 }
+]
+
+
+Assignment Questions:-
+1. Are there any documents in the trips collection where the "start station name" or the "end station name" have been left as null?
+
+ db.trips.find({$or: [{"start station name": {$type: 10}},{"end station name": {$type: 10}}]})
+
+
+2. Return the top 10 companies by number of employees in descending order use projection to project only the "numbe_of_employees" and "name" fields.
+
+db.companies.find({},{"name": 1, "number_of_employees": 1}).sort({"number_of_employees":-1})
+
+
+3. Find out how many companies have over 100,000 employees in the company's collection.
+Sol 1:-
+db.companies.find({"number_of_employees": {$gt: 100000}}).count()
+14
+
+Sol 2:-
+db.companies.find({"number_of_employees": {$gte: 100000}}).count()
+16
+
+Querying Embedded Documents:-
+From the below doc we have an address field having other sub-fields in it. We have to call the 'Zip' field from the address for that we have to use dot notation.
+
+db.inspections.findOne()
+{
+  _id: ObjectId("56d61033a378eccde8a8354f"),
+  id: '10021-2015-ENFO',
+  certificate_number: 9278806,
+  business_name: 'ATLIXCO DELI GROCERY INC.',
+  date: 'Feb 20 2015',
+  result: 'No Violation Issued',
+  sector: 'Cigarette Retail Dealer - 127',
+  address: { city: 'RIDGEWOOD', zip: 11385, street: 'MENAHAN ST', number: 1712 }
+}
+
+Example:-
+db.inspections.find({"address.zip": 11385})
+
+
+Querying Arrays:-
+Syntax:-
+ db.posts.find({"tags":"roof"},{"tags": 1})
+
+and
+
+ db.posts.find({"tags":["string","string","string",.......]},{"tags": 1})
+
+
+Example 1:-
+In posts collection we have to display only 'tags' field having 'roof' string in its array?
+db.posts.find({"tags":"roof"},{"tags": 1})
+
+Note:-
+ db.posts.find({"tags":["string","string","string",.......]},{"tags": 1})
+Each and every element we give in an array must match and also in the same order to tags array otherwise it will not display.
+
+
+1. $all Operator:-
+db.posts.find({"tags":["string","string","string",.......]},{"tags": 1})
+By using the $all operator even if the order we give is different from the tags array it gets prints the values.
+
+2. $size Operator:-
+It is used to return documents based on the array size we mention
+
+Example:-Consider posts collection in that we have 67485 documents and then return the documents have array size:10 for the tags array only?
+db.posts.find({"tags":{$size:10}}).count()
+
+Output-
+500
+
+3. $elemMatch Operator:-
+Consider the grades doc it has scores field with "type" and "score" values.
+
+Syntax:-
+db.collection.find({field:{$elemMatch:{{}query1},{query2},....}})
+
+Example:-
+Return the fields having type:exam and score > 80, without using $elemMatch it is impossible to return the values.
+db.grades.find({"scores":{$elemMatch:{"type":"exam", "score":{$gt:80}}}})
+
+Assignment Questions:-
+1. Return all documents in the routes collection where the id(embedded in the airline field) is 410
+sample_training> db.routes.find({"airline.id":410})
+
+2. Return all docs in the companies collection where there is a product named "Jobster", note that the name field is embedded inside the products field, and the products field contains an array of docs. Use projection to project only the "_id" and "products" fields.
+db.companies.find({"products":{$elemMatch:{"name":"Jobster"}}},{"products":1})
+
+Inserting Documents Into Documents:-
+This is done by using the insert method.
+Syntax:-
+db.collection.insert(<doc or array of docs>,{writeConcern:<document>,ordered:<Boolean>})
+
+Example:-Creating new collection and docs in it.
+db.testcollection.insert({"name":"Akhil", "profession":"Software Engineer"})
+
+Where 
+testcollection is the collection we are given.
+name and profession are the documents in  the 'testcollection' collection.
+
+Checking whether the docs were inserted or not
+db.testcollection.find()
+[
+  {
+    _id: ObjectId("63a6a68caeff90b6d08a7e41"),
+    name: 'Akhil',
+    profession: 'Software Engineer'
+  }
+]
+
+Note:- _id field is automatically generated.4
+Example 2:-User defined id.
+ db.testcollection.insert({"_id":1001,"name":"Peter", "Profession":"Spider Man"})
+
+ sample_training> db.testcollection.find()
+[
+  {
+    _id: ObjectId("63a6a68caeff90b6d08a7e41"),
+    name: 'Akhil',
+    profession: 'Software Engineer'
+  },
+  {
+    _id: ObjectId("63a6a80daeff90b6d08a7e42"),
+    name: 'Akhil',
+    profession: 'Software Engineer'
+  },
+  { _id: 1001, name: 'Peter', Profession: 'Spider Man' }
+]
+
+
+Example 3:-
+db.testcollection.insert({"Name":"Tony Stark","Profession":"Iron Man"},{"Name":"Banner","Profession":"Banner"})
+
+Example 4:-
+ db.testcollection.insert([{"name":"Tony", "Profession":"Iron man"},{"name":"Banner","Profession":"Hulk"}])
+
+
+Deleting Documents:-
+We have two methods in deleting the documents.
+1. deleteOne
+Syntax:-
+db.collection.deleteOne(
+	<filter>,
+	{
+	    writeConcern:<document>,
+	    collation:<document>,
+	    hint:<document>
+	}
+)
+
+Example:-We have two documents with name:"Akhil", where deleteOne method deletes the method delete only one doc only.
+db.testcollection.deleteOne({"name":"Akhil"})
+
+2. deleteMany
+Syntax:-
+db.collection.deleteMany(
+	<filter>,
+	{
+	    writeConcern:<document>,
+	    collation:<document>
+	}
+)
+
+Example:-We have two fields with name:"Akhil", where deleteMany method deletes all fields associated with the name:Akhil. This is the main difference between the deleteOne and deleteMany methods
+
+db.testcollection.deleteMany({"name":"Akhil"})
+
+
+Updating Documents in the Shell:-
+There are two methods 
+1. updateOne
+Syntax:-
+db.collection.updateOne({filter},{update},{options})
+
+2. updateMany
+Syntax:-
+db.collection.updateMany({filter},{update},{options})
+
+To update a fileds we are using
+$set Operator:
+Replces existing field value and sets the new value for the field in the document.
+
+Syntax:-
+db.collection.updateOne({filter},{$set:{field:value,...}},{options})
+db.collection.updateMany({filter},{$set:{field:value,...}},{options})
+
+
+Update Operators:-
+$unset - Removes the values to the fields
+Syntax:-
+db.collection.updateMany({filter},{$unset:{field:value,...}},{options})
+
+$inc - Incrementing the values in documment.
+Syntax:-
+db.collection.updateMany({filter},{$inc:{field:value,...}},{options})
+
+$rename
+Syntax:-
+db.collection.updateMany({filter},{$rename:{field:value,...}},{options})
+
+
+$push - Adds element into an array
+Syntax:-
+db.collection.updateMany({filter},{$push:{field:value,...}},{options})
+
+
+Upsert:-
+Upserting is nothing but an adding the data to the collections
+
+Example:-
+db.collection.updateMany({"name":"unknown"},{$set:{"age":"25"}},{upsert:true})
+
+
+Introduction to the Aggregation Pipeline:-
+1. It allows for more advanced operations
+2. This is a type of framework
+3. This pipeline has different stages.
+	--> $match stage
+	--> $project stage
+	--> $group stage
+Syntax:-
+db.collection.aggregate([{stage 1},{stage 2},....{stage N}], {options})
+For each in the above syntax we have to use the each stage like $match, $project, $group
+
+1. $match stage:-
+$match acts like a filter that is used in the aggregation pipeline. Which used in the stages one time or multiple times.
+
+Syntax:-
+db.collection.aggregate([{$match:{query}},{$match:{query}},...{stage N}], {options})
+
+Example:-Return the docs that are having "class_id"=116 using aggregate?
+db.grades.aggregate({$match:{"class_id":116}})
+
+Note:-
+The above example was also done by using the find() method
+
+Output:-
+We got the docs that match "class_id":116
+
+Example 2:-Return the docs with type: exam and score > 85 which are in the array of scores in grades collection.
+db.grades.aggregate([{$match:{"scores":{$elemMatch:{"type":"exam","score":{$gt:85}}}}}])
+
+
+2. $project stage:-
+-> It is also used in the stages of the aggregation pipeline.
+Syntax:-
+$project{specification(s)}
+
+Example 1:-
+By using the below command we get the perfect output, but it is a huge number of fields due to this it is difficult to find the "founded_year"
+db.companies.aggregate([{$match:{"founded_year":{$gte:2005, $lte:2010}}}])
+
+To get more clearly we can use $project, it will only project that what fields we want. We get to know only "founded_year" and "category_year".
+db.companies.aggregate([{$match:{"founded_year":{$gte:2005, $lte:2010}}},{$project:{"founded_year":1, "category_code":1}}])
+
+Output:-
+  {
+    _id: ObjectId("52cdef7c4bab8bd675297dbd"),
+    category_code: 'games_video',
+    founded_year: 2005
+  },
+  {
+    _id: ObjectId("52cdef7c4bab8bd675297dd3"),
+    category_code: 'mobile',
+    founded_year: 2005
+  },
+  {
+    _id: ObjectId("52cdef7c4bab8bd675297de9"),
+    category_code: 'web',
+    founded_year: 2006
+  }
+
+Note:- Here _id fields are generated automatically by mongo, to stop the id field just project "_id":0 in the aggregate pipeline.
+
+Example 2:- By using $project operator we can also create new fields and also assign values to them. In a companies collection, there are a field number_of_employees" project it and create a new field "no_of_emp_new" and assign a number_of_employees values.
+ db.companies.aggregate([{$project:{"number_of_employees":1,"_id":0,"no_of_emp_new":"$number_of_employees"}}])
+
+Output:-
+[
+  { number_of_employees: 47, no_of_emp_new: 47 },
+  { number_of_employees: 1300, no_of_emp_new: 1300 },
+  { number_of_employees: null, no_of_emp_new: null },
+  { number_of_employees: null, no_of_emp_new: null },
+  { number_of_employees: 60, no_of_emp_new: 60 },
+  { number_of_employees: 120, no_of_emp_new: 120 },
+  { number_of_employees: 63000, no_of_emp_new: 63000 },
+  { number_of_employees: 50, no_of_emp_new: 50 },
+  { number_of_employees: 50, no_of_emp_new: 50 },
+  { number_of_employees: null, no_of_emp_new: null },
+  { number_of_employees: 35, no_of_emp_new: 35 },
+  { number_of_employees: 5299, no_of_emp_new: 5299 },
+  { number_of_employees: null, no_of_emp_new: null },
+  { number_of_employees: 13600, no_of_emp_new: 13600 },
+  { number_of_employees: null, no_of_emp_new: null },
+  { number_of_employees: null, no_of_emp_new: null },
+  { number_of_employees: null, no_of_emp_new: null },
+  { number_of_employees: null, no_of_emp_new: null },
+  { number_of_employees: null, no_of_emp_new: null },
+  { number_of_employees: 62, no_of_emp_new: 62 }
+]
+
+Example 3:- Dividing the each number_of_employees field with 1000 using $divide operator and assigning it to new field "number_of_employees_K"
+
+db.companies.aggregate([{$project:{"_id":0, "number_of_employees":1, "number_of_employees_K":{$divide:["$number_of_employees",1000]}}}])
+
+Output:-
+[
+  { number_of_employees: 47, number_of_employees_K: 0.047 },
+  { number_of_employees: 1300, number_of_employees_K: 1.3 },
+  { number_of_employees: null, number_of_employees_K: null },
+  { number_of_employees: null, number_of_employees_K: null },
+  { number_of_employees: 60, number_of_employees_K: 0.06 },
+  { number_of_employees: 120, number_of_employees_K: 0.12 },
+  { number_of_employees: 63000, number_of_employees_K: 63 },
+  { number_of_employees: 50, number_of_employees_K: 0.05 },
+  { number_of_employees: 50, number_of_employees_K: 0.05 },
+  { number_of_employees: null, number_of_employees_K: null },
+  { number_of_employees: 35, number_of_employees_K: 0.035 },
+  { number_of_employees: 5299, number_of_employees_K: 5.299 },
+  { number_of_employees: null, number_of_employees_K: null },
+  { number_of_employees: 13600, number_of_employees_K: 13.6 },
+  { number_of_employees: null, number_of_employees_K: null },
+  { number_of_employees: null, number_of_employees_K: null },
+  { number_of_employees: null, number_of_employees_K: null },
+  { number_of_employees: null, number_of_employees_K: null },
+  { number_of_employees: null, number_of_employees_K: null },
+  { number_of_employees: 62, number_of_employees_K: 0.062 }
+]
+
+Note:- $divide is an arithmetic operator which is discussed later.
+
+Assignment Questions:-
+1. Use the $match stage on the trip collections to return all documents where the "stop time" is after 2016-01-05 (Hint: Use the $gt operator with an ISODate value)?
+
+db.trips.aggregate([{$match:{"stop time":{$gt:ISODate("2016-01-05")}}}])
+
+2. Use $project to project only the "start station location" and "end station location" fields but to display only the coordinate values?
+db.trips.aggregate([{$project:{"start station location.coordinates":1,"end station location.coordinates":1,"_id":0}}])
+
+3. Use $project and $match on the zips collection to return the zip codes from the city of Houston where the population is over 40,000. But display only the "zip" and "pop" fields in the resulting documents?
+db.zips.aggregate([{$match:{"city":"HOUSTON","pop":{$gt:40000}}},{$project:{"zip":1,"pop":1,"_id":0}}])
+
+
+Arithmetic Expression Operators:-
+1. $add - It adds the given numbers
+Syntax:-
+{$add:[exp1,exp2,....expN]}
+
+2. $subtract - This return the subtracted value. It takes only two expressions by subtracting exp2 - exp1
+Syntax:-
+{$subtract:[exp1, exp2]}
+
+3. $divide - This returns the result by dividing the first num by the second num.
+Syntax:-
+{$divide:[exp1, exp2]}
+
+4. $multiply - Multiplies the given numbers, and excepts multiple expressions
+Syntax:-
+{$multiply:[exp1,exp2,....expN]}
+
+5. $round - Rounds the number to a specific number of decimals
+Syntax:-
+{$round:[expression, no_of_decimals]}
+
+
+Example:- Return the tripduration in hours from trips collection by using $divide and $round?
+db.trips.aggregate([{$project:{"tripduration":1,"tripduraton_hrs":{$round:[{$divide:["$tripduration",60]}]}}}])
+
+
+String Expression Operators:- There are many number of string operaters, on the below operators are the most used string operators
+
+1. $concat
+Syntax:-
+{$concat:[exp1,exp2,.....expN]}
+
+2. $toUpper
+Syntax:- 
+{$toUpper: exp}
+
+3. $toLower
+Syntax:-
+{$toLower:exp}
+
+4. $regexMatch - Searches for a pattren
+Syntax:-
+{$regexMatch:{input: exp, regex:exp, options: exp}}
+
+
+Example 1:- In trips collection turn start station name toUpper case
+db.trips.aggregate([{$project:{"start station name":{$toUpper: "$start station name"}}}])
+
+Example 2:-In trips collections by using $regexMatch operator check if "start station name" as Howard then it is true otherwise false.
+
+Output:-
+  {
+    _id: ObjectId("572bb8222b288919b68abf5c"),
+    'start station name': '10 Ave & W 28 St',
+    Howard_flag: false
+  },
+  {
+    _id: ObjectId("572bb8222b288919b68abf5d"),
+    'start station name': 'Howard St & Centre St',
+    Howard_flag: true
+  },
+
+Date Expression Operators:-
+1. $dateAdd
+Syntax:-
+{$dateAdd:{startDate:Exp, unit:exp, amount:exp, timezone:exp}}
+
+2. $dateDiff
+Syntax:-
+{$dateDiff:{startDate:exp, endDate:exp, unit:exp, timezone: exp, startOfWeek: string}}
+
+3. $month
+Expresions like 1-12
+Syntax:-
+{$month:Expression}
+
+Example:-
+db.trips.aggregate([{$project:{"start time":1,"month_no":{$month:"$start time"}}}])
+
+Output:-
+ {
+    _id: ObjectId("572bb8222b288919b68abf9f"),
+    'start time': ISODate("2016-01-01T00:20:05.000Z"),
+    month_no: 1
+  },
+  {
+    _id: ObjectId("572bb8222b288919b68abfa0"),
+    'start time': ISODate("2016-01-01T00:20:05.000Z"),
+    month_no: 1
+  },
+
+
+Comparision Expression Operators:-
+Previously we discussed about comparision operators like $eq, $gt, $gte, $lt etc..
+
+
+Array Expression Operators:-
+There are a many sexpression operators in arrays. Mostly used array expression operators are given below.
+1. $isArray
+It will return true or false. Suppose we have an array it will check wheather the field is present then return true otherwise return false.
+
+Syntax:-
+{$isArray:[exp]}
+
+2. $arrayElemAt
+If we want a value from particular index value of the array then it will return that element.
+
+Syntax:-
+{$arrayElemAt:[array, index]}
+
+3. $concatArrays
+Syntax:-
+{$concatArrays:[arr1,arr2....arrN]}
+
+4. $first
+Syntax:-
+{$first:exp}
+
+5. $last
+Syntax:-
+{$last:exp}
+
+Note:-
+$first and $last return the first and last values of the given array.
+
+6. $size
+Syntax:-
+{$size: array}
+
+7. $map
+Syntax:-
+{$map:{input:exp, as: string, in: exp}}
+
+
+Conditional Expression Operators:-
+1. $cond
+Syntax:-
+{$cond: {if: exp, then: true-case, else: false-case}}
+
+Example:-Return "large" if number_of_employees > 1000 else return "not large"?
+db.companies.aggregate([{$project:{"_id":0, "number_of_employees":1, "size_class":{$cond:{if:{$gt:["$number_of_employess",10000]},then:"large", else:"not large"}}}}])
+
+Output:-
+[
+  { number_of_employees: 47, size_class: 'not large' },
+  { number_of_employees: 1300, size_class: 'not large' },
+  { number_of_employees: null, size_class: 'not large' },
+  { number_of_employees: null, size_class: 'not large' },
+  { number_of_employees: 60, size_class: 'not large' },
+  { number_of_employees: 120, size_class: 'not large' },
+  { number_of_employees: 63000, size_class: 'not large' },
+  { number_of_employees: 50, size_class: 'not large' },
+  { number_of_employees: 50, size_class: 'not large' },
+  { number_of_employees: null, size_class: 'not large' },
+  { number_of_employees: 35, size_class: 'not large' },
+  { number_of_employees: 5299, size_class: 'not large' },
+  { number_of_employees: null, size_class: 'not large' },
+  { number_of_employees: 13600, size_class: 'not large' },
+  { number_of_employees: null, size_class: 'not large' },
+  { number_of_employees: null, size_class: 'not large' },
+  { number_of_employees: null, size_class: 'not large' },
+  { number_of_employees: null, size_class: 'not large' },
+  { number_of_employees: null, size_class: 'not large' },
+  { number_of_employees: 62, size_class: 'not large' }
+]
+
+2. $ifNull
+Syntax:-
+{$ifNull: [exp1, exp2,...expN, replaacement-expression-if-null]}
+
+Example:-Return the data from companies where the number_of_employess = NULL  then replace value as 0.
+db.companies.aggregate([{$project:{"number_of_employees":{$ifNull:["$number_of_employees",0]},"_id":0}}])
+
+Output:-
+[
+  { number_of_employees: 47 },
+  { number_of_employees: 1300 },
+  { number_of_employees: 0 },
+  { number_of_employees: 0 },
+  { number_of_employees: 60 },
+  { number_of_employees: 120 },
+  { number_of_employees: 63000 },
+  { number_of_employees: 50 },
+  { number_of_employees: 50 },
+  { number_of_employees: 0 },
+  { number_of_employees: 35 },
+  { number_of_employees: 5299 },
+  { number_of_employees: 0 },
+  { number_of_employees: 13600 },
+  { number_of_employees: 0 },
+  { number_of_employees: 0 },
+  { number_of_employees: 0 },
+  { number_of_employees: 0 },
+  { number_of_employees: 0 },
+  { number_of_employees: 62 }
+]
+
+3. $switch
+Syntax:-
+$switch:{
+	branches: [
+		{case: exp, then:exp},
+		{case: exp, then:exp},
+		...
+	]
+}
+
+
+Assignment Questions
+1. Use the $project stage with the $divide and $subtract expression operators on the trips collection. Project the "tripduration" with a new field that returns the difference between the "start time" and "stop time" fields in minutes for each document, call the resulting field "journey time".
+(Hint: Using $subtract on two dates returns the difference in milliseconds).
+
+ db.trips.aggregate([{$project:{"_id":0, "tripduration":1, "journey time":{$divide:[{$subtract:["$stop time","$start time"]},1000]}}}])
+
+Output:-
+[
+  { tripduration: 889, 'journey time': 890 },
+  { tripduration: 2321, 'journey time': 2321 },
+  { tripduration: 694, 'journey time': 695 },
+  { tripduration: 1236, 'journey time': 1236 },
+  { tripduration: 967, 'journey time': 968 },
+  { tripduration: 2606, 'journey time': 2607 },
+  { tripduration: 928, 'journey time': 929 },
+  { tripduration: 738, 'journey time': 739 },
+  { tripduration: 2446, 'journey time': 2447 },
+  { tripduration: 2426, 'journey time': 2426 },
+  { tripduration: 1254, 'journey time': 1254 },
+  { tripduration: 1417, 'journey time': 1418 },
+  { tripduration: 2243, 'journey time': 2244 },
+  { tripduration: 755, 'journey time': 755 },
+  { tripduration: 1824, 'journey time': 1825 },
+  { tripduration: 631, 'journey time': 632 },
+  { tripduration: 1493, 'journey time': 1493 },
+  { tripduration: 431, 'journey time': 431 },
+  { tripduration: 1331, 'journey time': 1332 },
+  { tripduration: 746, 'journey time': 746 }
+]
+
+
+2. Use $match to return only those documents where the "start station name" value contains the string "Whitehall" - case sensitive.
+Eg: "Water - Whitehall Plaza".
+
+db.trips.aggregate([{$match:{$expr:{$regexMatch:{input:"$start station name",regex:"Whitehall"}}}}])
+
+
+3. On the companies collection return the "name" field and a new field that shows the number of offices for each company. Name this field "no_of_offices", and return only those documents where the "no_of_ofiices" is greater than 20.
+db.companies.aggregate([{$project:{"_id":0, "name":1, "no_of_offices":{$size:"$offices"}}},{$match:{"no_of_offices":{$gt:20}}}])
+
+Output:-
+[
+  { name: 'The Orchard', no_of_offices: 25 },
+  { name: 'Duane Morris LLP', no_of_offices: 24 }
+] 
+
+
+4. On the zips collection use $project with $switch to project a new field that returns: "Low" if the population is below 1000
+	  "Mid" if the population is greater than or equal to 1000 but less than 10,000
+	  "High" if the population is greater than 10,000
+Name this new field "population class". Project only the "city", "zip", "pop" and "population class" fields.
+
+db.zips.aggregate([{$project:{"_id":0,"city":1, "zip":1, "pop":1,"population class":{$switch:{branches:[{case:{$lt:["$pop",1000]},then:"Low"},{case:{$gt:["$pop",10000]},then:"High"}],default:"mid"}}}}]) 
+
+
+$addFields Stage in Aggregation PipeLine:-
+Used to add a new field
+Syntax:-
+$addFields:{newField: exp, .....}
+
+Example:-
+db.trips.aggregate([{$addFields:{"tripduration_hrs":{$divide:["$tripduration",60]}}}])
+
+Output:-
+  {
+    _id: ObjectId("572bb8222b288919b68abff6"),
+    tripduration: 746,
+    'start station id': 236,
+    'start station name': 'St Marks Pl & 2 Ave',
+    'end station id': 331,
+    'end station name': 'Pike St & Monroe St',
+    bikeid: 23742,
+    usertype: 'Subscriber',
+    'birth year': 1977,
+    'start station location': { type: 'Point', coordinates: [ -73.98713956, 40.7284186 ] },
+    'end station location': { type: 'Point', coordinates: [ -73.99193043, 40.71173107 ] },
+    'start time': ISODate("2016-01-01T00:34:53.000Z"),
+    'stop time': ISODate("2016-01-01T00:47:19.000Z"),
+    tripduration_hrs: 12.433333333333334
+  }
+
+
+Curson Stage in Aggregation PipeLine:-
+In this we have four stages
+1. $sort
+Syntax:-
+$sort:{field1:sort_order, field2:sort_order,...fieldN:sort_order}
+
+2. $count
+Syntax:-
+$count: string
+
+3. $limit
+Syntax:-
+$limit: number
+
+4. $skip
+$skip: number
+
+
+Example 1:- Return documents from trips collections make tripduration in descending order using $sort, return only top 5 docs using $limit and apply $skip to skip 4 docs.
+db.trips.aggregate([{$sort:{"tripduration":-1}},{$limit:5},{$skip:4}])
+
+Example 2:- Return total number of docs in trips collection?
+db.trips.aggregate([{$count:"total docs"}])
+[ { 'total docs': 10000 } ]
+
+Assignment Questions:-
+1. In the zips collection use $adFields to add a new field called 'city_state' which is the city and state in the format "CITY - STATE".
+Eg: "ALPINE - AL".
+db.zips.aggregate([{$addFields:{"city_state":{$concat:["$city","-","$state"]}}}])
+
+
+2. Following on from the previous question, sort the docs by the newly created "city_state" field in ascending alphabetical order. Do you notice anything unusual in the results?
+
+
+$group Stage:-
+This stage groups docs by a specified_id expression and outputs a document for each distinct grouping of that expression.
+
+Syntax:-
+$group:
+	{
+	"_id":exp,
+	"field1":{accumulator1: exp1},
+	"field2":{accumulator2: exp2},
+	.....
+	"fieldN":{accumulatorN: expN}
+	}
+
+
+$bucket Stage:-
+Syntax:-
+$bucket:{
+	groupBy: exp,
+	boundaries:[lowerbound1, lowerbound2,....],
+	default: string literal,
+	output: {
+		output1: {accumulator exp},
+		...,
+		outputN: {accumulator exp}
+		}
+	}
+
+
+Example 1:-
+db.trips.aggregate([{$bucket:{groupBy:"$tripduration",boundaries:[0,100,1000,10000,10000000]}}])
+
+Output:-
+[
+  { _id: 0, count: 90 },
+  { _id: 100, count: 7153 },
+  { _id: 1000, count: 2693 },
+  { _id: 10000, count: 64 }
+]
+
+
+Example 2:-
+ db.trips.aggregate([{$bucket:{groupBy:"$tripduration",boundaries:[0,100,1000,10000],default:"other",output:{"avg_duration":{$avg:"$tripduration"}}}}])
+
+Output:-
+[
+  { _id: 0, avg_duration: 82.56666666666666 },
+  { _id: 100, avg_duration: 476.21333706137284 },
+  { _id: 1000, avg_duration: 1863.1500185666544 },
+  { _id: 'other', avg_duration: 44823.359375 }
+]
+
+$bucketAuto Stage:-
+Syntax:-
+$bucketAuto:{
+	groupBy: exp,
+	boundaries: number,
+	output: {
+		output1: {accumulator exp},
+		...,
+		outputN: {accumulator exp}
+		},
+	granularity: string
+	}
+
+Example 1:-
+db.trips.aggregate([{$bucketAuto:{groupBy:"$tripduration",buckets:5,output:{"avg_duration":{$avg:"$tripduration"},"count":{$sum:1}}}}])
+
+Output:-
+[
+  {
+    _id: { min: 61, max: 300 },
+    avg_duration: 209.52762568442012,
+    count: 2009
+  },
+  {
+    _id: { min: 300, max: 472 },
+    avg_duration: 381.9945082376435,
+    count: 2003
+  },
+  {
+    _id: { min: 472, max: 725 },
+    avg_duration: 587.9301397205588,
+    count: 2004
+  },
+  {
+    _id: { min: 725, max: 1246 },
+    avg_duration: 958.2150698602794,
+    count: 2004
+  },
+  {
+    _id: { min: 1246, max: 326222 },
+    avg_duration: 3543.1272727272726,
+    count: 1980
+  }
+
+
+Example 2:-
+ db.trips.aggregate([{$bucketAuto:{groupBy:"$tripduration",buckets:5,output:{"avg_duration":{$avg:"$tripduration"},"count":{$sum:1}},granularity:"R5"}}])
+
+Output:-
+[
+  {
+    _id: { min: 40, max: 400 },
+    avg_duration: 262.357936998147,
+    count: 3238
+  },
+  {
+    _id: { min: 400, max: 630 },
+    avg_duration: 506.0623534927332,
+    count: 2133
+  },
+  {
+    _id: { min: 630, max: 1600 },
+    avg_duration: 1011.0181556195965,
+    count: 3470
+  },
+  {
+    _id: { min: 1600, max: 400000 },
+    avg_duration: 5058.467644521139,
+    count: 1159
+  }
+]
+
+
+Note:-
+$bucket is to return the total no of people for tripduration from 0-99,100-199 etc.
+
+$facet Stage:-
+Syntax:-
+$facet:
+	{
+	sub_pipeline1: [stage1, stage2,...],
+	sub_pipeline2:[stage1, stage2,....]
+	....
+	}
+
+Example:-
+
+$sortByCount Stage:-
+Syntax:-
+$sortByCount: expression
+
+Example:-
+db.trips.aggregate([{$sortByCount:"$usertype"}])
+
+Output:-
+[
+  { _id: 'Subscriber', count: 8011 },
+  { _id: 'Customer', count: 1989 }
+]
+
+
+Assignment Questions:-
+1. In the trips collection what is the most common "start station name"?
+
+ db.trips.aggregate([{$sortByCount:"$start station name"}])
+
+Output:-
+[
+  { _id: 'Central Park S & 6 Ave', count: 114 },
+  { _id: 'Lafayette St & E 8 St', count: 99 },
+  { _id: 'Carmine St & 6 Ave', count: 95 },
+  { _id: 'Broadway & E 14 St', count: 93 },
+  { _id: 'E 17 St & Broadway', count: 86 },
+  { _id: '5 Ave & E 78 St', count: 80 },
+  { _id: 'Central Park West & W 85 St', count: 76 },
+  { _id: 'West St & Chambers St', count: 68 },
+  { _id: 'South End Ave & Liberty St', count: 67 },
+  { _id: 'W 21 St & 6 Ave', count: 67 },
+  { _id: 'Greenwich Ave & 8 Ave', count: 64 },
+  { _id: 'Lafayette St & Jersey St', count: 63 },
+  { _id: 'Cleveland Pl & Spring St', count: 61 },
+  { _id: '1 Ave & E 15 St', count: 61 },
+  { _id: 'Central Park West & W 68 St', count: 59 },
+  { _id: 'E 20 St & FDR Drive', count: 59 },
+  { _id: '9 Ave & W 22 St', count: 57 },
+  { _id: 'Broadway & W 60 St', count: 57 },
+  { _id: 'University Pl & E 14 St', count: 56 },
+  { _id: 'Central Park West & W 76 St', count: 56 }
+]
+
+2. On the trips collection what are the top 5 "start station names" in terms of highest average trip duration?
+db.trips.aggregate([{$group:{"_id":"$start station name","avg_tripduration":{$avg:"$tripduration"}}},{$sort:{"avg_tripduration":-1}},{$limit:5}])
+
+Output:-
+[
+  { _id: 'Clark St & Henry St', avg_tripduration: 23176 },
+  {
+    _id: 'Lexington Ave & E 63 St',
+    avg_tripduration: 12511.266666666666
+  },
+  {
+    _id: 'Riverside Blvd & W 67 St',
+    avg_tripduration: 10071.222222222223
+  },
+  {
+    _id: 'DeKalb Ave & Hudson Ave',
+    avg_tripduration: 8600.333333333334
+  },
+  { _id: 'Madison St & Clinton St', avg_tripduration: 8104.15 }
+]
+
+
+3. Bucket the docs in the companies collection so you can see how many companies have between 0-99, 100-199 and, 1000+ employees.
+db.companies.aggregate([{$bucket:{groupBy:"$number_of_employees",boundaries:[0,100,1000,10000000],default:"other"}}])
+
+Output:-
+[
+  { _id: 0, count: 3896 },
+  { _id: 100, count: 427 },
+  { _id: 1000, count: 125 },
+  { _id: 'other', count: 5052 }
+]
+
+$unwind Stage:-
+Syntax:-
+$unwind:
+	{
+	path: field to unwind,
+	includeArrayIndex: string
+	preserveNullAndEmptyArrays: boolean
+	}
+
+Example:-
+db.grades.aggregate([{$unwind:{path:"$scores",includeArrayIndex:"Array_Idx", preserveNullAndEmptyArrays:false}}])
+
+
+$out Stage:-
+It is the last stage of the aggregation pipeline used to save documents in the collection. It also can overrided the existing collection.
+Syntax:-
+$out: string(name of collection)
+
+Example 1:- Save the data of number_of_employees > 10000 from companies collection in "emp_over_10000".
+
+db.companies.aggregate([{$project:{"founded_year":1, "number_of_employees":1}},{$match:{"number_of_employees":{$gt:10000}}},{$out:"emp_over_10000"}])
+
+
+Combining it all Together:-
+Combining all the aggregation pipeline stages like $match, $project, $group, etc,.. Combining all the stages becomes more lengthy for that we also create variables in the MongoDB by storing data into that variable we can call them into aggregation pipelines.
+
+Example:-
+Storing the data/commands in the variables like stage1, stage2 stage3
+stage1 = {$project:{"name":1, "numebr_of_employees":1,"_id":0}}
+stage2 = {$sort:{"numebr_of_employees":-1}}
+stage3 = {$limit:5}
+
+db.companies.aggregate([stage1, stage2, stage3])
+
+Output:-
+[
+  { name: 'Twitter' },
+  { name: 'StumbleUpon' },
+  { name: 'Facebook' },
+  { name: 'Wetpaint' },
+  { name: 'Omnidrive' }
+]
+
+
+Variable in Aggregation Expressions:-
+System-Generated Variables:-
+1. $$NOW - Returns the current time 
+2. $$ROOT - Returns the new document
+
+db.grades.aggregate([{$project:{"student_id":1,"scores":1,"class_id":1,"detetime":"$$NOW","timestampe":"$$CLUSTER_TIME","root document":"$$ROOT"}}])
+
+
+User-Defined Variables:-
+>> x = 37
+>> db.grades.find({"class_id":x})
+
+Output:- GIves the documentes having class_id = 37  
+
+
+We can also create a usesr defined variable using  $let and $map. Where the $map is already covered.
+
+$let Expression:-
+It is used to bind variables and use as expression
+Syntax:-
+{
+$let:
+	{
+	vars:{var1: exp1,......}
+	in: exp
+	}
+}
+
+Example:-
+ db.trips.aggregate([{$addFields:{"tripduration_120%":{$let:{"vars":{"tDur":"$tripduration","multiplier":1.2},"in":{$multiply:["$$tDur","$$multiplier"]}}}}}])
+
+
+
+Limits and Thresholds:-
+For every stage of the aggregation pipeline like $match, $project, etc, there has a limit of 100MB of RAM. By default, if a stage exceeds the limit MongoDB produces an error.
+For some pipelines, we can take up more space by using the "allowDiskUse" option.
+
+writeConcern and ordered inserts:-
+Going back to insert methods in the insertMany methods there have two options lie writeConcern and ordered.
+
+writeConcern:-
+writeConcern has a different acknowledgment like
+1. w request acknowledgment that the write operation has propagated to a specified number of instances
+2. j request acknowledgment that the write operation has been written to the on-disk journal.
+3. writeout specifies a time limit to prevent write operations from blocking indefinitely, it will return an error after the time has passed. The time you enter is in milliseconds.
+
+ordered Inserts:-
+ordered if true if the ordered insert fails then it one of the documents in the array contains an error then the processing stops. If false then it continues onto the next insert.
+
+
+Schema Validation:-
+db.createCollection("name",{options})
+We have three types of options for schema validation, They are:
+1. validator
+2. validationLevel
+There are two levels in validationLevel. They are:
+	-> strict
+	->moderate
+3. validationAction
+In validationAction there having a two levels, They are:
+	->error
+	-> warn
+
+Data Modelling Considerations:-
+--> The right schema design can enable you to make the most of your database.
+--> When designing ypur DB it is important to consider:
+	->Data use and performance
+	-> Determine important queries
+	-> Read vs Write
+
+
+$lookup:-
+It is an additional aggregation pipeline stage that can takes each doc from a collection ("to") and matches it to a document in another collection ("from"), matching documents are added as an array of embedded documents.
+
+Syntax:-
+$lookup:
+	{
+	from:<collection to join>,
+	localField:<field from the input documents>,
+	foreignField:<field from the documents of the "from" collection>,
+	as: <output array field>
+	}
+
+Example:-
+ db.comments.aggregate([{$lookup:{"from":"comments","localField":"name","foreignField":"name","as":"users"}}])
+
+
+Assignment Questions:-
+1. Use $lookup to join the movies collection, which is the "to" collection, to the "comments" collection. Join the "_id" field of the movies collection to the "movie_id" field of the comments collection. However, return only the results for the movie with the title "My Skinny Sister".
+
+ db.movies.aggregate([{$lookup:{"from":"comments","localField":"_id","foreignField":"movie_id","as":"comments"}},{$match:{"title":"My Skinny Sister"}}])
+
+Types of Relationships:-
+--> 1:1 Relationship
+Eg:-
+Employee <--> EmployeesDetails
+
+-->1: Many Relationship
+Eg:-
+Youtube Channel --> Many Subscriber Info
+
+--> Many: Many Relationship
+Eg:-
+Books and Author i.e one author write many books or one book by two authors else one book by one author.
+
+
+Indexes and Performance:-
+Introduction to Indexes:-
+MongoDB has a COLLSCAN (collection scan) which is one where every document in the collection is scanned. An index can be ordered in ascending or descending. Indexed increase query performances. In indexes, there is a B-Tree that is used for searching.
+-> Indexes take up storage space
+-> Indexes should be created on commonly queried fields.
+Syntax:-
+db.collection.createIndex(keys, options)
+
+The Explain Method:-
+This method provides info about the query. This method can be used in many other mathods like 1. aggregate(), 2. count(), 3. find(), 4. remove(), etc.
+
+In expain method there is Verbosity Modes like
+1. "queryPlanner" (default)
+2. "executionStats"
+3. "allPlansExecution"
+
+Syntaxes:-
+db.collection.method().explain(<verbosity mode>)
+db.collection.explain(<verbosity mode>).method()
+db.collection.aggregate([{...}],{explain: true})
+db.trips.explain().find({...})
+
+
+Example:- 
+db.trips.find({"start station id":476}).explain("queryPlanner")
+
+Output:- It gives the information about the document query like how much time it takes to fetch etc.
+
+Single Field Indexes:-
+Example:- db.companies.aggregate([{$match:{"number_of_employees":{$gt:1000}}}]).explain("executionStats")
+
+
+Sorting with Indexes:-
+db.zips.find().sort({"pop":1}).explain("executionStats")
+
+
+Compound Indexes:-
+ 
+Arrays and Embedded Fields:-
+
+Partial Indexes:-
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
