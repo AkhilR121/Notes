@@ -1,0 +1,1097 @@
+What is NodeJS?
+1. Node runs on a server, not in a browser.
+2. Node has common core modules that we will explore. 
+
+
+File System in NodeJS:-
+The file system in the nodejs is used to allow us to work the file system on our computer.
+To include the file system module use the require() method.
+
+var fs = require('fs')
+
+where fs on LHS is variable
+fs on RHS is the filesystem including into the JS file.
+
+Common use for the fileSystem module:-
+Read files
+Create/Write files
+Update/Append files
+Delete files
+Rename files
+
+
+FileSystem ReadFiles:-
+We have already created a txt file and reading the file and printing the data stored in the txt file on the console.
+
+Example:-
+const fs = require('fs');
+
+fs.readFile('./files/carsList.txt', (err, data) => {
+    if(err) {
+        console.log(err);
+    } else {
+        console.log(data.toString());
+    }
+})
+
+
+Output:-
+Suzuki
+Benz
+Ferrari
+Audi
+Renault
+
+ReadFiles using the Path Module:-
+The Path module provides a way of working with directories and file paths.
+
+To include a path module in our app
+
+var path = require('path');
+
+Example:-Reading file using the path module, output is same as the above example.
+
+const fs = require('fs');
+const path = require('path');
+
+fs.readFile(path.join(__dirname, 'files', 'carsList.txt'), 'utf8',(err, data) => {
+    if(err) {
+        console.log(err);
+    } else {
+        console.log(data.toString());
+    }
+})
+
+Output:-
+Suzuki
+Benz
+Ferrari
+Audi
+Renault
+
+
+FileSystem WriteFile:-
+Which is used to create a new file and add a data into it.
+
+fs.writeFile(path.join(__dirname, 'files', 'greet.txt'), 'Hello Good Morning!', (err) => {
+    if(err) throw err
+    console.log('Write Completed');
+})
+
+Output:-
+Write COmpleted
+
+Where
+files - folderName
+'greet.txt' - is file name
+'Hello Good Morning!'  -  Data we entered into the greet.txt file.
+
+FileSystem AppendFile:-
+Which is same as the write operation. it creates a new file and appends the data into it.
+
+Example 1:-
+fs.appendFile(path.join(__dirname, 'files', 'test.txt'), 'Testing Text',(err) => {
+    if(err) throw err
+    console.log('Appending Completed');
+})
+
+Output:-
+Appending Completed
+
+Example 2:-
+Without creating a new file also we can append the data into the file using the append operation.
+
+fs.writeFile(path.join(__dirname, 'files', 'greet.txt'), 'Hello Good Morning!',(err) => {
+    if(err) throw err
+    console.log('Write Completed');
+
+    fs.appendFile(path.join(__dirname, 'files', 'greet.txt'), '\n\n How are you?',(err) => {
+        if(err) throw err
+        console.log('Appending Completed');
+    })
+})
+
+
+FileSystem ReName:-
+Which is used to rename the file name.
+Suppose we have greet.txt rename it as a greeting.txt
+
+Example:-
+// Write File
+fs.writeFile(path.join(__dirname, 'files', 'greet.txt'), 'Hello Good Morning!',(err) => {
+    if(err) throw err
+    console.log('Write Completed');
+
+    // Append 
+    fs.appendFile(path.join(__dirname, 'files', 'greet.txt'), '\n\n How are you?',(err) => {
+        if(err) throw err
+        console.log('Appending Completed');
+
+        // Rename
+        fs.rename(path.join(__dirname, 'files', 'greet.txt'), path.join(__dirname, 'files', 'greeting.txt'),(err) => {
+        if(err) throw err
+        console.log('Rename Completed');
+        })
+    })
+})
+
+
+Full Code:-
+const fs = require('fs');
+const path = require('path');
+
+fs.readFile(path.join(__dirname, 'files', 'carsList.txt'), 'utf8',(err, data) => {
+    if(err) {
+        console.log(err);
+    } else {
+        console.log(data.toString());
+    }
+})
+
+console.log('Hello');
+
+// Write File
+fs.writeFile(path.join(__dirname, 'files', 'greet.txt'), 'Hello Good Morning!',(err) => {
+    if(err) throw err
+    console.log('Write Completed');
+
+    // Append 
+    fs.appendFile(path.join(__dirname, 'files', 'greet.txt'), '\n\n How are you?',(err) => {
+        if(err) throw err
+        console.log('Appending Completed');
+
+        // Rename
+        fs.rename(path.join(__dirname, 'files', 'greet.txt'), path.join(__dirname, 'files', 'greeting.txt'),(err) => {
+        if(err) throw err
+        console.log('Rename Completed');
+        })
+    })
+})
+
+
+Output:-
+Hello
+Write Completed
+Suzuki
+Benz
+Ferrari
+Audi
+Renault
+
+Appending Completed
+Rename Completed
+
+Note:-
+Once we observe the output the program execution is not in the flow it was in the asynchronous way.
+Where
+Suzuki
+Benz
+Ferrari
+Audi
+Renault
+We have console carsList first
+ 
+Hello - in second
+Write Completed - in third
+Append and rename - in fourth and fifth
+
+Thus the output is not in the order because JS will execute default/own data like console etc.., first and the remaining data like api's will execute later.
+
+To overcome this we have to use Promises concepts in JS like Async and Await functions.
+
+FileSystem Promises:-
+Importing the FS promises
+const fsPromises = require('fs').promises;
+
+Example:- Write a JS code for read/write/append/rename files using promises(async and await).
+const fsPromises = require('fs').promises
+const path = require('path');
+
+let fileOps = async () => {
+    try {
+        const data = await fsPromises.readFile(path.join(__dirname, 'files', 'carsList.txt'), 'utf8')
+        console.log(data);
+        await fsPromises.unlink(path.join(__dirname, 'files', 'bikesList.txt'), 'utf8')
+        await fsPromises.writeFile(path.join(__dirname, 'files', 'emojis.txt'), '🤖')
+        await fsPromises.appendFile(path.join(__dirname, 'files', 'emojis.txt'), '\n\n🍓🍲')
+        await fsPromises.rename(path.join(__dirname, 'files', 'emojis.txt'), path.join(__dirname, 'files', 'newEmojis.txt'))
+        const newData = await fsPromises.readFile(path.join(__dirname, 'files', 'newEmojis.txt'), 'utf8')
+        console.log(newData);
+
+    } catch (error) {
+        console.error(err);
+    }
+}
+
+fileOps()
+
+Output:-
+Hello
+CarsList
+🤖
+
+🍓🍲
+
+
+
+Another Way to Read/Write/ files:-
+To read/write/ files using the stream like createReadStream(), createWriteStream(), etc.
+
+Pre-Requisites
+on() method - The on() method attaches one or more event handlers for the selected elements and child elements. 
+
+pipe() method -  it is used to combine n number of functions.
+
+Example:-Write a JS program to read a file data and write that data into newly created file.
+
+1. We created a new lorem.txt file have data "Lorem Text"
+2. By using createReadStream we read the data of lorem.txt file and store in the rs variable.
+3. Created new file new-lorem.txt and assigned to ws variable
+4.  By using on() method or pipe() method we copying/assigning data from rs(lorem.txt) --> ws(new-loream.txt) and print that data in the new-lorem.txt file.
+
+const fs = require('fs');
+
+const rs = fs.createReadStream('./files/lorem.txt', {encoding: 'utf8'})
+const ws = fs.createWriteStream('./files/new-lorem.txt')
+
+rs.on('data', (dataChunk) => {
+    ws.write(dataChunk)
+})
+
+
+(OR)
+
+rs.pipe(ws)
+
+Note:-
+Pipe() method is simple compared to the on() method.
+
+
+mkdir() and rmdir():-
+Used to create and remove the directories.
+
+Creating New Directory (mkdir()):-
+Directory is nothing but an folder
+
+mkdir() method - means MakeDirectory
+
+Example 1:- Create a new directory using mkdir() method
+const fs = require('fs');
+
+fs.mkdir('./new', (err) => {
+    if(err) throw err
+    console.log('Directory Created');
+})
+
+Example 2:-From above if we run multiple times it will show an error that directory already exists. To overcome error we use If else condition.
+const fs = require('fs');
+
+if (!fs.existsSync('./new')) {
+    fs.mkdir('./new', (err) => {
+        if(err) throw err
+        console.log('Directory Created');
+    })
+} else {
+    console.log("Already Directory Exists");
+}
+
+Remove Directory(rmdir()):-
+Example:-
+if (fs.existsSync('./new')) {
+    fs.rmdir('./new', (err) => {
+        if(err) throw err
+        console.log('Directory Removed');
+    })
+} else {
+    console.log("Already Directory Removed");
+}
+
+
+NPM Modules:-
+NPM is like as cloud having a 3rd party modules.
+To install a modules from the NPM use
+
+1. npm i nodemon -g -> nodemon is used to run js file automatically.
+2. npm init -> it will generate package.json file which is used to insall packages to build applications.
+3. npm i date-fns -> Date functions are get installed and added to package.json file dependencies i.e without package.json file impossible to install packages.
+Example:-
+const {format} = require('date-fns')
+console.log(format(new Date(), 'yyyyMMdd\tHH:mm:ss'));
+
+Output:-
+2022-12-14	22:57:20
+4. npm i uuid -> It will generate unique ID's.
+Example:-
+const {v4:uuid} = require('uuid')
+console.log(uuid());
+
+
+Event Emitter:-
+Event Emitter is a class, in nodeJS eventemitter is used to create and handle cucstom events.
+Syntax:-
+const eventEmitter = require('events');
+
+eventEmitter.addListener(event, listener)
+eventEmitter.on(event, listener)
+
+Emitting events:-
+Every event is named an event in nodejs. We can trigger an event by emit(event, [arg1], [arg2], […]) function. We can pass an arbitrary set of arguments to the listener functions.
+Syntax:-
+eventEmitter.emit(event, [arg1], [arg2], [...])
+
+Example:-
+We have created two node files index.js and index2.js files
+In Index.js file
+const {format} = require('date-fns')
+const { v4: uuid } = require('uuid')
+const fs = require('fs');
+const fsPromises = require('fs').promises;
+const path = require('path');
+
+const logEvents = async (msg) => {
+    const dateTime = format(new Date(), 'yyyy-MM-dd\tHH:mm:ss')
+    const logItem = `${dateTime}\t${uuid()}\t${msg}\n`
+
+    console.log(logItem);
+    try {
+        if(!fs.existsSync(path.join(__dirname, 'logs'))) {
+            await fsPromises.mkdir(path.join(__dirname, 'logs'))
+        }
+        await fsPromises.appendFile(path.join(__dirname, 'logs', 'eventLog.txt'), logItem)
+    } catch (err) {
+        console.error(err);
+    }
+}
+module.exports = logEvents
+
+
+In index2.js file
+const logEvents = require('./index');
+
+const EventEmitter = require('events');
+
+class MyEmitter extends EventEmitter { }
+
+const obj = new MyEmitter()
+
+// obj is an EventEmitter
+obj.on('log', (msg)=> logEvents(msg))
+
+setTimeout(() => {
+    obj.emit('log', 'Log Event Emitter!')
+}, 2000)
+
+Output:-
+2022-12-15	12:32:01	7209977a-a142-4e1b-bebc-5486eac37615	Log Event Emitter!
+
+Note:-
+Where obj.emit always focus on the 'log' events in the on() methods and passes an arguments to the on() method callBack functions.
+
+
+Web Server using NodeJS:-
+const http = require('http');
+const path = require('path');
+const fs = require('fs');
+const fsPromises = require('fs').promises;
+
+const logEvents = require('./index');
+const EventEmitter = require('events');
+const { stringify } = require('querystring');
+class Emitter extends EventEmitter { }
+
+const MyEmitter = new Emitter()
+
+const PORT = process.env.PORT || 3000
+
+const serverFile = async (filePath, contentType, response) => {
+    try {
+        const data = await fsPromises.readFile(filePath, 'utf8')
+        response.writeHead(200, {'Content-Type': contentType})
+        response.end(data)
+    } catch (err) {
+        console.log(err);
+        response.statusCode = 500
+        response.end()
+    }
+}
+
+const server = http.createServer((req, res) => {
+    // console.log(req.url, req.method);
+    console.log(req.url);
+    console.log(req.url.slice(-1));
+
+    // extname returns the extension(.js, java, .html, etc)
+    const extension = path.extname(req.url)
+    
+    let contentType;
+
+    switch(extension) {
+        case '.css' :
+            contentType = 'text/css'
+            break;
+        case '.js':
+            contentType = 'text/javascript'
+            break;
+        case '.json':
+            contentType = 'application/json'
+            break;
+        case 'jpg':
+            contentType = 'image/jpeg'
+            break;
+        case '.png':
+            contentType = 'image/png'
+            break;
+        case '.txt':
+            contentType = 'text/plain'
+            break;
+        default:
+            contentType = 'text/html'
+    }
+
+    let filePath = 
+        contentType === 'text/html' && req.url === '/'
+            ? path.join(__dirname, 'views', 'index.html')
+            : contentType === 'text/html' && req.url.slice(-1) === '/'
+                ? path.join(__dirname, 'views', req.url, 'index.html')
+                : contentType === 'text/html'
+                    ? path.join(__dirname, 'views', req.url)
+                    : path.join(__dirname, req.url)
+    
+    
+    if(!extension && req.url.slice(-1) !== '/'){
+        filePath += '.html';
+    }
+
+    const fileExists = fs.existsSync(filePath)
+    if(fileExists) {
+        serverFile(filePath, contentType, res)
+    } else {
+        switch(path.parse(filePath).base) {
+            case 'old-page.html':
+                res.writeHead(301, {'Location': '/new-page.html'})
+                res.end()
+                break;
+            case 'www-page.html':
+                res.writeHead(301, {'Location': '/'})
+                res.end()
+                break;
+            default:
+                serverFile(path.join(__dirname, 'views', '404.html'), 'text/html', res)
+        }
+    }
+})
+
+server.listen(PORT, () => console.log("Server is Running", PORT))
+
+
+
+// obj is an EventEmitter
+// obj.on('log', (msg)=> logEvents(msg))
+
+// setTimeout(() => {
+//     obj.emit('log', 'Log Event Emitter!')
+// }, 2000)
+
+ExpressJS:-
+It is a framework for nodejs which is used instead of an HTTP module.
+Express should install from NPM packages
+To install expressjs type cmd in terminal
+--> npm i express
+After installing we have to access into nodejs file by using require('').
+const express = require('express')
+
+Example 1:-
+const express = require('express');
+const app = express()
+
+const path = require('path');
+const PORT = process.env.PORT || 3000
+
+app.get('/', (req,res) => {
+     res.send('<h1>Hello World</h1>')
+})
+
+
+app.listen(PORT, () => console.log("Server is Running: ", PORT))
+
+Ouput:-
+In the browser when we click localhost:3000 Hello world will get display.
+
+
+Example:- Also we can access files by using sendFile() method,
+const express = require('express');
+const app = express()
+
+const path = require('path');
+const PORT = process.env.PORT || 3000
+
+app.get('/', (req,res) => {
+     res.sendFile('./views/index.html', {root: __dirname})
+})
+
+
+app.listen(PORT, () => console.log("Server is Running: ", PORT))
+
+Note:-
+{root: __dirname} is an option that we are specifying it is a directory.
+
+
+Example 3:- Another way to send files using the path.join()
+const express = require('express');
+const app = express()
+
+const path = require('path');
+const PORT = process.env.PORT || 3000
+
+app.get('/', (req,res) => {
+     res.sendFile(path.join(__dirname, 'views', 'index.html'))
+})
+
+
+app.listen(PORT, () => console.log("Server is Running: ", PORT))
+
+Output:-
+Search localhost: 3000
+It will show index.html file content in the view
+
+Example 4:- What if we search localhost: 3000/index.html to get the index file then it will show an error because we write a code for '/' but not for '/index.html'. Write a code to get index.html file for both routes.
+const express = require('express');
+const app = express()
+
+const path = require('path');
+const PORT = process.env.PORT || 3000
+
+app.get('^/$|/index.html', (req,res) => {
+     res.sendFile(path.join(__dirname, 'views', 'index.html'))
+})
+app.get('/new-page.html', (req,res) => {
+     res.sendFile(path.join(__dirname, 'views', 'new-page.html'))
+})
+
+
+app.listen(PORT, () => console.log("Server is Running: ", PORT))
+
+Note:-
+app.get(^/$|index.html) here we are using OR(|) operator which works for both '/' and 'index.html' rotes. ^/$ indicates starts with '/' and ends with '/'.
+
+
+Example 5:- What if we do not indicate the file extensions like (.html, .js) then it will show an error(404 not found) to overcome this we have to make each extension an option (.html)?,
+const express = require('express');
+const app = express()
+
+const path = require('path');
+const PORT = process.env.PORT || 3000
+
+app.get('^/$|/index(.html)?', (req,res) => {
+    //  res.send('<h1>Hello World</h1>')
+     res.sendFile(path.join(__dirname, 'views', 'index.html'))
+})
+app.get('/new-page(.html)?', (req,res) => {
+     res.sendFile(path.join(__dirname, 'views', 'new-page.html'))
+})
+
+app.listen(PORT, () => console.log("Server is Running: ", PORT))
+
+Redirect Method:-
+Syntax:-
+res.redirect(statusCode, 'filename.ext')
+
+Example 6:-
+Write a code using redirect() method?
+Syntax:-
+
+const express = require('express');
+const app = express()
+
+const path = require('path');
+const PORT = process.env.PORT || 3000
+
+app.get('/new-page(.html)?', (req,res) => {
+     res.sendFile(path.join(__dirname, 'views', 'new-page.html'))
+})
+
+app.get('/old-page(.html)?', (req,res) => {
+     res.redirect(301, '/new-page.html')
+})
+
+app.listen(PORT, () => console.log("Server is Running: ", PORT))
+
+Note:-
+If we type localhost:3000/old-page.html it will automatically redirect to 
+localhost:3000/new-page.html with a status code of 301 means that we indicate that it is permanently redirecting.
+
+Example 7:-
+const express = require('express');
+const app = express()
+
+const path = require('path');
+const PORT = process.env.PORT || 3000
+
+app.get('^/$|/index(.html)?', (req,res) => {
+    //  res.send('<h1>Hello World</h1>')
+     res.sendFile(path.join(__dirname, 'views', 'index.html'))
+})
+app.get('/new-page(.html)?', (req,res) => {
+     res.sendFile(path.join(__dirname, 'views', 'new-page.html'))
+})
+
+app.get('/old-page(.html)?', (req,res) => {
+     res.redirect(301, '/new-page.html')
+})
+
+app.get('/*', (req,res) => {
+    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'))
+})
+
+(or)
+
+app.all('*', (req,res) => {
+    res.status(404)
+    if(req.accepts('html')) {
+        res.sendFile(path.join(__dirname, 'views', '404.html'))
+    } else if(req.accepts('json')) {
+        res.json({error: '404 Not Found'})
+    } else {
+        res.type('txt').send('404 Not Found')
+    }
+})
+
+
+app.listen(PORT, () => console.log("Server is Running: ", PORT))
+
+Note:-
+If we do not specify status(404) which is the status code, the server will show any error.
+'/*' - it will reject everything after / and show '404 page not found'.
+
+
+Route Handlers:-
+After compiling one function and calling next function 
+Example 1:-
+app.get('/hello(.html)?', (req, res, next) => {
+    console.log('attempted to load Hello.html');
+    next()
+}, (req, res) => {
+    res.send('Hello World')
+})
+
+In the above, we have used a next() function that means it navigates to next function in the chain.
+
+Example 2:-
+let one = (req, res, next) => {
+    console.log('One');
+    next()
+}
+
+let two = (req, res, next) => {
+    console.log('two');
+    next()
+}
+let three = (req, res, next) => {
+    console.log('three');
+    res.send('Task Finished')
+}
+
+app.get('/chain(.html)?', [one, two, three])
+
+Note:-
+next() function always calls the functions next to it.
+
+Middleware:-
+It is between the request and response one of the examples is route handlers that are chaining three functions [one, two, three] by using next().
+
+Pre-requisites:-
+use() function:-
+The app. use() function is used to apply middleware to all the HTTP methods like get(), post(), update (), delete(), and the path which is being specified in those methods.
+
+express.static() function:-
+use(express. static()) adds a middleware for serving static files to your Express app. You can use the express. static middleware to make it possible to access files from this folder via HTTP.
+
+We have three types of middleware
+1. Built-in Middlewares:-
+// built-in middleware to handle urlencoded data or form data
+app.use(express.urlencoded({extended: false}))
+
+// built-in middleware for json() data.
+app.use(express.json())
+--> This method is used to parse the incoming requests with JSON payloads 
+
+// Serve static files
+app.use(express.static(path.join(__dirname, '/public')))
+Without this we cannot assign a any other file to html like css files.
+
+2. Custom Middlewares.
+We can also create our own middleware
+In index2.js file
+const { logger } = require('./index');
+
+const whitelist = ['https://www.yoursite.com', 'http://127.0.0.1:5500', 'http://localhost:3000'] 
+const corsOptions = {
+    origin: (origin, callback) => {
+        if(whitelist.indexOf(origin) !== -1 || !origin) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    },
+    optionsSuccessStatus: 200
+}
+app.use(cors(corsOptions))
+
+In index.js file
+let logger = (req, res, next) => {
+    logEvents(`${req.method}\t${req.headers.origin}\t${req.url}`, 'reqLog.txt')
+    console.log(`${req.method} ${req.path}`);
+    next()
+}
+module.exports = {logEvents, logger}
+
+Error Handling 
+In index2.js file
+const errorHandler = require('./errorHandler');
+
+app.use(errorHandler)
+
+In index.js file
+
+const {logEvents} = require('./index');
+let errorHandler = (err, req, res, next) => {
+    logEvents(`${err.name}: ${err.message}`, 'errorLog.txt')
+    console.error(err.stack);
+    res.status(500).send(err.msg)
+}
+
+module.exports = errorHandler
+
+3. 3rd party Middlewares.
+
+
+Routing in NodeJS:-
+
+In subdir.js file
+const express = require('express');
+const router = express.Router()
+const path = require('path');
+
+router.get('^/$|/index(.html)?', (req,res) => {
+    // '..' is because subdir.js file not in the  views folder
+     res.sendFile(path.join(__dirname, '..', 'views', 'subdir', 'index.html'))
+})
+
+router.get('/test(.html)?', (req,res) => {
+    // '..' is because subdir.js file not in the  views folder
+     res.sendFile(path.join(__dirname, '..', 'views', 'subdir', 'test.html'))
+})
+
+
+module.exports = router
+
+In Index2.js file 
+// From sibdir.js file
+app.use('/subdir', require('./Routes/subdir'))
+
+In browser 
+Requesting test.html file
+localhost: 3000/subdir/test
+
+There is a problem with this, that css file are not applied to index and test files in the subdir directory because previously we made a mistake that making the public folder files as static but we do not mention to which folder.
+// Serve static files
+app.use('/', express.static(path.join(__dirname, '/public')))
+app.use('/subdir', express.static(path.join(__dirname, '/public')))
+
+app.use('/subdir', require('./Routes/subdir'))
+
+Using Middleware we are shifting all other get req to root.js file in Routes folder
+In index.js file
+app.use('/', require('./Routes/root'))
+
+From root.js file
+const express = require('express');
+const router = express.Router()
+const path = require('path');
+
+
+router.get('^/$|/index(.html)?', (req,res) => {
+     res.sendFile(path.join(__dirname, '..', 'views', 'index.html'))
+})
+
+router.get('/new-page(.html)?', (req,res) => {
+     res.sendFile(path.join(__dirname, '..', 'views', 'new-page.html'))
+})
+
+router.get('/old-page(.html)?', (req,res) => {
+     res.redirect(301, '..', '/new-page.html')
+})
+
+
+module.exports = router
+
+
+Example:-
+Sending JSON Data which is stored in databases like MongoDB.
+In this we create a employees.json file and stored some data.
+
+In employees.json file: We stored data
+[
+    {
+        "id": 1,
+        "firstname": "Akhil",
+        "lastname": "Vinnakota"
+    },
+    {
+        "id": 2,
+        "firstname": "Roshi",
+        "lastname": "Vinnakota"
+    }
+]
+
+In employees.js file: Making CRUD operations
+const express = require('express');
+const router = express.Router()
+const path = require('path');
+const data = {}
+// Connecting To DataBase
+data.employees = require('../../JSON Data/employees.json')
+
+
+//Commonly giving route as '/' for get, put, post, delete
+router.route('/')
+    .get((req, res) => {
+    res.json(data.employees)
+    })
+    .post((req, res) => {
+        res.json({
+            "firstname": req.body.firstname,
+            "lastname": req.body.lastname
+        })
+    })
+    .put((req, res) => {
+        res.json({
+            "firstname": req.body.firstname,
+            "lastname": req.body.lastname
+        })
+    })
+    .delete((req, res) => {
+        res.json({"id": req.body.id})
+    })
+
+router.route('/:id')
+    .get((req, res) => {
+        res.json({"id": req.params.id})
+    })
+module.exports = router
+
+
+In index.js file: Using middleware to take access employees.js file
+app.use('/employees', require('./Routes/api/employees'))
+
+MVC (Model View Controller) REST API:-
+It is nothing but making code cleaner from the above example for get, post, put, delete, we are making separate file empController.js fie
+
+In empController.js file
+const data = {}
+data.employees = require('../JSON Data/employees.json')
+
+const getAllEmployees = (req, res) => {
+    res.json(data.employees)
+}
+
+const createNewEmp = (req, res) => {
+    res.json({
+        "firstname": req.body.firstname,
+        "lastname": req.body.lastname
+    })
+}
+
+const updateEmp = (req, res) => {
+    res.json({
+        "firstname": req.body.firstname,
+        "lastname": req.body.lastname
+    })
+}
+
+const deleteEmp = (req, res) => {
+    res.json({
+        "id": req.body.id
+    })
+}
+
+const getEmp = (req, res) => {
+    res.json({"id": req.params.id})
+}
+
+module.exports = {getAllEmployees, createNewEmp, updateEmp, deleteEmp, getEmp}
+
+In employees.js file
+const express = require('express');
+const router = express.Router()
+const path = require('path');
+const empController = require('../../controllers/empController');
+
+router.route('/')
+    .get(empController.getAllEmployees)
+    .post(empController.createNewEmp)
+    .put(empController.updateEmp)
+    .delete(empController.deleteEmp)
+
+router.route('/:id')
+    .get(empController.getEmp)
+module.exports = router
+
+In index.js file using middleware 
+app.use('/employees', require('./Routes/api/employees'))
+
+
+User Authentication Using NodeJS:-
+Pre-Requisites:-
+1. To install bcrypt NPM Package - npm i bcrypt
+2. req.body - meaning that access data from client/user side in a string or JSON format.
+3. bcrypt.hash(pwd, 10) - By this we can salt and hash a password using bcrypt.
+Where pwd is a string given by user that we have to hash.
+	10 is a  saltRounds.
+
+Example 1:-
+In regController.js file
+const userDB = {
+    users: require('./JSON Data/user.json'),
+    setUsers: function(data) { this.users = data }
+}
+
+const path = require('path');
+const fsPromises = require('fs').promises;
+const bcrypt = require('bcrypt');
+
+const handleNewUser = async (req, res) => {
+    const {user, pwd} = req.body
+    if(!user || !pwd) {
+        return res.status(400).json({'message': 'UserName and Pwd is Required'})
+    }
+    // Check fore Duplicate usernames in DB
+    const duplicate = userDB.users.find(person => person.username === user )
+    if(duplicate) {
+        return res.sendStatus(409)
+    }
+
+    try {
+        // Encrypt the Password
+        const hashedPwd = await bcrypt.hash(pwd, 10)
+        // Store the new user
+        const newUser = { 'username': user, 'password': hashedPwd }
+        // To add previous data sending ...userDB.users otherwise data will raplace but not added.
+        userDB.setUsers([...userDB.users, newUser])
+        await fsPromises.writeFile(
+            path.join(__dirname, 'JSON Data', 'user.json'),
+            JSON.stringify(userDB.users)
+        )
+        console.log(userDB.users);
+        res.status(201).json({"Success": `New user ${user} created!`})
+    } catch (err) {
+        res.status(500).json({'message': err.message})
+    }
+}
+
+module.exports = { handleNewUser }
+
+In register.js file
+const express = require('express');
+const router = express.Router()
+const {handleNewUser} = require('./regController')
+
+router.post('/', handleNewUser)
+
+module.exports = router
+
+
+In index.js file
+app.use('/register', require('./register'))
+
+JWT (JSON Web Tokens) Auth:-
+
+What is JWT?
+JWT is only used for authorization but not for authentication.
+Before going to the jwt concept we have to know the difference between authorization and authentication.
+Authentication is for username and password for login.
+Authorization is user sends a request to the server and the same user logged in
+
+For example, we have the most traditional user login system and have a cookie to store the user without using JWT.
+1. Client Browser sends post requests for login credentials to the server and stores them in the session storage this completes the registration process we create a username and password, then send the Session ID as a cookie to the browser.
+2. For login user sends a request with a Session ID cookie to the server and gets the user from session storage based on ID and verifies (username and password), whether the given credentials are correct or not. If the credentials are correct, the user will be logged in otherwise shows the password is incorrect.
+
+User login using JWT
+1. Client Browser sends post requests for login credentials to the server and creates a JWT for the user with a secret key and the login credentials are stored in the secret key. Then sends JWT to the browser.
+2. Send a request with JWT to the server and the Server verify the JWT signature and get the user from JWT and sends the response to the browser.
+
+
+To add protected routes we are using JWTs.
+Install 
+-> npm i dotenv jsonwebtoken cookie-parser
+
+Create an Environment file (.env)
+That creates environmental variables
+
+In .env file
+ACCESS_TOKEN_SECRET='797ef59f280ddaa1dfa4caad295e0383ae2c616427f0be3b627
+3109e3eb3c2c77b7e991c98f45bbb21e63a813c80ef9ec046321043d0220
+c8bbd42d6a65ecefe'
+REFRESH_TOKEN_SECRET='432ade14f30004d89e5da76ab50b2955d53374e1009
+c54d5656f88e3645fb45
+28593d82cc01ebaf28a14ec33f4a0f4644de0a44c52ef620944eff328d4f41fb1'
+
+Note:-
+To generate that tokens just go to terminal and type 
+'node'
+Now type
+> require('crypto').randomBytes(64).toString('hex')
+It will generate random crypto bytes, then copy that byte and assign to environment variables to each.
+
+Create a .gitignore file
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

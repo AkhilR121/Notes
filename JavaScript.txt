@@ -1,0 +1,2207 @@
+JavaScript Tutorial
+
+Variables in JavaScript:-
+Which is used to store the data the same as in other languages.
+>In JS variable   can have characters,
+		 numbers except the first position,
+		 can have $ and _.
+		can have let, var, const
+
+Keywords in JavaScript:-
+1.var
+2. let
+3. const - This makes the data fixed and cannot be changed again and again.
+
+DataTypes:-
+In JS there having two types of datatypes
+1. Primitive
+	Number
+	String
+	Boolean
+	Null
+	Undefined
+	Symbol
+2.  Object
+
+Concatenation:-
+Mering two strings using '+'.
+
+Example:-
+let firstName = "Akhil"
+let lastName = "Vinnakota"
+
+let name = firstName + " "  + lastName
+
+console.log(name)
+
+Output:- Akhil Vinnakota
+
+History of JavaScript:-
+Mocha --> LiveScript --> JavaScript
+
+Type Conversion:-
+To covert the type of given data i.e from number to boolean or string to number etc.
+Example:-
+let num = Number("123");
+console.log(typeof num)
+
+output:-
+123 number
+
+Type Coercion:-
+In simple words i,t converts the type automatically. For suppose if we concatenate number with string then the final output change into string type.
+
+Example:-
+let x =8;
+console.log(x, typeof x)
+
+output:-
+8, number
+
+//Concatenating number with String then the output will be the string
+let x = x + "";
+console.log(x, typeof x)
+
+Output:-
+8, string
+
+//Previously x value is '8' which is 'String' type but now it will change into number.
+let x = x - 2   
+console.log(x, typeof x);
+
+output:-
+6, number
+
+Note:-
+1.Based on the operation JS environment will change the type of data.
+2.Number + String = String.
+3.Number - String = Number.
+4.parseInt is also used to convert into a number.
+
+Arthematic Operators in JavaScript:-
+1. Arthematic operators are   + , - , / , * , %
+
+Adding two boolean values
+let num = true + true
+console.log(num)
+
+Output:-
+2
+
+2.Short hand opertors a+=2, a-=2., a*=2 etc...
+3.Increment and Decrement
+	n++ Post-Increment
+	++n Pre-Increment
+	n-- Post-Decrement
+	--n Pre-Decrement
+4.Example:-
+let num = Math.pow(4,3)
+console.log(num)
+
+Output:-
+64
+
+In the new version of JS there is **  means the power
+let num = 4 ** 3; 	// means 4 * 4 * 4 =64
+console.log(num)
+
+Output:-
+64
+
+Relational Operators(< , > , ==, ===, !=, !==):-
+1.For this the output will in the boolean type i.e true or false.
+2.Based on ASCII values there is comparision between two strings.
+3.Example:-
+let x = 3;
+let y = 3;
+ let result = x == y;
+console.log(result)
+
+Output:-
+true
+
+
+
+4.Difference between == and === :-
+From the above example comparing sttring and number gives output as true, now instead of == using === the output will be
+Example:-(Using == operator)
+//Now comparing string and number i.e x is "3" which is a string then the output is 
+let x ="3"
+let y = 3;
+ let result = x == y;
+console.log(result)
+
+Output:-
+true
+//Because by using the 'type coercion' JS will convert the x ="3" string value into number type
+
+//Using === Operator
+let x ="3"
+let y = 3;
+ let result = x == y;
+console.log(result)
+
+Output:-
+false
+//Because the === operator will compare the type of data also, in the above x is string type and y is number type so the ouput becomes false.
+
+Logical Operators (&, | , !):-
+For making multiple comparisions same time
+Example:-
+let x = 7, y = 2, z = 5;
+let result = x > y || x < z
+
+console.log(result)
+
+Conditional Statements:-
+1.If-esle statements and if-else-is statement:-
+The syntax is same the java, c.
+
+if(condition) {
+	--------
+} else {
+	--------
+}
+
+Also in js we have another if else statement 
+if(let var1  in  array/object) {
+	-------
+}
+else {
+	------
+}
+
+Ternary Operator:-
+Sytax:-
+condition ? if cond true : if cond false
+Example:-
+let n = 2
+let result = (n % 2 == 0) ? even : odd
+
+console.log(result);
+ 
+Output:-
+even
+
+Switch Statement:-
+Working is same as the java, c, etc..
+switch(statement) {
+	case 'statement 1' : console;
+	break;
+	case 'statement 2' : console;
+	break;
+	case 'statement 3' : console;
+	break;
+	case 'statement 4' : console;
+	break;
+	default: console;
+}
+
+Template Literals in JavaScript:-
+When we using invited commas for the string/paragraph sentences in between if want to use any code related.
+For example
+let num1 = 9
+let num2 = 4
+let result  = num1 + num2
+console.log("The addition of num1 and num2 is result");
+
+Output:-
+The addition of num1 and num2 is result
+
+The is no addition result it prints the string in console but we want result value, in javascript there we use + like in java or use template literals using $ symbol.
+
+let num1 = 9
+let num2 = 4
+let result  = num1 + num2
+console.log(`The addition of ${num1} and ${num2} is ${result}`);
+
+Output:-
+The addition of 9 and 4 is 13
+
+Loops:-
+In JavaScript we have 4 types of loops 
+1.While Loop
+2.do-While Loop
+3.For Loop
+4.For in Loop
+5.For Each Loop
+6.For of Loop
+
+1.While Loop:-
+Syntax is same as in other languages.
+while(condition) {
+	-------
+}
+
+2.do-while Loop:-
+do{
+	---------
+} 
+while(cond) {
+	---------
+}
+3.For Loop
+for(initialization; condition; increment/decrement) {
+	--------
+}
+
+(or)
+
+JS also supports in this way of for loop
+initialization;
+
+for( ; condition; ) {
+	increment/decrement
+}
+
+Example:-
+let i = 1;
+
+for( ; i<=5; ) {
+	console.log("Hii", i)
+	i++
+}
+
+4.For in Loop in JavaScript:- (Here 'in' means Index)
+Which is mostly used for the properties of the objects.
+Example 1:-
+To print only key values in the object.
+let myData = {
+    name: 'Akhil',
+    Branch: 'ECE',
+    YOP: 2020,
+    lappy_specs: {
+        ram: 8,
+        ssd: 256,
+        company: 'dell'
+    }
+}
+
+for(let key in myData) {			//key is user-defined variable
+    console.log(key)
+}
+
+Output:-
+name
+Branch
+YOP
+lappy_specs
+
+Example2:-
+To print values with keys
+let myData = {
+    name: 'Akhil',
+    Branch: 'ECE',
+    YOP: 2020,
+    lappy_specs: {
+        ram: 8,
+        ssd: 256,
+        company: 'dell'
+    }
+}
+
+for(let key in myData) {
+    console.log(key, myData[key])
+}
+
+Output:-
+name Akhil
+Branch ECE
+YOP 2020
+lappy_specs { ram: 8, ssd: 256, company: 'dell' }
+
+Example 3:- To print "Nested Objects only keys with values"
+let myData = {
+    name: 'Akhil',
+    Branch: 'ECE',
+    YOP: 2020,
+    lappy_specs: {
+        ram: 8,
+        ssd: 256,
+        company: 'dell'
+    }
+}
+
+for(let key in myData.lappy_specs) {
+    console.log(key + " " + '=>' + " " + myData.lappy_specs[key])
+}
+
+Output:-
+ram => 8
+ssd => 256
+company => dell
+
+5. For Each Loops:-
+
+Example:-
+Using the Arrow function and forEach loop print the array values.
+
+let arr = [5,6,7,14,1,21,56,55]
+
+arr.forEach((n) => {
+    console.log(n, i, arr);
+})
+
+Output:-
+5
+6
+7
+14
+1
+21
+56
+55
+
+For of Loop:-
+Example:-
+const sumArray = (numbers) => {
+    let result = 0
+    for(const number of numbers) {
+        console.log(number);
+        
+        sresult = result + number;
+    }
+    return {result}
+}
+
+let arr = [1,2,3,4]
+console.log(sumArray(arr));
+
+Example 2:-To find the letter frequency of the given string
+
+
+const letterFreq = (phrase) => {
+    let frequency = {}
+    for(let letter of phrase) {
+        if(letter in frequency) {
+            frequency[letter] = frequency[letter] + 1;
+        }else {
+            frequency[letter] = 1
+        }
+    }
+    return frequency
+}
+
+console.log(letterFreq('tenet'))
+
+Output:-
+{ t: 2, e: 2, n: 1 }
+
+
+Objects in JavaScript:-
+Object is created by using the curly braces {}.
+
+Example 1:-
+let myData = {
+    name: 'Akhil',
+    Branch: 'ECE',
+    YOP: 2020
+}
+
+console.log(myData)
+
+Output:-
+{ name: 'Akhil', Branch: 'ECE', YOP: 2020 }
+
+Example 2:- To get one particular data. Suppose like name
+let myData = {
+    name: 'Akhil',
+    Branch: 'ECE',
+    YOP: 2020
+}
+
+console.log(myData.name)
+
+Output:-
+Akhil
+
+Example 3:- In object if the keyword have more than one word i.e YOP mean Year of Passing(having spaces) it will not allow togive 'spaces'. We can indicate using underscore '_' or invited commas ' '.
+let myData = {
+    name: 'Akhil',
+    Branch: 'ECE',
+    'Year of Passing': 2020 	//(or) Year_of_Passing: 2020
+}
+
+console.log(myData['Year of Passing'])
+
+Suppose if we want to print only 'Year of Passing' we cannot use dot(.) to fetch data instead we use square brackets
+
+Output:-
+2020
+
+Example 4:- To add data in the object.
+let myData = {
+    name: 'Akhil',
+    Branch: 'ECE',
+    'Year of Passing': 2020 	
+}
+
+myData.college = 'BEC'
+console.log(myData)
+
+Output:-
+{
+  name: 'Akhil',
+  Branch: 'ECE',
+  'Year of Passing': 2020,
+  college: 'BEC'				//college: BEC new data entered
+}
+
+
+Complex Object:-
+Complex object means having an object inside another object.
+Example:-
+let myData = {
+    name: 'Akhil',
+    Branch: 'ECE',
+    YOP: 2020,
+    lappy_specs: {
+        ram: 8,
+        ssd: 256,
+        company: 'dell'
+    }
+}
+
+console.log(myData)
+console.log(myData.lappy_specs)	//to get on lappy_specs data
+console.log(myData.lappy_specs.company.length)   //to get lenght of string 'dell'
+ 
+Output:- 
+{
+  name: 'Akhil',
+  Branch: 'ECE',
+  YOP: 2020,
+  lappy_specs: { ram: 8, ssd: 256, company: 'dell' }
+}
+
+{ ram: 8, ssd: 256, company: 'dell' }
+
+4
+
+Delete Property:-
+To delete any key value in the object use delete property.
+let myData = {
+    name: 'Akhil',
+    Branch: 'ECE',
+    YOP: 2020,
+    lappy_specs: {
+        ram: 8,
+        ssd: 256,
+        company: 'dell'
+    }
+}
+
+delete myData.lappy_specs;
+console.log(myData)
+
+Output:-
+{ name: 'Akhil', Branch: 'ECE', YOP: 2020 }
+
+Functions in JavaScript:-
+Example:-
+funtion greet() {
+	console.log("Hello World")
+}
+
+greet();	//calling a funtions then only the program will execute
+
+Output:-
+Hello World
+
+Function returning and passing:-
+1.Should have only one return statement.
+
+Example 1:-Using return keyword
+function greet() {
+    return "hello world"
+}
+
+console.log(greet());
+
+Output:- By passing values
+hello world
+
+Example 2:-
+function greet(user) {
+    return `Hello ${user}`
+}
+
+let user = "Akhil"
+console.log(greet(user))
+
+Output:- Passing values to add two numbers
+Hello Akhil
+
+Example 3:-
+function add(a,b) {
+    return a + b;
+}
+console.log(add(4,5))
+
+Output:-
+9
+
+Function Expression:-
+Assigning the function/anonymous function to the variable(treating that variable as function to passing values) then it is function expression.
+Example 1:-
+let add = function(a,b) {
+    return a + b
+}
+
+let result = add(4,5)
+console.log(result)
+
+Output:-
+9
+
+Example 2:- Also we can treat result variable as a function again
+let add =function(a,b) {
+    return a + b
+}
+
+let result = add
+let sum = result(4,5)
+
+console.log(sum)
+
+Output:-
+9
+
+Local, Global Variable | Default Value in JS:-
+Example:-(Local and Global)
+let user = ''akhil''		//Global Variable - can able to access entire code
+funtuon(user) { 
+	let num = 9;	//Local Variable - cannot able to access outside function
+	console.log(user)
+}
+console.log(num) 	//Got an error because num is in function which is local variable
+
+
+Example:-
+Default value is used in functions when we are not passing values to the arguments.
+
+function add(num1, num2, num3 = 1) {		//num3 = 1 is the default value
+	return num1 + num2 + num3;
+}
+let reesult = add(5, 4)
+console.log(result)
+
+Output:-
+10
+
+Note:-
+1.When we are not pass num3 value then only the default value will works.
+2.If we pass num3 value as 2 then output is 5+4+2=11, in this case default value will not be taken because we pass the value as 2.
+3.As a default value we can pass any value not only 1.
+
+function add(num1, num2, num3 = 1) {          //num3 = 1 not work because there we pass the value
+	return num1 + num2 + num3;
+}
+let reesult = add(5, 4, 2)
+console.log(result)
+
+Output:-
+11
+
+Arrow Function in JS:-
+It is just as anonymous function. By using arrow (=>) we cannot type function/functionName keywords.
+Example 1:-(Basic example using arrow function)
+let greet = (user) => {
+    console.log("Hello" + user)
+    return 1
+}
+
+greet('Akhil')
+
+Output:-
+HelloAkhil
+
+Example 2:-
+When there is only one line of code with return keyword in function then no need of that curly braces {}, also return keyword, i.e arrow function will return autometically.
+
+let add = (a, b) => a + b
+
+console.log(add(4,5))
+
+Output:-
+9
+
+
+Methods in JS:-
+It is an object but it is a 'method'.In simple, function in the object.
+Example 1:-
+let laptop = {
+    cpu: 'i9',
+    ram: 8,
+    brand: 'HP',
+
+    greet: function() {		//Called as Method
+        console.log('Hello World')
+    }
+}
+
+laptop.greet();
+
+Output:-
+Hello World
+
+Here greet act as key in object known as method but assigned a function so we can access greet as a function by using object name laptop,.
+
+This Keyword in JS:-
+By this we can print key values in the object where getConfig method is there. 
+
+Example 1:-Without using this keyword
+let laptop = {
+    cpu: 'i9',
+    ram: 8,
+    brand: 'HP',
+
+    getConfig: function() {
+        console.log(laptop.cpu)  	//printing cpu value using object name
+    }
+}
+
+laptop.getConfig();
+
+Output:-
+i9
+
+Example:-Using 'this' keyword
+let laptop = {
+    cpu: 'i9',
+    ram: 8,
+    brand: 'HP',
+
+    getConfig: function() {
+        console.log(this.cpu)
+    }
+}
+
+laptop.getConfig();
+
+Output:-
+i9
+
+Instead of object name laptop using this keyword because it will points to current object only if we have laptop1 and laptop2 objects
+
+Example:-
+Insert two object laptop1 and laptop2 with different specifications and compare both laptops which is faster based on CPU generation.
+
+JS CODE:-
+let laptop1 = {
+    cpu: 'i5',
+    ram: 8,
+    brand: 'HP',
+
+    getConfig: function() {
+        console.log(this.cpu)
+    }
+}
+
+let laptop2 = {
+    cpu: 'i8',
+    ram: 16,
+    brand: 'DELL',
+
+    getConfig: function() {
+        console.log(this.cpu)
+    }
+}
+
+function bestLaptop(Model1, Model2){
+    if(laptop1.cpu > laptop2.cpu){
+        console.log(laptop1)
+        console.log('Laptop 1 is faster')
+    } 
+    else{
+        console.log(laptop2)
+        console.log('Laptop 2 is faster')
+
+    }
+}
+bestLaptop(laptop1, laptop2);  //passing values to the arguments
+
+Output:-
+{
+  cpu: 'i8',
+  ram: 16,
+  brand: 'DELL',
+  compare: [Function: compare],
+  getConfig: [Function: getConfig]
+}
+Laptop 2 is faster
+
+
+(OR)
+
+
+let laptop1 = {
+    cpu: 'i8',
+    ram: 8,
+    brand: 'HP',
+
+    getConfig: function() {
+        console.log(this.cpu)
+    }
+}
+
+let laptop2 = {
+    cpu: 'i5',
+    ram: 16,
+    brand: 'DELL',
+
+    compare: function(other){
+        if(laptop1.cpu > this.cpu) {
+            console.log(laptop1)
+            console.log("Laptop 1 is Faster")
+        } else{
+            console.log(laptop2)
+            console.log("Laptop 2 is Faster")
+
+        }
+    },
+
+    getConfig: function() {
+        console.log(this.cpu)
+    }
+}
+
+laptop2.compare(laptop1)
+
+
+Output:-
+{ cpu: 'i8', ram: 8, brand: 'HP', getConfig: [Function: getConfig] }
+Laptop 1 is Faster
+
+
+Constructor:-
+Constructor is created by using new keyword which creates the object. This look like same as the function.
+
+Example 1:-
+let student = new Student('Akhil', 'JS')
+
+function Student(name, tech) {
+    this.name = name
+    this.tech = tech
+}
+
+console.log(student)
+
+Output:-
+Student { name: 'Akhil', tech: 'JS' }
+
+
+Example 2:-
+Create another new object and insert new values
+let student = new Student('Akhil', 'JS')
+let student1 = new Student('Navin', 'java')
+
+function Student(name, tech) {
+    this.name = name
+    this.tech = tech
+}
+
+console.log(student)
+console.log(student1)
+
+Output:-
+Student { name: 'Akhil', tech: 'JS' }
+Student { name: 'Navin', tech: 'java' }
+
+Example 3:-
+To change/replace the Akhil tech from JS to AngularJS.
+let student = new Student('Akhil', 'JS')
+let student1 = new Student('Navin', 'java')
+
+function Student(name, tech) {
+    this.name = name
+    this.tech = tech
+}
+student.tech = 'AngularJS';  	//just like in object manupulations
+
+console.log(student)
+console.log(student1)
+
+Output:-
+Student { name: 'Akhil', tech: 'AngularJS' }
+Student { name: 'Navin', tech: 'java' }
+
+
+Example 4:-
+Also create method/function in the constructor
+let student = new Student('Akhil', 'JS')
+let student1 = new Student('Navin', 'java')
+
+function Student(name, tech) {
+    this.name = name
+    this.tech = tech
+
+    //creating methods in constructor
+    this.work = function() {
+        console.log('Inside the constructor')
+    }
+}
+student.tech = 'AngularJS';
+
+console.log(student)
+console.log(student1)
+student.work();
+
+
+
+Output:-
+Student {
+  name: 'Akhil',
+  tech: 'AngularJS',
+  work: [Function (anonymous)]
+}
+Student { name: 'Navin', tech: 'java', work: [Function (anonymous)] }
+Inside the constructor
+
+Note:-
+1.Try to write constructor name start with UpperCase letter because it same as function syntax.
+2.In constructor we can create a methods
+
+
+Arrays:-
+1.There are two ways in js to create array. 
+2.In array we can insert any type of elements like string, number, float type elements.
+3.Index value of an array will start from 0.
+Syntax 1:-
+let values = new Array();
+
+Syntax 2:-
+let values = [];
+
+Example 1:-
+let values = [1,2,3,4, "Akhil", 5.5];
+console.log(values);
+console.log(values.length)
+
+Output:-
+[ 1, 2, 3, 4, 'Akhil', 5.5 ]
+6
+
+Example 2:-Adding elements at specific index value/location
+let values = [1,2,3,4, "Akhil", 5.5];
+
+values[6] = 'Navin'; 		//Element 'Navin' added at index value 6.
+
+console.log(values);
+console.log(values.length)
+
+Output:-
+[ 1, 2, 3, 4, 'Akhil', 5.5, 'Navin' ]
+7
+
+Array Methods:-
+In methods in array we have 
+1.Push
+2.Pop
+3.Shift
+4.Unshift
+5.Splice
+
+1.Push:-
+Adding elements at the end of the array.
+Example:-
+let values = [1,2,3,4, "Akhil", 5.5];
+values.push(6)
+console.log(values);
+
+Output:-
+[ 1, 2, 3, 4, 'Akhil', 5.5, 6 ]
+
+2.Pop:-
+Deleting element at the end of the array.
+
+Example:-
+let values = [1,2,3,4, "Akhil", 5.5];
+values.pop();
+values.pop();
+console.log(values);
+console.log(values.length)
+
+Output:-
+[ 1, 2, 3, 4 ]
+4
+
+Note:-
+We write pop method two time then two elements at the end of the array is deleted.
+
+3.Shift:-
+Deleting elements at the starting of the array.
+
+Example:-Delete two elememnts 1,2 at the starting of the array
+let values = [1,2,3,4, "Akhil", 5.5];
+values.shift();
+values.shift();
+console.log(values)
+console.log(values.length)
+
+Output:-
+[ 3, 4, 'Akhil', 5.5 ]
+4
+
+4.Unshift:-
+Adding elements at the starting of the array.
+
+Example:-Insert two elements -1,0 at starting of the array.
+let values = [1,2,3,4, "Akhil", 5.5];
+
+values.unshift(0,-1);
+console.log(values)
+console.log(values.length)
+
+Output:-
+[ -1, 0, 1, 2, 3, 4, 'Akhil', 5.5 ]
+8
+
+5.Splice :-
+To remove elements from a particular location.
+Syntax:-
+splice(index_value, How many elements to be remove, Elements to be added);
+
+Example:-
+let arr = [2,3,4,5,6,8]
+
+arr.splice(2,1, 11,15)   	//From index 2, 1 element to be removed and 11,15 is added at index valaue 2.
+console.log(arr);
+
+Output:-
+[ 2, 3, 11, 15, 5, 6, 8 ]
+
+6.Slice :-
+To get elements in the array
+const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+const citrus = fruits.slice(1, 3);
+console.log(citrus);
+
+Output:-
+[ 'Orange', 'Lemon' ]
+
+7.indexOf :-
+To know the index of the element of the array.
+const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+const citrus = fruits.indexOf('Orange')
+console.log(citrus);
+
+Output:-
+1
+
+8.Lenght :-
+To the lenght of the array
+const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+const citrus = fruits.length();
+
+Output:-
+4
+
+Summary:-
+PUSH():- Adding elements at the 'end' of the 'array'.
+POP():- Deleting element at the 'end' of the 'array'.
+SHIFT():- Deleting elements at the 'starting' of the 'array'.
+UNSHIFT():- Adding elements at the 'starting' of the 'array'.
+SPLICE():-To remove and add elements from a particular location.
+SLICE():- To ge the elements in the array using the index values.
+INDEXOF():- To know the index of the partucular element of the array.
+LENGTH():- To return that how many elements present in the array.
+
+
+Different Types of Data in Array:-
+1.Also, we can create an object inside of the array.
+let data = ['Akhil', {..}];
+2.We can create a function in the array.
+let data = [1,2,3, function(){ console.log("Hello") }]
+
+Example:-To insert object and function as an array.
+let arr = ['Akhil', {tech: 'JS', laptop:'Dell'}, function(){ console.log("Hello World") }]
+
+arr[2](); //Calling a function
+console.log(arr)
+
+Output:-
+Hello World
+[ 'Akhil', { tech: 'JS', laptop: 'Dell' }, [Function (anonymous)] ]
+
+Note:-
+1.When the function in the object we have to call that function by the 'arr_name()'.
+
+
+For-of/For-in Loop with an Array in JS:-
+Difference between For-of and For-in loop is:
+For-of loop fetches the values especially in the arrays.
+For-in loop fetches the both keys and values mainly in objects.
+
+Example 1:- Using For-of Loop(Prints only values but not keys)
+let arr = []
+
+arr[0] = 2
+arr[1] = 3
+arr[10] = 5
+
+for(let n of arr) {
+    console.log(n)
+}
+
+Output:-
+2
+3
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+5
+
+Example 2:- Using For-in Loop(Prints both key and values/only values if we want)
+let arr = []
+
+arr[0] = 2
+arr[1] = 3
+arr[10] = 5
+
+for(let key in arr) {
+    console.log(key, arr[key])
+}
+
+Output:-
+0 2
+1 3
+10 5
+
+Note :-
+In the above example 2, key values printed are the index values(0  1  10).
+
+
+Array Destructuring:-
+To print a particular elements in the array, there are two ways
+1.Using Index values
+2.Array destructuring
+
+Example 1:-
+let arr = [1,5,7,9]
+console.log(arr)
+let [a,b,c,d] = arr; 	// assign arr to => a=1, b=5, c=7, d=9
+
+console.log(d);
+
+Output:-
+[ 1, 5, 7, 9 ]
+9
+
+->Suppose if we remove c
+Example:-
+let arr = [1,5,7,9]
+
+console.log(arr)
+let [a,b,,d] = arr;
+
+console.log(d);
+
+Output:-
+[ 1, 5, 7, 9 ]
+9
+
+->Swaping two numbers
+let a = 5;
+let b = 7;
+
+[a,b] = [b,a]
+console.log(a,b)
+
+Output:-
+7,5
+
+->Using 'split' 
+Syntax:-
+split('') - without space means splitting letters.
+split(' ') - means splitting the words.
+
+let sentence = "My name is Akhil".split(' ')
+
+console.log(sentence)		//Printing full string by spliting
+let [a,b,c,d] = sentence; 	//a=My, b=name, c=is, d=Akhil
+console.log(a,b)		//Printing a,b i.e My name
+
+Output:-
+[ 'My', 'name', 'is', 'Akhil' ]
+My name
+
+->If we add a word in the sentence then by using (...)
+
+In below example d=Akhil Vinnakota by using (...) remaining part from akhil is assigned to d only.
+
+let sentence = "My name is Akhil Vinnakota".split(' ')
+
+let [a,b,c,...d] = sentence; 
+console.log(d)
+
+Output:-
+[ 'Akhil', 'Vinnakota' ]
+
+Note:-
+1.Split can make string/sentence seperated and display each word in invited commas.
+2.Also, we can assign string to the array[a,b,c] after split each word in the string/sentence.
+
+
+Array ForEach Method:-
+ForEach loop gives the values one by one form the value.
+
+Example:-
+Using Arrow function and forEach loop print the array values.
+
+let arr = [5,6,7,14,1,21,56,55]
+
+arr.forEach((n) => {
+    console.log(n, i, arr);
+})
+
+Output:-
+5
+6
+7
+14
+1
+21
+56
+55
+
+Filter, Map, Reduce:-
+
+1.Filter():-
+In simple, filtering the unwanted data. Also, filter mathed always works on conditions. In below example n %2===0 is the condition, if we perform any arthematic operation it will not work.
+
+Example 1:-Filter elements from the array which are even.
+let arr = [5,6,7,14,1,21,56,55]
+
+let result = arr.filter(n => n%2===0 )
+console.log(result);
+
+Output:-
+[ 6, 14, 56 ]
+
+Example 2:- In the above example we get output as array, now print the values as list.
+let arr = [5,6,7,14,1,21,56,55]
+
+arr.filter(n => n%2===0 ).forEach(n => { console.log(n) });
+
+Output:-
+6
+14
+56
+
+Map():-
+let arr = [5,6,7,14,1,21,56,55]
+
+arr.filter(n => n%2===0 )
+                .map(n => n * 2)
+                .forEach(n => {
+                    console.log(n);
+                })
+
+Output:-
+12
+28
+112
+
+Reduce():-
+By making some operation on array of data and reduce to single value
+Syntax:-
+arr.reduce((accumulator, currentValue) => {----}, initialValue of  accumulator);
+
+
+Example:-
+let arr = [5,6,7,14,1,21,56,55]
+
+let result = arr.filter(n => n%2===0 )		//like conditions
+                .map(n => n * 2)			//like oprerations
+                .reduce((a,b) => a+b)
+
+console.log(result);
+
+Output:-
+152
+
+
+Set in JavaScript:-
+1.Set is different from java. 
+2.Set is a collection
+3.It has unique values only and does not have any index values.
+4.Maintain order
+
+Creating Set in JS:-
+let num = new Set();
+
+Example 1:- It fetch unique values
+let val = new Set('TENET')
+console.log(val);
+
+Output:-
+Set(3) { 'T', 'E', 'N' }
+
+In the above example only 3 elements printed because set eliminate repeated elements, In the word TENET there are 2 - T's, 2 - E's, 1 - N it eliminate remainint T's and E's in the given string.
+
+Example 2:-
+let val = new Set()
+
+val.add(3)		//By using add() we can add elements in the Set
+val.add(4)
+val.add(3)
+val.add('TENET')
+val.add('PUSHPA')
+
+console.log(val);
+
+Output:-
+Set(4) { 3, 4, 'TENET', 'PUSHPA' }
+
+Here in the above example 3 is added two times so one is deleted, but TENET and PUSHPA not repeated. Set is not checked TENET and PUSHPA as strings but as elements so they printed as it is.
+
+Example 3:- Print set values using forEach Loop
+let val = new Set()
+
+val.add(3)
+val.add(4)
+val.add(3)
+val.add('TENET')
+val.add('PUSHPA')
+
+//To print elements using forEach
+val.forEach( n => {
+    console.log(n);
+})
+
+Output:-
+3
+4
+TENET
+PUSHPA
+
+has() Method:-
+Which is used to check the particuclar value in Set present or not
+
+Example 4:-Using has() check the values 3 and TENET and AVENGERS in the Set present or not.
+let val = new Set()
+
+val.add(3)
+val.add(4)
+val.add(3)
+val.add('TENET')
+val.add('PUSHPA')
+
+console.log(val.has(3));
+console.log(val.has('TENET'));
+console.log(val.has('AVENGERS'));
+
+Output:-
+true		//3
+true		//TENET
+false		//AVENGERS
+
+
+Map in JavaScript:-
+>Map is very similar to the object (having the key and values for Map) but there is small difference ber object and the Map.
+Syntax to create a Map in JS is:
+let map = new Map();
+
+Example:- Write a basic JS program using Map
+let map = new Map();
+
+map.set('Akhil', 'JS')
+map.set('raaj', 'Java')
+map.set('John', 'SQL')
+map.set('Kiran', 'Angular')
+
+console.log(map);
+
+Output:-
+Map(4) {
+  'Akhil' => 'JS',
+  'raaj' => 'Java',
+  'John' => 'SQL',
+  'Kiran' => 'Angular'
+}
+
+Example:- Using the keys() method we can fetch all the keys in the Map.
+let map = new Map();
+
+map.set('Akhil', 'JS')
+map.set('raaj', 'Java')
+map.set('John', 'SQL')
+map.set('Kiran', 'Angular')
+
+console.log(map.keys());
+
+Output:-
+[Map Iterator] { 'Akhil', 'raaj', 'John', 'Kiran' }
+
+Example 3:- 
+>Using has() method we get whether the key is present or not in the Map.
+>Using get() method we can print particular key values.
+let map = new Map();
+
+map.set('Akhil', 'JS')
+map.set('raaj', 'Java')
+map.set('John', 'SQL')
+map.set('Kiran', 'Angular')
+
+//To check the keys are present or not using has()
+console.log(map.has('Akhil'));
+console.log(map.has('John'));
+console.log(map.has('Shiva'));
+
+//To get the values using get()
+console.log(map.get('John'));
+console.log(map.get('Kiran'));
+
+Output:-
+true
+true
+false
+SQL
+Angular
+
+Example 4:- Print the key and values in the Map using For-of Loop and also replace the Akhil value into ReactJS.
+let map = new Map();
+
+map.set('Akhil', 'JS')
+map.set('raaj', 'Java')
+map.set('John', 'SQL')
+map.set('Kiran', 'Angular')
+map.set('Akhil', 'ReactJS')	//Here value JS replaced into ReactJS but not print seperatly
+
+for (let [key,val] of map) {
+    console.log(key, val);
+}
+
+Output:-
+Akhil ReactJS
+raaj Java
+John SQL
+Kiran Angular
+
+Example 5:-Print the values using For-each loop
+let map = new Map();
+
+map.set('Akhil', 'JS')
+map.set('raaj', 'Java')
+map.set('John', 'SQL')
+map.set('Kiran', 'Angular')
+
+map.forEach((key, val) => {
+    console.log(key, " : ", val);
+});
+
+Output:-
+JS:  Akhil
+Java:  raaj
+SQL:  John
+Angular:  Kiran
+
+Recursion in JS:-
+A function call by itself is known as the recursion.
+
+Synchronous and Asynchronous Programming:-
+
+Synchronous  Programming:-
+Synchronous Programming/functions mean executing the programs line by line or synchronously.
+
+
+ Asynchronous Programming:- ( Promises, Async, Await, Fetch, Then )
+>Asynchronous Programming/functions mean the program executes without any order. Suppose it will execute the code which is faster and then execute the other line of code which is slower.
+Suppose we have 3 lines of code then the execution order will be
+console.log('1st Out')
+fetch('Some API URL'){console.log('2nd Out')}
+console.log('3rd Out')
+
+Output:-
+1st Out
+3rd Out
+2nd Out
+
+Because in JS API calls will take a few seconds to execute. So the 2nd line will execute last.
+
+Example:-
+
+let waitingForOutPut = () => console.log('2');
+
+
+console.log(1);
+setTimeout(waitingForOutPut, 2000) //2000 milli second = 1 second
+console.log(3);
+
+Output:-
+1
+3
+2
+
+setTimeout() Function:-
+setTimeout(() => {code, SetTime });
+
+Example 1:-
+
+setTimeout( console.log('After 2 seconds'), 2000);
+
+OR
+
+let waitingForOutPut = () => console.log('After 2 seconds');
+setTimeout(waitingForOutPut, 2000)		 //2000 milli second = 1 second
+
+Output:- The code execution time is 2 seconds
+[Running] node "c:\Users\Dell\Documents\Coding\JavaScript\First.js"
+After 2 seconds
+
+[Done] exited with code=0 in 2.392 seconds
+
+[Running] node "c:\Users\Dell\Documents\Coding\JavaScript\First.js"
+After 2 seconds
+
+[Done] exited with code=0 in 2.218 seconds
+
+
+1. Promises:- This is the asynchronous function that creates the object of the claass by using the keyword 'new'. In this we have reject and resolve followed by the 'then' and 'catch' blockes.
+Syntax:-
+let promise1 = new Promise((resolve, reject) => {
+
+})
+
+-> In promises there is a methods like .race(), .all(), .allSettled()
+
+Example:-
+//Ordered the soup in restaurant, after 2seconds order is served/resolved
+
+let MyPromise = new Promise((resovle, reject) => {
+    setTimeout(() => {
+        let isReady = false;
+	//using Math.random() to set true or false automatically
+	// let isReady = [true, false][Math.floor(Math.random() * 2)]
+
+        isReady ? resovle('Soup is ready 🍲') : reject('Not Ready ❌')
+    }, 2000)
+})
+.then(success => console.log(success))
+.catch(error => console.error(error))
+
+Output:-
+Not Ready ❌
+
+2. Async and Await:-
+>This concept is used instead of promises by that we can avoid then() and catch() blocks and make code in a single line and, easier. 
+>Async is a type of function.
+>Await is used for responses
+>What If? there is any error handling,
+We have try and catch blocks in this concept
+Syntax:-
+let variable = async () => {
+	try{await ----------}
+	catch(error) {-----------}
+}
+
+Rules:-
+1. Must create a function
+2. Must use keywords 'async' and 'await'.
+
+Suppose fetch API using Promises(then blocks)
+fetch('https://dog.ceo/api/breeds/image/random')
+    .then(response => response.json())
+    .then(data => console.log(data))
+
+Example 1:-
+const getDog = async () => {
+    let url = 'https://dog.ceo/api/breeds/image/random'
+    let response = await fetch(URL)   //Instead of .then() and .catch() we using 'await'
+    let data = await response.json()
+    console.log(data);
+}
+getDog()
+
+Output is the same for both of the above codes
+
+Example 2:-
+let MyPromise = new Promise((resovle, reject) => {
+    setTimeout(() => {
+        let isReady = [true, false][Math.floor(Math.random() * 2)]
+        isReady ? resovle('Soup is ready 🍲') : reject('Not Ready ❌')
+    }, 2000)
+})
+
+
+let MyPromise1 = async () => {
+    try{
+        const soup =await MyPromise
+        console.log(soup)
+    } catch(error) {
+        console.log(error);
+    }
+    
+}
+MyPromise1()
+
+>async block does not return the data we want for that we have two ways 
+1. Using the Keyword 'await'.
+2. By the .then block in promises
+Example 3:- Using .then block
+let MyPromise = new Promise((resovle, reject) => {
+    setTimeout(() => {
+        let isReady = [true, false][Math.floor(Math.random() * 2)]
+        isReady ? resovle('Soup is ready 🍲') : reject('Not Ready ❌')
+    }, 2000)
+})
+
+let MyPromise1 = async () => {
+    data = {rating: 0, tip: 0, pay: 0, rewiew: 0}
+    try{
+        const soup =await MyPromise
+        console.log(soup)
+        data.rating = 5
+        data.tip = .10
+        data.pay = 100
+        data.review = 10
+    } catch(error) {
+        console.log(error);
+        data.rating = 1
+        data.tip = 0
+        data.pay = 0
+        data.review = 1
+
+    }
+        return data
+}
+
+MyPromise1().then(val => console.log(val))
+
+Output:-
+Soup is ready 🍲
+{ rating: 5, tip: 0.1, pay: 100, rewiew: 10 }
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Math Methods:-
+1.Math.floor() :- This method is used to rounds down the numbers.
+Example:-
+If the result is 11.2 when we use floor method it rounds to 11
+
+2.Math.ceil() :- This method is used to rounds up the numbers
+Example:-
+If the result is 11.2 when we use floor method it rounds to 12
+
+3.Math.Random() :- This mathod give random nmber between 0 and 1 by default. If we want any random number between anny numbers just multiply with that number, Supposeif we want random number between 1 and 4 then multiply with 4 like => Math.random() * 4.
+
+4.Math.min()
+5.Math.max()
+
+Example:-
+let a = 12.5
+let b = 12
+
+let c = a + b
+console.log("Accurate Result: ", c);
+console.log('Round down result: ', Math.floor(c)); 	//Using Math.floor()
+console.log('Round Up result: ', Math.ceil(c));		//Using Math.ceal()
+
+let randNum = Math.random() * 3;			//Usind Math.random()
+console.log("Accurate RandNum: ", randNum);
+console.log("Round down randNum:", Math.floor(randNum));
+
+Output:-
+Accurate Result:  24.5
+Round down result:  24
+Round Up result:  25
+Accurate RandNum:  1.132834768284831
+Round down randNum: 1
+
+
+-------------------------------------------------------------------------------------------------------
+Example Problems:-
+
+Code 1:- To find the word frequency of the given string
+const wordFrequency = (phrase) => {
+    let frequency = {}
+    let splitSentence = phrase.split(' ')
+    for (const word of splitSentence) {
+        if(word in frequency) {
+            frequency[word] += 1;
+        } else {
+            frequency[word] = 1
+        }
+    }
+
+    return frequency;
+}
+
+console.log(wordFrequency('lol what lol what happen to lol'))
+
+Output:-
+{ lol: 3, what: 2, happen: 1, to: 1 }
+
+
+Code 2:- To find the letter frequency of the given string
+const letterFreq = (phrase) => {
+    let frequency = {}
+    for(let letter of phrase) {
+        if(letter in frequency) {
+            frequency[letter] = frequency[letter] + 1;
+        }else {
+            frequency[letter] = 1
+        }
+    }
+    return frequency
+}
+
+console.log(letterFreq('tenet'))
+
+Output:-
+{ t: 2, e: 2, n: 1 }
+
+
+
+Code 3:- Using Filter, map, reduce get the total collections of all the movies
+let movies = [
+    { Movie: 'Pushpa', collections: 100 },
+    { Movie: 'Godfather', collections: 92 },
+    { Movie: 'Bheemla Nayak', collections: 104 },
+    { Movie: 'Vakeel Saab', collections: 90 }
+]
+
+let result = movies.filter(a => a.collections >= 80).map(a => a.collections).reduce((a,b) => (a + b))
+
+
+console.log(result)
+
+Output:-
+386
+
+Code 4:-
+Sum up all the netWorth values of the actors by using (reduce function only).
+let actors = [
+    {name: 'Johnny', networth: 2000000},
+    {name: 'amber', networth: 10},
+    {name: 'matt', networth: 170000000},
+    {name: 'brad', networth: 300000000},
+    {name: 'leonardo', networth: 10000000}
+]
+
+let result = actors.reduce((a,b) => a + b.networth, 0)
+
+console.log(result);
+
+Output:-
+482000010
+
+
+Code 5:-Using join(), filter and map functions filter the movies that collected >90 and join movie names with spaces and comma.
+join(' ') - Seperated by spaces
+join(', ') - Seperated by comma and spaces
+
+let movies = [
+    { Movie: 'Pushpa', collections: 100 },
+    { Movie: 'Godfather', collections: 92 },
+    { Movie: 'Bheemla Nayak', collections: 104 },
+    { Movie: 'Vakeel Saab', collections: 90 }
+]
+
+let result = movies.filter(a => a.collections > 90).map(a => a.Movie).join(', ')
+
+console.log(result)
+
+Ouput:-
+Pushpa, Godfather, Bheemla Nayak
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+JavaScript DOM Manupulations:-
+How to link javaScript file to HTML?
+<script src=".js file_name"></script>  --> should be bottom of the code otherwise it shows an error.
+
+
+document.getElementById in JS :-
+Which is used to get global access to the DOM elements by using ID of the DOM elements.
+
+documet.querySelectorAll in JS :-
+Used to get global access to the DOM elementss through class attributes.
+Example:-
+const box = document.querySelectorAll('.box') 	//box is the class in HTML which is given to the red, yellow, green DIV tags
+console.log(box);
+
+Output:-
+0: div#red.box
+1: div#yellow.box
+2: div#green.box
+
+document.createElement('DOM element Name') in JS :-
+Which is used to create the DOM element tags in the HTML using the JS. 
+
+document.querySelector():-
+Is is used to fetch both id and class
+
+Example:-
+document.querySelector('#id')
+document.querySelector('.class')
+
+addEventListeners in JS:-
+To add the events to the DOM element
+DOM.addEventListener('event', callBack Func() {
+	
+})
+
+.add() and .remove() in JS:-
+To add or remove the CSS classes to the DOM elements
+
+.contains() Method in JS :-
+It fetches the class names only
+
+Example:-
+.contains('Fetch Class Names')
+
+.currentTarget in JS:-
+Mostly used for loops and click events used to focus on the button what we clicked.
+
+.classList:-
+This is used to display the classes we given to the DOM element.
+
+Example:-
+<div class="btn btn-primary border my-3"></div>		We have 4 classes
+
+In JS:-
+let classNames = btn.classList
+console.out(classNames);
+
+Output:-
+Array[]
+0:btn
+1:btn-Primary
+2:border
+3:my-3
+
+.getBoundingClientRect() in JS:-
+Which is used to return the CSS styles like Margins, Heigth etc of the DOM elements.
+
+ .setAttribute() in JS:-
+We can set an attributes like id, name, href, placeholder etc..., 
+
+.getAttribute() in JS:-
+We can get DOM attribute like href, value etc.
+
+offsetTop in JS:-
+It returns us a value/Number of  top height position of the DOM element in pixels
+
+Example:-
+In HTML
+<div class="imageDiv"></div> 	//In we can insert images using JS.
+
+In JS
+Step 1:- Create DOM element <img> and assign it to a variable.
+let imageElement = document.createElement('img')
+
+Step 2:-Now, set an attributes like id/name to that DOM <img>
+imageElement.setAttribute('data-id', image.id)
+
+Step 3:- Give the source to the <img> tag
+img.src = 'image.jpg'
+
+Step 4:-Finally, we bring it to the view by appending step1 'imageElement' to the class='images' in the HTML.
+let imageDiv = document.querySelector('.images')
+
+images.appendChild(imageElement)
+
+
+.innerText in JS:-
+Which is used to get the entire inner text in the particular DOM element by creating the ID to that DOM element.
+
+For Example
+In HTML file
+<h1 title="title">Hello World!</h1>
+
+In JS file
+console.log('Hello');
+
+let title = document.getElementById('title')	//title is ID of DOM h1 tag in html
+
+console.log("Before: ",title.innerText);
+
+title.innerHTML = 'Good Bye';    //To change/manupulate the text in the DOM element h1(Hello World) to Good Bye
+
+console.log("After: ",title.innerHtml)
+
+Console:-
+Hello
+Before: Hello World
+After: Good Bye
+
+In Brower:-
+Good Bye
+
+.innerHTML in JS:-
+
+In HTML file
+If we do not mention div tag then the output/text in the browser will always in the H1 tag format only.
+<div id='title'>
+    <h1>Hello World! I am Akhil</h1>
+</div>
+
+
+let title = document.getElementById('title')
+
+message = 'Hey there can we start'
+title.innerHTML = `<p>${message}</p>`
+
+In the above we make th paragraph tag without the div tag text(message) will be in the form of H1 tag size only, so we have make H1 in the HTML in the seperate DIV tag.
+
+In Browser:- 
+Hey there can we start
+
+Diiference between innerHTML and innerText?
+innerText - returns all text contained by an element and all its child elements. innerHtml -  returns all text, including html tags, that is contained by an element.
+
+Style Manupulations in JS:-
+title.style.color = 'red';
+>In the javascript file to change the color/bgColor etc...., of the text by using the ID 'title' given to the DIV tag in the html file.
+
+.toFixed Method :-
+Which makes the numbers into two digits after the decimal point.
+
+alert Window :-
+Which is used to send the alert messages in the browser.
+Syntax:-
+alert('Alert window')
+
+throw Keyword:-
+Throw is used to sent execeptions in the console window.
+Syntax:-
+throw 'Throw Window'
+
+Problem:-
+Create three color(red, yellow, green) boxes/squres, flex them in a row, make them as a buttons, when we click on them console the color name as the output and alos, when we click the buttons then display the numbers that number of times click actions are done.
+
+In HTML File
+<divi id="flex">
+    <button type="button" id="red" class="box" value="red"></button>
+    <button type="button" id="yellow" class="box" value="yellow"></button>
+    <button type="button" id="green" class="box" value="green"></button>
+    
+</div>
+<button id="clr-game">Clear</button>
+
+In JS File:-
+Step 1:-
+When we click actions then the color name should console. We have two ways
+1. Assign each elementID and write sperate onclick events for each color ID to get console on display
+
+Code:-
+let red = document.getElementById('red')
+let yellow = document.getElementById('yellow')
+let green = document.getElementById('green')
+
+red.onclick = () => {
+    console.log('User Choose: Rock');
+};
+
+yellow.onclick = () => {
+    console.log('yellow');
+};
+
+green.onclick = () => {
+    console.log('green');
+};
+
+2. Making the buttons in to an array by using the classes of each element
+Here class = "box" then select  all box classes then assign into the one variable 'boxes'. Now boxes have all the properties of three colors(red,green, yellow). Using forEach loops display the values of the buttons.
+
+Code:-
+const boxes = document.querySelectorAll('.box')
+
+boxes.forEach(boxes => {
+    boxes.onclick = () => console.log(boxes.value);
+})
+
+
+Note:-
+The above two ways have the same ouput in the console.
+
+Step 2:-
+When we click on the button then there should display the count about how many times we make click actions. Suppose, if click red button 3 times then digit 3 should display on the red color box.
+
+Code:-
+const timesClicked = { 'red': 0, 'yellow': 0, 'green': 0 }
+
+boxes.forEach(box => {
+    box.onclick = () => {
+        timesClicked[box.value] += 1
+        box.innerText = timesClicked[box.value]
+    }  
+})
+
+
+Step 3:-
+Creating clear button. when we click on clear button everything should reset.
+clrGame.onclick = () => {
+    boxes.forEach(box =>{
+        timesClicked[box.value] = ''	//making empty or zero
+        box.innerText = timesClicked[box.value]
+    })
+}
+
+
+Project TipCalculator :-
+To calculate the tip 'per person' while in the restaurent. The tip amount is caluculated by some mathematical formulas
+
+
+Project 2:- Rock Paper Scissors 
+Rules:-
+1. Rock wins against scissors.
+2. Paper wins against rock.
+3. Scissors wins against paper. 
+4. If both players throw the same hand signal, it is considered a tie, and play resumes until there is a clear winner.
+
+
+API in JavaScript:-
+API - Application Programming Interface.
+>It is used to communicate the app with other services to fetch data.
+>Using the concpet called promises we can call the api.
+
+Example :- We have already an api links in the chrome by using that api we can call the different images of dogs.
+
+In HTML :-
+<body>
+    Hello World
+    <div id="dogImg"><img src="" alt=""></div>
+    <button id="chngImg" class="btn btn-primary">Click</button>
+</body>
+
+In JS :-
+let dogImg = document.getElementById('dogImg')
+let chngImg = document.getElementById('chngImg')
+
+let changeImg = () => {
+    fetch('https://dog.ceo/api/breeds/image/random')
+    .then(Response => Response.json())
+    .then(json => {
+        console.log(json.message)
+        dogImg.innerHTML = `<img src='${json.message}'/>`
+        })
+}
+
+
+chngImg.onclick = () => {
+    changeImg()
+}
+
+
+Classes in Js:-
+>Classes in JS we can create a 'constructor' and 'Methods' in its body. 
+>For every  class we create a object of it, by using 'new' keyword.
+Syntax:-
+class car {
+	constructor(parameters,...,..) { 
+		-------
+	}
+}
+
+//TO create an object of the above class car
+let Suzuki = new car(parameters....)
+
+Example 1:-
+//Classes in JavaScript
+class car {
+  //Creating constructor and Method in the class
+  constructor(name, color, model) {
+    this.name = name
+    this.color = color
+    this.model = model
+
+    //Also we can assign a values directly here
+    this.currentSpeed = 0
+  }
+
+  //Creatng Method()
+  drive() {
+    this.currentSpeed += 10
+  }
+
+ brake() {
+    this.currentSpeed -= 10
+  }
+
+  stop() {
+    this.currentSpeed = 0
+  }
+}
+
+let ferrari = new car('Ferrari', 'red', 550)
+// console.log(ferrari);
+
+// //If we want a only color info from car
+// console.log(ferrari.color)
+// console.log(ferrari.currentSpeed);
+// //Calling a methods drive() and brake()
+// ferrari.drive()
+// ferrari.brake()
+
+// console.log(ferrari.currentSpeed);
+
+// ferrari.zeroToSixty()
+// console.log(ferrari.currentSpeed)
+ferrari.drive()
+ferrari.drive()
+ferrari.drive()
+ferrari.drive()
+ferrari.drive()
+ferrari.drive()
+ferrari.drive()
+ferrari.drive()
+
+console.log('Current Speed: ', ferrari.currentSpeed);
+ferrari.brake()
+console.log('Speed After Brake: ', ferrari.currentSpeed);
+
+ferrari.stop()
+console.log('Speed after Car Stops: ', ferrari.currentSpeed);
+
+Output:-
+Current Speed:  80
+Speed After Brake:  70
+Speed after Car Stops:  0
+
+
+User Defined Methods:-
+We already have a methods like .push, .pop, .shift etc.. In JS also we can create a user defined methods on our own using the 'prototype'
+Syntax:-
+Array/object/function.prototype.methodName = function() {
+	---------------
+}
+
+Example 1:-
+//Creating user defined Methods
+Array.prototype.myPush = function(item) {
+  this[this.length] = item
+  return this     //this means it will return entire 'fruits' Array
+}
+let cars = ['Suzuki', 'Lenovo', 'Renault', 'Nexa', 'Innovo']
+let fruits = ['banana', 'strawberry', 'cookies', 'apple', 'Mango']
+fruits.myPush('kiwi')
+fruits.myPush('Custod Apple')
+fruits.myPush('Orange')
+console.log(fruits);
+cars.myPush('Skoda')
+console.log(cars);
+
+Output:-
+[
+  'banana',
+  'strawberry',
+  'cookies',
+  'apple',
+  'Mango',
+  'kiwi',
+  'Custod Apple',
+  'Orange'
+]
+[ 'Suzuki', 'Lenovo', 'Renault', 'Nexa', 'Innovo', 'Skoda' ]
+
+
+Example 2:-
+Try creating a bank class with methods like .withdraw() and .deposit() and properties like .balance?
+
+
+
+addEventListener() Method in JavaScript:-
+This method is alternative for the onclick() event which have a different syntax.
+Syntax:-
+add.EventListener('give events like click', fucntion() {
+	------------------
+	------------------
+})
+
+
+Example:-
+When we click on the HTML view then console the output
+
+In HTML
+<h1 id="text">Hello World</h1>
+
+In JS
+let text = document.getElementById('text')
+
+text.addEventListener('click', function() {
+  console.log('click');
+})
+
+
+Console Window(output):-
+click
+
+
+Example 2:-
+document.addEventListener('keydown', function(e) {
+  console.log('hi');
+})
+
+
+In the above code 
+>document - means the HTML file, which attached to JS.
+>keydown - means when we click any key down on our laptop keyboard it will generate an output 'hi' on the console.
+>e - means the "KeyBoard Event" without this output will not get.
+
+Example 3:-
+By using the above example let us focus on key 'q' on out keyboard, that is when we click on the 'q' key then only output should generate.
+
+document.addEventListener('keydown', function(e) {
+  if(e.key == 'q') {
+    console.log('hi');
+  }
+})
+
+Output:-Now click 'q' key two time then it console 2 times as below
+hi
+hi
+
+
+Audio Tags in JavaScript:-
+In HTML
+    <audio id="audio" src="C:/Users/Dell/Documents/Coding/JavaScript/Sounds/pikachuuuuuuu.mp3"></audio>
+
+
+In JS
+document.addEventListener('keydown', function(e) {
+  if(e.key == 'q') {
+    console.log('Q');
+    document.getElementById('audio').play()
+  } else {
+    console.log('Not Q');
+  }
+})
+
+Note:-
+>From the above code, when click 'q' key then the audio will play otherwise not.
+
+
+Functional JavaScript:-
+1. Composition
+2. Currying
+3. Partial Application
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
