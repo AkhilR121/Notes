@@ -1,0 +1,433 @@
+Introduction:-
+Types:-
+1. Number
+2. String
+3. Boolean
+4. Null
+5. Undefined
+6. Void
+7. Object
+8. Array
+9. Tuples
+10. Any
+11. Never
+12. unknown ....
+
+Note:- Try to avoid "any" type because it isn't type-checked.
+
+Functions in TypeScript:-
+Syntax:-
+function funcName(x: type): type {
+	------------
+}
+
+Also, pass arguments as an object in functions.
+function functName({x: string, y: number}){}
+
+Type Aliases:-
+Type Aliases allow defining types with a custom name (an Alias). In simple words, creating our own datatypes.
+
+Example:-
+type userLogin = {
+    userName: string,
+    password: string,
+    isValid: boolean
+}
+function loginDetails(user: userLogin) {
+    return user
+}
+
+//If we don't include every key value in the type "userLogin" then it will show an error.
+console.log(loginDetails({ userName: "akhil", password: "kkk", isValid: true }))
+
+Note:- user is the userLogin "type".
+
+Type Assertions:-
+Example:-
+const x = "hello" as number;
+
+READONLY and Optional:-
+
+Example 1:-
+type userLogin = {
+    readonly _id: number
+    userName: string,
+    password: string,
+    isValid: boolean,
+    // Making email as optional using ?
+    email?: string
+}
+
+let userDetails: userLogin = {
+    _id: 1109,
+    userName: "Thor",
+    password: "akh",
+    isValid: true
+} 
+
+console.log(userDetails);
+
+// Trying to Modify the data
+userDetails.userName = "Ironman"
+console.log(userDetails);
+
+// Throw an error
+userDetails._id = 1231
+
+
+Example 2:-
+Creating two type aliases and assigning these two type aliases to another type alias.
+
+type cardName = {
+    cardName: string
+}
+type cardCvvNum = {
+    cvvNumber: number
+}
+
+type cardDetails = cardName & cardCvvNum
+
+let cardInfo: cardDetails = {
+    cardName: "Akhil",
+    cvvNumber: 123,
+}
+// (or)
+//type cardDetails = cardName & cardCvvNum & { cardNum: number }
+
+Note:- cardDetails fetches two or three different types(cardName and cardCvvNum). Now cardDetails is a type alias.
+
+Arrays in TypeScript:-
+In typescript arrays without type then by default typescript takes that array as 'never[]' i.e not assignable to that array.
+const arr: string[] = []; -> allows only string values.
+const arr: number[] = []; -> allows only number values.
+const arr: boolean[] = []; -> allows only boolean values.
+
+Another way to define an array
+const arr: Array<string> = []
+const arr: Array<number> = []
+
+Also using type alias
+type User = {
+	name: string,
+	isActive: boolean
+}
+
+const arr: User[] = []
+
+Example:-
+type User = {
+	name: string,
+	isActive: boolean
+}
+
+const arr: User[] = []
+arr.push({name:"Thor", isActive:true})
+console.log(arr);
+
+2D Arrays:-
+const arr: number[][] = [[],[],[]]
+
+Union Types in TypeScript:-
+Giving two or more types(datatypes) to the variable using the pipe(|).
+
+Example 1:-
+const password: number | string
+//Where password can allow both number type and string type values.
+
+
+Example 2:-
+function empEmailID(email: string | number) {
+    // It will show and error because it may or may not be string
+    // email.toUpperCase()
+
+    // To convert into uppercase we have to use if condition
+    if(typeof email === "string"){
+        return email.toUpperCase()
+    }
+
+}
+
+console.log(empEmailID("akh@gmail.com"))
+
+In the case of arrays, it is different
+Example 3:-
+Should use brackets otherwise it shows an error.
+const arr: (string | number)[] = [1, "Hulk", 888]
+
+Example 4:- In the case of variable
+course is only assignable to these strings only.
+
+let course: "React" | "MERN" | "Java"
+
+course = "React"
+course = "Rust" //Shows error
+
+Tuples:-
+Which is nothing but declaring a type using an array.
+Example:- An employee having an ID, name, and salary details.
+const employee: [number, string, number]
+//First element should be num, 2nd should be string,....
+employee = [125, "Tony", 30000]
+
+//Should follow an order otherwise shows an error
+employee = ["Tony", 125, 3000]
+
+Note:-
+The Typescript array push method can't catch a tuple type of array.
+//Doesn't show any error
+employee.push("Stark")
+
+ENUMS:-In TypeScript, enums or enumerated types are data structures of constant length that hold a set of constant values Enums are useful when setting properties or values that can only be a certain number of possible values and allow us to declare a set of named constants i.e a collection of related numeric or string values
+enum SeatChice {
+	upper,
+	middle,
+	lower	
+}
+
+Interfaces in TypeScript:-
+interface User{
+    readonly id: number,
+    email: string,
+    userId: number,
+    googleId?: string,
+
+    // Also declare methods
+    startTrail(): string
+    getCoupon(cName: string, value: number): number
+}
+
+const customer: User = {
+                        id: 1123, 
+                        email: "akh@gmail.com", 
+                        userId: 555,
+                        startTrail: () =>{ return "trailer started" },
+                        getCoupon: (name: "Tony", value: 122) => {
+                            return value
+                        }
+                    }
+console.log(customer);
+                    
+
+Interface vs Type:-
+Both interface and Type are almost the same but there are slight changes. Compared to type, Interface has some advantages.
+*In typescript, the Interface is able to extend with another interface.
+*Type is also extendable by using & operator which is not the best syntax.
+*We can declare a new interface with the same name whereas in Type declaring again with the same name will get an error.
+
+Example:-
+interface User{
+    readonly id: number,
+    email: string,
+    userId: number,
+    googleId?: string,
+
+    // Also declare methods
+    startTrail(): string
+    getCoupon(cName: string, value: number): number
+}
+
+interface User {
+    course: string,
+    duration: number
+}
+
+interface student extends User{
+    fee: number
+}
+const customer: student = {
+                        id: 1123, 
+                        email: "akh@gmail.com", 
+                        userId: 555,
+                        startTrail: () =>{ return "trailer started"},
+                        getCoupon: (name: "Tony", value: 122) => {
+                            return value
+                        },
+                        course: "React",
+                        duration: 52,
+                        fee: 55555 
+                    }
+console.log(customer);
+                    
+
+Classes in TypeScript:-
+class employee {
+    empName: string
+    empEmail: string
+    constructor(name: string, email: string){
+        this.empName = name
+        this.empEmail = email
+    }
+
+    empDetails(){
+        console.log(`My name is ${this.empName}, my emailID is ${this.empEmail}`);  
+    }
+}
+
+let emp = new employee("Akhil","akh@gmail.com");
+emp.empDetails();
+
+Note:- Declaring variables like empName and empEmail is a must and should in typescript otherwise it shows an error.
+
+Public, Private and Protected:-
+Public: Accessible anywhere in the code.
+Private: Accessible only in class body.
+Protected: Accessible within the parent and child class.
+
+class employee {
+    public empName: string
+    public empEmail: string
+    private salary: number
+    constructor(name: string, email: string){
+        this.empName = name
+        this.empEmail = email
+    }
+}
+
+let emp = new employee("Akhil","akh@gmail.com");
+
+//Shows an error because the salary is private which is not accessible outside of the class body.
+emp.salary = 250000
+
+A professional way to implement public and private variables
+class employee {
+    constructor(private name: string, 
+		    public email: string, 
+		    private salary: number){ }
+}
+
+Example:-
+class employee {
+    constructor(private name: string, public email: string){ }
+
+    empDetails(){
+        console.log(`My name is ${this.name}, my emailID is ${this.email}`);  
+    }
+}
+
+let emp = new employee("Akhil","akh@gmail.com");
+emp.empDetails();
+
+
+Getters and Setters:-
+class employee {
+
+    public courseCounter: number = -5
+    constructor(public name: string, public age: number, private experience: number) { }
+
+    get getEmpName(): string {
+        return this.name;
+    }
+
+    get getExp(): number {
+        return this.experience
+    }
+
+    get courseCount(): number {
+        return this.courseCounter
+    }
+    set courseCount(courseNum) {
+        if (courseNum <= 0) {
+            throw new Error("Should be >1")
+        }
+        this.courseCounter = courseNum
+
+    }
+}
+
+let emp = new employee("Tony Stark", 45, 5)
+
+
+Abstract Class in TypeScript:-
+->We cannot able to create an object of an abstract class.
+
+Generics:-
+
+Example:-
+const score: Array<number> = []
+const names: Array<string> = []
+
+function funcName(): <>
+
+TypeScript Utility Types:-
+1. type User = {
+	id: string,
+	name?: string,
+	age?: number
+};
+
+-->type RequiredUser = Partial<User>  -- Making object key value pairs 'optional'.
+-->type RequiredUser = Required<User> -- Making every key value in object 'required'.
+-->type RequiredUser = Omit<User, "id"> -- Which deletes the key-value/property in the object.
+-->type RequiredUser = Pick<User, "id"> -- Wchich is user to pick the new properties in the object.
+-->type RequiredUser = Readonly<User> -- Which makes entire object readonly.
+
+Function Generators:-
+Which are used to pausing the execution.
+Syntax:-
+function* createGen(){
+	yeild 1;
+	console.log("He")
+	yeild 2;
+} 
+
+Iterables and Iterators:-
+
+
+LODASH:-
+Install lodash using 
+--> npm i lodash
+Import lodash in typescript/Javascript
+-->const _ = require("lodash");
+
+Optional Chaining Operator(?):-
+When we optional chaining operator always begins with a ? followed by dot operator.
+
+
+Nullish Coalescing Operator(??):-
+Instead of using the OR operator use nullish coalescing operator.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

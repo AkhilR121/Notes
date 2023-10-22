@@ -1,0 +1,760 @@
+What is Spring Boot?
+Spring Boot provides a good platform for Java developers to develop a stand-alone and production-grade spring application that you can just run. You can get started with minimum configurations without the need for an entire Spring configuration setup.
+
+Dependency Injection:-
+In simple words, a bunch of variables is known as dependencies.
+
+Example:-
+A person/employee to join a project depends upon different parameters like skills, team, companyID, name those are the dependencies for an employee to enter into the company and to get a project.
+
+Class Person{
+  String name;
+  int phoneNo;
+  Skills s = new Skills();
+  Team t;
+  ArrayList<Integer> impNo = new ArrayList<Integer>;
+}
+
+
+Spring Dependency Injection, Autowire:-
+In Java, we can create our own objects manually using the new keyword, but in spring dependency injection can automatically create an object whenever we want by specifying @Component in the class.
+By using @Component we are telling spring that we want an object of that particular class, then spring creates a container having the class init.
+Just like JVM spring provides us with a spring container. This container contains objects those are called spring bean.
+In spring we have two different types of scopes, which are used in web applications.
+
+1. Singleton Scope.
+Only one instance will be created for a single bean definition per Spring IoC container and the same object will be shared for each request made for that bean.
+Without creating an object for a class spring creates automatically a new object. Without using the getBean() method data will run.
+
+2. Prototype Scope.
+If the scope is declared prototype, then the spring IOC container will create a new instance of that bean every time a request is made for that specific bean.
+
+By mentioning it everything is done manually i.e without creating the object getBean() output will not get.
+
+Example 1:-
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+
+@SpringBootApplication
+public class FirstProjectApplication {
+
+	public static void main(String[] args) {
+		ConfigurableApplicationContext context = SpringApplication.run(FirstProjectApplication.class, args);
+		
+		Student s = context.getBean(Student.class);
+		s.show();
+		
+		Student s1 = context.getBean(Student.class);
+		s1.show();
+	}
+}
+
+Create a new class name as Student.java
+package com.example.demo;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+//Without this, spring cannot create objects automatically.
+@Component
+//Mentioning this class is a prototype using @Scope()
+@Scope(value="prototype")
+public class Student {
+	private int Sid;
+	private String SName;
+	private String tech;
+	
+	
+	
+	public Student() {
+		super();
+		System.out.println("Object Created...");
+	}
+	public int getSid() {
+		return Sid;
+	}
+	public void setSid(int sid) {
+		Sid = sid;
+	}
+	public String getSName() {
+		return SName;
+	}
+	public void setSName(String sName) {
+		SName = sName;
+	}
+	public String getTech() {
+		return tech;
+	}
+	public void setTech(String tech) {
+		this.tech = tech;
+	}
+	
+	public void show() {
+		System.out.println("In Show Method...");
+	}
+}
+
+
+To understand the Autowire concept let's create a new class named Laptop.java
+Laptop.java
+package com.example.demo;
+
+import org.springframework.stereotype.Component;
+//Creating a name for the class in spring container
+@Component("AkhLappy")
+public class Laptop {
+	 private int LId;
+	 private String LBrand;
+	public int getLId() {
+		return LId;
+	}
+	public void setLId(int lId) {
+		LId = lId;
+	}
+	public String getLBrand() {
+		return LBrand;
+	}
+	public void setLBrand(String lBrand) {
+		LBrand = lBrand;
+	}
+	
+	public void compile() {
+		System.out.println("Compiling...");
+	}
+	 
+}
+
+Student.java
+package com.example.demo;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Student {
+	private int Sid;
+	private String SName;
+	private String tech;
+//	By using @Autowired it will automatically search for the object(Laptop) in spring container
+	@Autowired
+//	Search By name
+	@Qualifier("AkhLappy")
+	private Laptop lap1;
+	
+	
+	public Laptop getLap1() {
+		return lap1;
+	}
+	public void setLap1(Laptop lap1) {
+		this.lap1 = lap1;
+	}
+	public Student() {
+		super();
+		System.out.println("Object Created...");
+	}
+	public int getSid() {
+		return Sid;
+	}
+	public void setSid(int sid) {
+		Sid = sid;
+	}
+	public String getSName() {
+		return SName;
+	}
+	public void setSName(String sName) {
+		SName = sName;
+	}
+	public String getTech() {
+		return tech;
+	}
+	public void setTech(String tech) {
+		this.tech = tech;
+	}
+	
+	public void show() {
+		System.out.println("In Show Method...");
+		lap1.compile();
+	}
+
+}
+
+Note:- The only difference between @Autowired and @Qualifier("") is that Autoawired searched by object whereas Qualifier searched by name.
+
+Explanation of Autowire:-
+In the above code from Student.java and Laptop.java where those two are linked, i. e Student class depends upon the Laptop class. When we implement @Component in the Laptop class memory is created in the spring container but the code will not run because the instance of the laptop class is created in the Student class we have to tell spring to navigate to the Laptop class by using @Autowired.
+
+Web App Using Spring Boot:-
+1. Create a new project and goto src/main folder and create a jsp folder.
+2. Before that we have to add a dependency in the pom.html file copied from the Maven Repository by searching "tomcat jasper".
+3. Create new class named HomeController.java
+package com.firstapp.demo;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class HomeController {
+	@RequestMapping("home")
+	public String home() {
+		System.out.println("Hello");
+		return "home.jsp";
+	}
+}
+
+@RequestMapping("home")  will navigate to the home.jsp file
+
+
+Accepting Client Data:-
+Sending data from the client side to the server side using HttpServletRequest. To get the data into the view we can use HttpSession and setAttribute.
+
+Example:-
+package com.firstapp.demo;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
+@Controller
+public class HomeController {
+	@RequestMapping("home")
+	public String show(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		String name = req.getParameter("name");
+		System.out.println("Hello" + name);
+		session.setAttribute("name", name);
+		return "home";
+	}
+}
+
+In home.jsp file
+<body>
+	<h1>Hello ${name}</h1>
+</body>
+
+Web App Using Spring Boot Model and View:-
+This is a shortcut way for the above example by this we can pass route params as method arguments.
+
+Example:-
+package com.firstapp.demo;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
+@Controller
+public class HomeController {
+	@RequestMapping("home")
+	public String show(String name, HttpSession session) {
+		System.out.println("Hello" + name);
+		session.setAttribute("name", name);
+		return "home";
+	}
+}
+
+Suppose if we enter localhost:8080/home?name=John 
+Output:- Hello John
+Suppose if we enter  localhost:8080/home?myName=John 
+Output Hello
+
+Because we pass argument as name 	
+--> public String show(String name, HttpSession session) {   }
+
+Set @RequestParam("name")
+
+Example:-
+package com.firstapp.demo;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
+@Controller
+public class HomeController {
+	@RequestMapping("home")
+	public String show(@RequestParam("name") String myName, HttpSession session) {
+		System.out.println("Hello" + myName);
+		session.setAttribute("name", myName);
+		return "home";
+	}
+}
+
+Using ModelAndView in SpringBoot framework
+Example:-
+package com.firstapp.demo;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
+@Controller
+public class HomeController {
+	@RequestMapping("home")
+	public ModelAndView show(@RequestParam("name") String myName) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("name", myName);
+		
+		mv.setViewName("home");
+		return mv;
+	}
+}
+
+
+Web App Using Spring Boot Model Object:-
+Create a new class named Employee.java
+
+Example:-
+Employee.java file
+package com.firstapp.demo;
+
+public class Employee {
+	private int empId;
+	private String empName;
+	private String lang;
+	public int getEmpId() {
+		return empId;
+	}
+	public void setEmpId(int empId) {
+		this.empId = empId;
+	}
+	public String getEmpName() {
+		return empName;
+	}
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
+	public String getLang() {
+		return lang;
+	}
+	public void setLang(String lang) {
+		this.lang = lang;
+	}
+	
+	
+}
+
+
+HomeController.java file
+package com.firstapp.demo;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
+@Controller
+public class HomeController {
+	@RequestMapping("home")
+	public ModelAndView show(Employee emp) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("obj",emp);
+		
+		mv.setViewName("home");
+		return mv;
+	}
+}
+
+In show method creates an instance for Employee file and adding object using ModelAndView.
+
+In JSP file
+	<h1>Hello ${obj.empId}, ${obj.empName}, ${obj.lang}</h1>
+
+
+JPA | MVC | H2 Example:-
+Create a new project by assigning a dependencies like
+1. Spring Data JPA
+2. H2 Database
+3. Spring Web
+Create home.jsp and showEmp.jsp files to get view
+Create EmpController.java (Class), and interface named EmpRemo.java file.
+Create SQL file named data.sql
+
+In home.jsp file
+<body>
+	<form action="addEmp">
+	    <input type="text" name="eid"><br>
+	    <input type="text" name="ename"><br>
+	    <input type="text" name="tech"><br>
+	    <input type="submit"><br>
+	</form>
+	
+	<form action="getEmp">
+	    <input type="text" name="eid"><br>
+	    <input type="submit"><br>
+	</form>
+</body>
+
+--> In DOM elements we given names eid, ename and tech from Employee.java file.
+
+In Employee.java file
+package com.firstapp.demo.model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
+public class Employee {
+	@Id
+	public int eid;
+	private String ename;
+	private String tech;
+	
+	public String getTech() {
+		return tech;
+	}
+	public void setTech(String tech) {
+		this.tech = tech;
+	}
+	public int getEid() {
+		return eid;
+	}
+	public void setEid(int eid) {
+		this.eid = eid;
+	}
+	public String getEname() {
+		return ename;
+	}
+	public void setEname(String ename) {
+		this.ename = ename;
+	}
+	@Override
+	public String toString() {
+		return "Employee [eid=" + eid + ", ename=" + ename + ", tech=" + tech + "]";
+	}
+}
+
+--> In employee.java file declare @Entity and @Id to add the data from the client/Input using SQL into database.
+
+From EmpRepo.java (Interface)
+package com.firstapp.demo.dao;
+
+import java.util.List;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.firstapp.demo.model.Employee;
+
+public interface EmpRepo extends CrudRepository<Employee, Integer> {
+	
+	List<Employee> findByTech(String tech);
+
+}
+
+--> We can create our own methods in the interface i.e EmpRepo to get the data, In the above, we created the method findByTech().
+--> Here we have to extends a CRUDRepository which have the features of CRUD operations like get(), put(), delete() etc...
+
+
+From EmpController.java file
+package com.firstapp.demo.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.firstapp.demo.dao.EmpRepo;
+import com.firstapp.demo.model.Employee;
+
+@Controller
+public class EmpController {
+	
+	@Autowired
+	EmpRepo repo;
+	
+	@RequestMapping("/")
+	public String show() {
+		return "home.jsp";
+	}
+	
+	@RequestMapping("/addEmp")
+	public String addEmp(Employee emp) {
+		repo.save(emp);
+		return "home.jsp";
+	}
+	
+	@RequestMapping("/getEmp")
+	public ModelAndView getEmp(@RequestParam int eid) {
+		ModelAndView mv = new ModelAndView("showEmp.jsp");
+		Employee emp = repo.findById(eid).orElse(new Employee());
+		
+		System.out.print(repo.findByTech("Java"));
+		
+		
+		mv.addObject("obj",emp);
+		return mv;
+	}
+}
+
+--> In empController file we make a post and get request to add and get the data from the database.
+
+In data.sql
+insert into employee values(101,'Akhil','Java');
+insert into employee values(102,'Kandy','ReactJS');
+insert into employee values(103,'Ajay','Spring');
+insert into employee values(104,'Vikki','Salesforce');
+
+--> We added data like eid, ename, tech of the employee.
+
+In application.properties
+spring.h2.console.enabled=true
+spring.sql.init.platform=h2
+spring.datasource.url=jdbc:h2:mem:akhil
+spring.jpa.defer-datasource-initialization=true
+
+In showEmp.jsp file
+<body>
+
+	<h1>${obj}</h1>
+
+</body>
+
+-->This is followed by EmpController.java file using ModelAndView.
+
+
+
+
+========================================================================================================================
+Since this tutorial is beeing a bit out of date due to the new Spring framework beeing released there is one step/line of code that needs to be added in application.properties at 1:27:00. That is "spring.jpa.defer-datasource-initialization=true" - since my newer spring framework was throwing out an exception "table ALIEN not found" and this new line in app properties managed to create database on initialization with Entity annotation. 
+
+Full exception:
+Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Invocation of init method failed; nested exception is org.springframework.jdbc.datasource.init.ScriptStatementFailedException: Failed to execute SQL script statement #1 of URL [file:/C:/JavaProjects/Servlet2/bootjpa/target/classes/data.sql]: INSERT INTO ALIEN VALUES ('101', 'TIN'); nested exception is org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ALIEN" not found; SQL statement:
+
+Usefull documentation where I found an answer: https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto.data-initialization
+
+Anyway sir, thank you very much for this excellent content!
+==============================================================================================================================
+
+REST API CAlls Example:-
+By using above same code making REST API calls
+package com.firstapp.demo.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.firstapp.demo.dao.EmpRepo;
+import com.firstapp.demo.model.Employee;
+
+@Controller
+public class EmpController {
+	
+	@Autowired
+	EmpRepo repo;
+	
+	@RequestMapping("/")
+	public String show() {
+		return "home.jsp";
+	}
+	
+	@RequestMapping("/addEmp")
+	public String addEmp(Employee emp) {
+		repo.save(emp);
+		return "home.jsp";
+	}
+	
+
+	//When we call this all entities will display	
+	@RequestMapping("/employee")
+	@ResponseBody
+	public String getEmp() {
+		
+		return repo.findAll().toString();
+		
+	}
+	
+	//Search by empId
+	@RequestMapping("/employee/{empId}")
+	@ResponseBody
+	public String getEmployees(@PathVariable("empId") int eid) {
+		
+		return repo.findById(eid).toString();
+		
+	}
+}
+
+--> From the above code the employee data will print in java object format we have to convert into JSON format by changing CRUDRepository to JpaRepository.
+--> JpaRepository is the package which extends the interface which has same features as CRUDRepository and some extra features also like it converts data into json format.
+
+Using JpaRpository to Convert data into JSON Format:-
+In EmpRepo.java file 
+package com.firstapp.demo.dao;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.firstapp.demo.model.Employee;
+
+public interface EmpRepo extends JpaRepository<Employee, Integer> {
+
+}
+
+--> Here we extends with JpaRepository which have the features to convert data.
+In EmpController.java file
+@RequestMapping("/employee")
+@ResponseBody
+public List<Employee> getEmp() {
+	
+	return repo.findAll();
+	
+}
+
+@RequestMapping("/employee/{empId}")
+@ResponseBody
+public Optional<Employee> getEmployees(@PathVariable("empId") int eid) {
+	
+	return repo.findById(eid);
+	
+}
+
+--> Change the return types to Optional<Employee> and List<Employee> which will return the data in JSON Format.
+
+
+Content Negotiation:-
+Content negotiation is nothing but if the client ask the spring that provide data particularly in JSON or XML etc.. then the spring provide the data in that format only. Content Negotiation helps the Consumer and Provider interact about the data exchange format.
+
+To do work in spring app we have to go to MAVEN repository in google and search for 'jackson dataformat xml' and copy the dependency then paste it in the pom.xml file.
+
+For @RequestingMapping() we have two attributes path="" and produces=""
+Example:-
+@RequestMapping(path="/employee",produces={"application/xml"})
+@ResponseBody
+public List<Employee> getEmp() {
+	
+	return repo.findAll();
+	
+}
+
+
+REST Postman Example:-
+Instead of using @Controller, we have to use @RestController which is used to make REST api calls like a post, get, update, and delete.
+In Mapping, there are types like 
+@GetMapping - For making get requests.
+@PostMapping - For making a post request.
+@DeleteMapping - Deleting data.
+@PutMapping - For updating the data.
+
+Example:-
+In EmpController.java file
+package com.firstapp.demo.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.firstapp.demo.dao.EmpRepo;
+import com.firstapp.demo.model.Employee;
+
+@RestController
+public class EmpController {
+	
+	@Autowired
+	EmpRepo repo;
+	
+	@RequestMapping("/")
+	public String show() {
+		return "home.jsp";
+	}
+	
+	
+//	Making POST Request for url /employee
+	@PostMapping("/employee")
+	public Employee addEmp(Employee emp) {
+		repo.save(emp);
+		return emp;
+	}
+		
+	
+//	Making GET request for url /employee
+	@GetMapping(path="/employee")
+	public List<Employee> getEmp() {
+		
+		return repo.findAll();
+		
+	}
+	
+	@GetMapping("/employee/{empId}")
+	public Optional<Employee> getEmployees(@PathVariable("empId") int eid) {
+		
+		return repo.findById(eid);
+		
+	}
+
+//	Making Delete request for selected empID	
+	@DeleteMapping(path="/employee/{eid}")
+	public String deleteEmployee(@PathVariable int eid) {
+		@SuppressWarnings("deprecation")
+		Employee e = repo.getOne(eid);
+		repo.delete(e);
+		return "Deleted Successfully";
+	}
+
+
+//	Making update/save request
+	@PutMapping(path="/employee",consumes= {"application/json"})
+	public Employee UpdateEmp(@RequestBody Employee emp) {
+		repo.save(emp);
+		return emp;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
