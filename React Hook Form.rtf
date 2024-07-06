@@ -1,0 +1,135 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fnil\fcharset0 Menlo-Regular;
+\f3\fnil\fcharset0 Menlo-Bold;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;\red193\green193\blue193;
+\red70\green137\blue204;\red66\green179\blue255;\red202\green202\blue202;\red212\green214\blue154;\red194\green126\blue101;
+\red109\green109\blue109;\red140\green211\blue254;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c100000\c100000\c100000;\cssrgb\c80000\c80000\c80000;
+\cssrgb\c33725\c61176\c83922;\cssrgb\c30980\c75686\c100000;\cssrgb\c83137\c83137\c83137;\cssrgb\c86275\c86275\c66667;\cssrgb\c80784\c56863\c47059;
+\cssrgb\c50196\c50196\c50196;\cssrgb\c61176\c86275\c99608;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 React Hook Form:-\
+
+\f1\b\fs30 1. useForm():-
+\fs26 \
+
+\f0\b0 This hook is the primary tool in react hook form. Which returns FORM.\
+
+\f1\b Managing Form State \
+
+\f0\b0 To manage form state we need to check\
+1. Current value of the every field in the form\
+2. Whether a field has beed interacted with user or not\
+3. Whether a fields value has changed\
+4. Whether the form is invalid\
+5. whether a field contains errors and etc.\
+\
+
+\f1\b Note:-
+\f0\b0  We can represent form state as 
+\f1\b Key: Value pairs\
+\
+Register:-\
+
+\f0\b0 1. 
+\f1\b useForm() 
+\f0\b0 provides a 
+\f1\b register
+\f0\b0  method to manage form state.\
+2. Register method will returns four methods they are\
+	1. Name\
+	2. Ref\
+	3. onChange\
+	4. onBlur\
+\
+
+\f1\b\fs28 Example 1:-\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4   \strokec5 const\strokec4  \strokec6 form\strokec4  \strokec7 =\strokec4  \strokec8 useForm\strokec4 ();\
+\
+  \strokec5 const\strokec4  \{ \strokec8 register\strokec4  \} \strokec7 =\strokec4  \strokec6 form\strokec4 ;\
+  \strokec5 const\strokec4  \{ 
+\f3\b \strokec6 name\strokec4 , \strokec8 ref\strokec4 , \strokec8 onChange\strokec4 , \strokec8 onBlur
+\f2\b0 \strokec4  \} \strokec7 =\strokec4  \strokec8 register\strokec4 (\strokec9 "email"\strokec4 );\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0\fs30 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec10 <\strokec5 input\strokec4  \strokec11 type\strokec7 =\strokec9 "text"\strokec4 \
+       \strokec11 placeholder\strokec7 =\strokec9 "Enter Email"\strokec4 \
+       \strokec11 id\strokec7 =\strokec9 "email"\
+\pard\pardeftab720\partightenfactor0
+
+\fs32 \cf4 \strokec4       
+\f3\b  
+\fs30 \cf2 \strokec11 name\strokec7 =\strokec5 \{\strokec6 name\strokec5 \}\strokec4 \
+       \strokec11 ref\strokec7 =\strokec5 \{\strokec8 ref\strokec5 \}\strokec4 \
+       \strokec11 onChange\strokec7 =\strokec5 \{\strokec11 e\strokec7  \strokec5 =>\strokec7  \{\strokec4 \
+\strokec7           \strokec8 onChange\strokec7 (\strokec11 e\strokec7 );\strokec4 \
+\strokec7         \}\strokec5 \}\strokec4 \
+       \strokec11 onBlur\strokec7 =\strokec5 \{\strokec11 e\strokec7  \strokec5 =>\strokec7  \{\strokec4 \
+\strokec7           \strokec8 onBlur\strokec7 (\strokec11 e\strokec7 );\strokec4 \
+\strokec7         \}\strokec5 \}
+\f2\b0 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+\strokec10 />
+\fs32 \strokec4 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b\fs28 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+Example 2:- 
+\f0\b0 Short form for the above example\
+\pard\pardeftab720\partightenfactor0
+
+\f2 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4   \strokec5 const\strokec4  \strokec6 form\strokec4  \strokec7 =\strokec4  \strokec8 useForm\strokec4 ();\
+  \strokec5 const\strokec4  \{ \strokec8 register\strokec4  \} \strokec7 =\strokec4  \strokec6 form\strokec4 ;\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b\fs24 \cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0\fs28 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4   \strokec10 <\strokec5 input\strokec4 \
+      \strokec11 type\strokec7 =\strokec9 "text"\strokec4 \
+      \strokec11 placeholder\strokec7 =\strokec9 "Enter Email"\strokec4 \
+      \strokec11 id\strokec7 =\strokec9 "email"\strokec4 \
+      
+\f3\b \strokec5 \{\strokec7 ...\strokec8 register\strokec7 (\strokec9 "email"\strokec7 )\strokec5 \}\strokec4 \
+
+\f2\b0 \strokec10   />\strokec4 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+
+\f1\b \
+
+\f0\b0 \
+}

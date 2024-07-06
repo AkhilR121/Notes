@@ -1,0 +1,92 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue-Bold;\f1\fnil\fcharset0 HelveticaNeue;\f2\fnil\fcharset0 LucidaGrande;
+}
+{\colortbl;\red255\green255\blue255;\red220\green161\blue13;}
+{\*\expandedcolortbl;;\cssrgb\c89412\c68627\c3922;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{circle\}}{\leveltext\leveltemplateid1\'01\uc0\u9702 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{circle\}}{\leveltext\leveltemplateid101\'01\uc0\u9702 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{circle\}}{\leveltext\leveltemplateid201\'01\uc0\u9702 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid3}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww28300\viewh14700\viewkind0
+\deftab560
+\pard\pardeftab560\partightenfactor0
+
+\f0\b\fs40 \cf0 GeoLocation Documentation:-\
+\pard\pardeftab560\sa40\partightenfactor0
+
+\fs32 \cf0 Installation and Introduction:-\
+\pard\pardeftab560\pardirnatural\partightenfactor0
+\ls1\ilvl0
+\f1\b0\fs26 \cf0 {\listtext	
+\f2 \uc0\u9702 
+\f1 	}Installed ArcGIS as dependency in React App 
+\f0\b version: 4.28.10 
+\f1\b0 using yarn/npm \
+{\listtext	
+\f2 \uc0\u9702 
+\f1 	}From ArcGIS Developer Documentation by adding JavaScript JDK {\field{\*\fldinst{HYPERLINK "https://developers.arcgis.com/javascript/latest/"}}{\fldrslt 
+\f0\b \cf2 https://developers.arcgis.com/javascript/latest/}}
+\f0\b  
+\f1\b0 implementation was done using React.\
+{\listtext	
+\f2 \uc0\u9702 
+\f1 	}Created a static view for GeoLocation screen which contains left side panel and on right side mapView.\
+\pard\tx566\pardeftab560\pardirnatural\partightenfactor0
+\cf0 \
+\pard\pardeftab560\slleading20\pardirnatural\partightenfactor0
+\cf0 {{\NeXTGraphic Screenshot 2023-12-12 at 1.27.20 PM.png \width28800 \height18000 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\
+\pard\pardeftab560\sa40\partightenfactor0
+
+\f0\b\fs32 \cf0 Features:-\
+\pard\pardeftab560\pardirnatural\partightenfactor0
+\ls2\ilvl0
+\f1\b0\fs26 \cf0 {\listtext	
+\f2 \uc0\u9702 
+\f1 	}On left panel their need to display Top Five tolls for the day, Resolved Transactions, Image Rejects, and overall transactions done. Also, need to display tickers by comparing previous day count if it less then red ticker will gets display else green ticker will get display.\
+{\listtext	
+\f2 \uc0\u9702 
+\f1 	}In MapView there need to display HCTRA toll locations by click/onHover actions on particular toll location pop need to generate which contains a transactions data for the day.\
+{\listtext	
+\f2 \uc0\u9702 
+\f1 	}Need to implement Enable Slideshow which is used to slide automatically from on toll location to another toll location with some duration.\
+{\listtext	
+\f2 \uc0\u9702 
+\f1 	}There we have a map layer selection between topographic and satellite view.\
+{\listtext	
+\f2 \uc0\u9702 
+\f1 	}Need to display the road line which is connected to each toll locations.\
+\pard\pardeftab560\slleading20\pardirnatural\partightenfactor0
+\cf0 \
+\pard\pardeftab560\sa40\partightenfactor0
+
+\f0\b\fs32 \cf0 Implementation:-\
+\pard\pardeftab560\pardirnatural\partightenfactor0
+\ls3\ilvl0
+\f1\b0\fs26 \cf0 {\listtext	
+\f2 \uc0\u9702 
+\f1 	}By importing javascript JDK modules: 
+\f0\b import Map from "@arcgis/core/Map\'94
+\f1\b0 , implemented a type of basemap: \'93topo\'94 or \'93satellite\'94 views.\
+{\listtext	
+\f2 \uc0\u9702 
+\f1 	}Using i
+\f0\b mport MapView from "@arcgis/core/views/MapView"; 
+\f1\b0 module display the map by taking reference of HTMLElement using useRef() hook, zoom, centre: making Houston city as center point when the user navigates to geoloc 		screen.\
+{\listtext	
+\f2 \uc0\u9702 
+\f1 	}By using GraphicsLayer() and Point
+\f0\b  import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer"; import Point from "@arcgis/core/geometry/Point"
+\f1\b0 ; and Graphics implemented a toll locations by hardcoding the toll 				locations latitude and longitude.\
+{\listtext	
+\f2 \uc0\u9702 
+\f1 	}Using 
+\f0\b view.when()
+\f1\b0  method when the user click on the respective toll location popup will get displayed with transactional data for the day.\
+{\listtext	
+\f2 \uc0\u9702 
+\f1 	}Using import Polyline from "@arcgis/core/geometry/Polyline\'94; implemented a road lines which connects to tollgate locations\
+{\listtext	
+\f2 \uc0\u9702 
+\f1 	}BasemapToggle is used to toggle between layers like topgraphic and satellite views.\
+}

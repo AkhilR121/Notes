@@ -26,8 +26,8 @@ Data Types in TypeScript:-
 9. never
 
 Class in TypeScript:-
--> InTS class we have a constructor.
--> In java, we have parameterized and default constructors in one class whereas in JS and TS we should contain only one constructor either parameterized or default constructor, if we try to implement both it will show an error.
+-> In TS class we have a constructor.
+-> In java, we have parameterised and default constructors in one class whereas in JS and TS we should contain only one constructor either parameterized or default constructor, if we try to implement both it will show an error.
 -> Constructors are responsible for creating an instance of the class.
 -> In classes, we have public, private (#), protected.
 
@@ -64,7 +64,6 @@ let userDetails : User = {' ', ' ', ' '}
 -> If we miss any property in the above line it will show an error for that we have to use the operator "?". Indicating with ? means that we are saying it is an optional.
 
 
-
 Modules:-
 Every angular app consists of at least one module known as the root module or app module.
 
@@ -77,7 +76,7 @@ In this we have
 To generate a new component
 	--> npm g c component_name
 		where g - generate
-  			 c - component
+  		      c - component
 
 
 Getting Started:-
@@ -99,7 +98,7 @@ Welcome {{name}}
 In ts file
 name = 'Akhil'
 
-Output?HTML view:-
+Output HTML view:-
 Welcome Akhil
 
 Using Interpolation:
@@ -162,7 +161,7 @@ Property binding is the same as interpolation. Binding data from class to templa
 -->Interpolation allows only string values but not boolean values.
 -->Property binding allows both string and boolean values.
 
-In HTML 
+In HTML
 <input [id]="myId" value="Angular">
 
 In TS file
@@ -489,7 +488,7 @@ This is Child Compt, I am Akhil
 
 
 2. Sending Data from Child to Parent Component:-
-It is in a different way because in parent-to-child data transfer we have a child components selector (<app-test></app-test>) but in data transfer from child to parent we didn't have a parent selector in child.html
+It is in a different way because in parent-to-child data transfer, we have a child components selector (<app-test></app-test>) but in data transfer from child to parent we didn't have a parent selector in child.html
 By using the events we can send data from parent to child.
 
 In test.ts file
@@ -646,7 +645,7 @@ Services:-
 2. To implement application logic.
 3. External Interactions like connecting to DataBases.
 >Services are of three types
-1. Class based providers.
+1. Class-based providers.
 2. Value Providers
 3. Factory
 

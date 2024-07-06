@@ -1,0 +1,142 @@
+Introduction:-
+The <motion /> component
+The core of Motion is the motion component. Think of it as a plain HTML or SVG element, supercharged with animation capabilities.
+
+Gestures
+<motion /> extends React's event system with powerful gesture recognisers. It supports hover, tap, pan and drag.
+
+Variants:-
+Variants can be used to animate entire sub-trees of components with a single animate prop. Options like when and staggerChildren can be used to declaratively orchestrate these animations.
+
+Scroll-triggered animations
+Elements can animate as they enter and leave the viewport with the handy whileInView prop.
+
+Server-side rendering
+The animated state of a component will be rendered server-side to prevent flashes of re-styled content after your JavaScript loads.
+
+MotionValues
+MotionValues are used to track the state and velocity of animating values, outside of React's render lifecycle.
+
+They're created automatically and used internally by motion components. But they can also be created manually and chained together to create performant, declarative effects.
+
+Layout animations
+Framer Motion is capable of animating changes in layout using performant transforms.
+
+Manual animations
+The useAnimate hook can be used to manually trigger animations in effects and event handlers. It can also be used to orchestrate more complex animations.
+
+Animations in Framer Motion:-
+Overview:-
+When any value in animate changes, the component will automatically animate to the updated target.
+
+x: x - axis
+y: y - axis
+scale - zoom in-out
+rotate - element rotation
+
+Example:-
+<motion.div animate={{ x: 100 }} />
+
+Transitions:-
+By default, Motion will create an appropriate animation for a snappy transition based on the types of value being animated. For instance, physical properties like x or scale will be animated via a spring simulation. Whereas values like opacity or color will be animated with a tween.
+
+Enter Animations:-
+When a motion component is first created, it'll automatically animate to the values in animate if they're different from those defined in style or initial. You can set the initial prop to false to disable enter animations.
+
+Example:-
+<motion.div animate={{ x : 100 }} initial={{ false }}/>
+By making initial={{false}} the animation gets disable.
+
+Exit Animations:-
+When user remove a component from the tree, it is removes instantly without any animation. By using AnimatePresence component we can perform exit animation. Practically more understandable.
+
+Example:-
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    />
+
+Keyframes:-
+Values in animate can also be set as a series of keyframes. This will animate through each value in sequence.
+
+Example:-
+<motion.div
+  animate={{ x: [0, 100, 0] }}
+/>
+
+Where the component scroll over from 0 to 100, 100 to 0 continously.
+
+Example 2:-
+<motion.div
+  animate={{ x: [null, 100, 0] }}
+/>
+
+This way, if a keyframes animation starts while the value is currently animating, the transition will be more natural. It also reduces duplication in our code.
+
+Gesture Animations:-
+Framer Motion has shortcuts for animating to a set of values when gestures start, like hover, tap, drag, focus and inView.
+1. whileHover
+2. whileTap
+3. whileInView
+4. whileDrag
+5. whileFocus
+
+Variants:-
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

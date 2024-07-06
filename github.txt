@@ -1,0 +1,205 @@
+Commands:-
+Configuring git:-
+Configuring is nothing but an telling who we are to the git using user.name and user.email
+$ git config --global user.name "Akhil V"
+
+$ git config --global user.email akhilvinnakota1998@gmail.com
+
+$ git config --global core.editor "code --wait"
+
+$ git config --global -e -> To open VSCode Editor
+
+
+mkdir Projects  -> Creates new folder named as Projects
+cd Project  -> Navigates into Projects folder.
+git init  -> Initialized empty Git repository in C:/Users/Dell/Documents/Coding/git/Moon/.git/
+	By default, it creates a subdirectory called .git\. 	Subdirectory .git is hidden we are unable to touch it.
+
+ls  -a or dir -a-> To check .git install or not after git init.
+
+open .git -> Used in Linux to open .git folder.
+start .git -> Used in Windows to open .git folder.
+git ls-files -> To check files in staging area.
+
+Note:- If we remove git subdirectory .git we lose the info of our project.
+
+Git WorkFlow:
+1. Staging Files:-
+Step 1: Creating a file with txt using echo
+echo hello > file1.txt
+echo hello > file2.txt
+
+Step 2: Check status of files
+git status
+
+It gives 
+No commits yet
+Untracked files:
+file1.txt
+file2.txt
+
+Because these two files are not in the staging area i.e not recognized by git.
+
+Step 3:(Staging files) Adding two files using git command
+To add a file
+git add file1.txt
+
+or
+
+To add multiple files by giving space
+git add file1.txt file2.txt
+
+or
+
+Using patterns i.e selects all the files having ext .txt
+git add *.txt
+
+or
+
+Selects every file in the directory
+git .
+
+Step 4: Again check the status after staging
+git status
+
+Stap 5: Modifying file1.txt file and run status
+echo world >> file1.txt
+
+git status
+We get
+modified file1.txt is out of staging area so that we have add again file1.txt after modifying.
+
+git add file1.txt
+
+Committing Changes:-
+We have two files in the staging area file1.txt and file2.txt which are ready to store in the repo permanently.
+
+$ git commit
+[master (root-commit) 0471958] Initial Commit
+ 2 files changed, 3 insertions(+)
+ create mode 100644 file1.txt
+ create mode 100644 file2.txt
+
+When we type git commit automatically opens the vscode editor and modifies the text. 
+3insertions means in file1 hello and world in 2 lines.
+			in file2 only hello.
+			total 3 insertions.
+
+
+Shortcut:-
+After modifying any file we can able to skip staging and directly commits to repo by using command
+
+$ git commit -am "Description"
+
+-am means a -> all and m -> modified files
+
+Removing Files:-
+Remove file2
+$ rm file2.txt
+
+Check the status
+git status
+On branch master
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    file2.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+Check the files in staging area after removing file2
+$ git ls-files
+file1.txt
+file2.txt
+
+Even after removing file2 in out workspace but in staging are both the files are required.
+
+Add file2 delete operation in staging
+$ git add file2.txt
+
+Now check files in staging area
+$ git ls-files
+file1.txt
+
+Finally status is green
+$ git commit -m "Remove unused code."
+[master 541936d] Remove unused code.
+ 1 file changed, 1 deletion(-)
+ delete mode 100644 file2.txt
+
+
+Renaming or Moving Files:-
+Rename file1.txt as main.js 
+mv file1.txt main.js
+
+By checking status we got red beacuse we cannot add this changes to staging area
+file add file1.txt
+git add main.js
+
+git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        renamed:    file1.txt -> main.js
+
+Shortcut:
+By using the below command
+$ git mv main.js file1.js
+We are changing the file name main.js to file1.js and it automatically added to the staging area we cannot add it separately.
+
+$ git status 
+Status as green
+
+Finally, commit changes
+$ git commit -m "Refactor code."
+[master e8815dd] Refactor code.
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename file1.txt => main.js (100%)
+
+
+Ignoring Files:-
+
+Pushing:-
+git push -u origin master=
+
+
+Rebase from main to branch:-
+1. Navigate to the src folder
+2. git status - nothing to commit
+3. git checkout main
+4. git pull
+5. git checkout Akhil
+6. git rebase main
+7. git checkout main
+8. git rebase Akhil
+9. git checkout Akhil
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

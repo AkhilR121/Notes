@@ -1,4 +1,4 @@
-JavaScript Tutorial
+O=JavaScript Tutorial
 
 Variables in JavaScript:-
 Which is used to store the data the same as in other languages.

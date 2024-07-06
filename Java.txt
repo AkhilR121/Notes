@@ -525,7 +525,7 @@ Note:-
 >After implementing interface by the class if we not declare the method which is 
 declared in the interface then it will shows error.
 >In class java will not support multiple inheritance but in interface java will support
- multiple inheritance
+ multiple inheritance.
 
 Example 1:-
 interface car {
@@ -643,12 +643,261 @@ We can also create our exceotions by using 'throw new'.
 Multi Threading in Java:-
 >It is nothing but the multi tasking.
 
+Collections Framework in Java:-
+Array List:-
+Examples:-
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class first {
+    public static void main(String[] args) {
+        // List with generics i.e datatype
+        ArrayList<String> list1 = new ArrayList<String>();
+
+        // List without generics
+        ArrayList list2 = new ArrayList();
+
+        // To add elements in the list 
+        list1.add("Akhil");
+        list1.add("Ajay");
+        list1.add("Vikki");
+        list1.add("John");
+        list1.add("Rajesh");
+        list1.add("Kandy");
+
+        list2.add("Ramesh");
+        list2.add(9);
+        list2.add(9.5);
+        list2.add("a");
+
+        System.out.println(list1);
+        System.out.println(list2);
+
+        // To get the elements from the list
+        String name = list1.get(3);
+        Object obj = list2.get(3);
+        System.out.println("Name from List1: " +name);
+        System.out.println("From List2: " +obj);
+
+        // To update an elements to the list
+        // Updating the name Vikki --> Vikrant
+        list1.set(2, "Vikrant");
+        System.out.println("Updated list1: "+list1);
+
+        // To remove item from list
+        list1.remove(4);
+        System.out.println("List 1 After removing index value 4: "+list1);
+
+        // To remove all the data/Items from list
+        // list1.clear()
+
+        // Using if Conditions
+        if(list1.contains("Akhil")){
+            System.out.println("Akhil is present");
+        } else{
+            System.out.println("Not Found");
+        }
+
+        System.out.println("====================Iterations=================");
+        // To dispaly all the elements using forEach loop
+        System.out.println("Using ForEach Loop");
+        for(String names : list1) {
+            System.out.println(names);
+        }
+        // Using For Loop
+        System.out.println("Using For Loop");
+        for(int i = 0; i<list1.size(); i++){
+            System.out.println(list1.get(i));
+        }
+        System.out.println("======================");
 
 
 
+        System.out.println("=======Using Iterator========");
+        Iterator<String> itr = list1.iterator();
+        // It Gives the 1st and 2nd index values
+        System.out.println(itr.next());
+        System.out.println(itr.next());
+        // It gives 3rd index values
+        System.out.println(itr.next());
+
+        System.out.println("Using While loop and iterator to print all data");
+        while(itr.hasNext()){
+            String str = itr.next();
+            System.out.println(str);
+            if(str.equals("Kandy")){
+                itr.remove();
+            }
+        }
+        // In while loop we have removed a Name: Kandy
+        System.out.println("List1 after iteration: "+list1);
+
+    }
+}
+
+
+Queue Interface in Java:-
+import java.util.PriorityQueue;
+
+import javax.management.Query;
+
+public class first {
+    public static void main(String[] args) {
+    
+    PriorityQueue<Integer> queue = new PriorityQueue<Integer>();
+    
+    for(int i=10;i>0;i--){
+        queue.add(i);
+    }
+    System.out.println(queue);
+    System.out.println("Size: "+queue.size());
+    System.out.println(queue.peek());
+
+    // Removes head of the queue
+    queue.poll();
+    System.out.println("Queue Size: "+queue.size());
+    System.out.println(queue.peek());
+    }
+}
+
+
+Sets in Java:-
+
+
+Reverse a array of elements:-
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class demo{
+   
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int realArr[] = {10,20,30,40,50,60};
+        int reverseArr[] = new int[realArr.length];
+
+        for(int i=realArr.length-1; i>=0; i--){
+            reverseArr[(realArr.length - 1) - i] = realArr[i];
+        }
+        for(int k=0;k<realArr.length;k++){
+            System.out.print(reverseArr[k]+" ");
+        }
+        sc.close();
+    }
+}
+
+Linear Search Algorithm
+import java.util.Scanner;
+
+public class demo{
+   
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int arr[] = {10,22,4,2,63,69};
+
+        System.out.println("Enter number to search: ");
+        int num = sc.nextInt();
+        int index = 0;
+        for(int i=0;i<arr.length;i++){
+            if(num == arr[i]){
+                index = 1;
+            } else{
+                index = -1;
+            }
+        }
+        if(index == 1){
+            System.out.println(num+" is found in the given array");
+        } else if(index == -1){
+            System.out.println(num+" is not found");
+        }
+        sc.close();
+    }
+}
+
+
+Remove Duplicates
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class demo{
+   
+    public static void main(String[] args) {
+             // sorted array
+      int arr[] = {10, 10, 20, 30, 40, 40, 50};
+      
+      // remove duplicates
+      int newArr[] = removeDuplicates(arr);
+      
+      // display both arrays
+      System.out.println("Original array: "
+                     + Arrays.toString(arr));
+      System.out.println("After removing duplicates: " 
+                     + Arrays.toString(newArr));
+    }
+       // method to remove duplicates from sorted array
+   public static int[] removeDuplicates(int[] arr) {
+      
+    int j = 0; // index without duplicates
+    int lastIndex = arr.length-1; 
+    
+    // loop to iterate the array (except last element)
+    for (int i = 0; i < lastIndex; i++) {
+       if(arr[i] != arr[i+1]) {
+          arr[j++] = arr[i];
+       }
+    }
+    
+    // for the last element
+    if(arr[j] != arr[lastIndex])
+       arr[j++] = arr[lastIndex];
+    
+    // return new copied array
+    return Arrays.copyOf(arr, j);
+ }
+}
 
 
 
+Given two strings S and T, return if they are equal when both are typed into empty text editors. # means a backspace character
+
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.Stack;
+
+public class demo{
+   
+    public static void main(String[] args) {
+        String S = "ab#c";
+        String T = "ad#c";
+        boolean sameOrNot = backSpace(S, T);
+        System.out.println(sameOrNot);
+ }  
+ public static boolean backSpace(String S, String T){
+    Stack<Character> stack1 = new Stack<Character>();
+    Stack<Character> stack2 = new Stack<Character>();
+        for(int i=0;i<S.length();i++){
+
+
+            if(S.charAt(i)!='#'){
+            stack1.push(S.charAt(i));
+
+        }else{
+                    stack1.pop();
+                }
+        }
+        for(int j =0;j<T.length();j++){
+
+            if(T.charAt(j)!='#'){
+            stack2.push(S.charAt(j));
+
+        }else 
+                stack2.pop();
+        }
+
+        if(stack1.equals(stack2))
+            return true;
+        return false;
+    }
+ }
 
 
 

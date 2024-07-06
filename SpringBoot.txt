@@ -734,9 +734,16 @@ public class EmpController {
 }
 
 
+---------------------------------------------------------------------------------
 
+Spring Boot In-Depth:-
 
-
+Spring Architecture:-
+There we have a four different layers
+1. Presentation Layer (Auth, JSON Translation)
+2. Business Layer (Business logic, Validation, Authorisation)
+3. Persistence Layer (Storage Logic)
+4. Database Layer (Actual Database)
 
 
 
