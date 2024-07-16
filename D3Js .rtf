@@ -6,16 +6,16 @@
 \deftab560
 \pard\tx6086\pardeftab560\partightenfactor0
 
-\f0\b\fs40 \cf0 D3 JS Tutorial:-\
+\f0\b\fs42 \cf0 D3 JS Tutorial:-\
 \pard\pardeftab560\slleading20\pardirnatural\partightenfactor0
 
-\f1\b0\fs26 \cf0 \
+\f1\b0\fs28 \cf0 \
 \pard\pardeftab560\sa40\partightenfactor0
 
-\f0\b\fs32 \cf0 SVG Paths:-\
+\f0\b\fs34 \cf0 SVG Paths:-\
 \pard\pardeftab560\slleading20\partightenfactor0
 
-\f1\b0\fs26 \cf0 Where \
+\f1\b0\fs28 \cf0 Where \
 	M - margins\
 	L - Line\
 	C - curves\
@@ -28,10 +28,10 @@ In svg we have types tags like circle, path, polygon, rectangle etc.\
 \cf0 \
 \pard\pardeftab560\sa40\partightenfactor0
 
-\f0\b\fs32 \cf0 Selections In D3:-\
+\f0\b\fs34 \cf0 Selections In D3:-\
 \pard\pardeftab560\slleading20\partightenfactor0
 
-\f1\b0\fs26 \cf0 By selecting the Id or class names of SVG icon we can fetch the svg tags.\
+\f1\b0\fs28 \cf0 By selecting the Id or class names of SVG icon we can fetch the svg tags.\
 \
 Syntax:-\
 It will search through entire DOM tree\
@@ -57,10 +57,10 @@ Const selectAll - d3.select(\'93container\'94).selectAll(\'93rect\'94); \
 \
 \pard\pardeftab560\sa40\partightenfactor0
 
-\f0\b\fs32 \cf0 Data Binding:-\
+\f0\b\fs34 \cf0 Data Binding:-\
 \pard\pardeftab560\slleading20\partightenfactor0
 
-\fs26 \cf0 The data passing using datum or data must be an array.
+\fs28 \cf0 The data passing using datum or data must be an array.
 \f1\b0 \
 \
 D3.select(\'92svg\'92).datum(data)\
@@ -70,10 +70,10 @@ D3.select(\'92svg\'92).selectAll(\'93rect\'94).data(data)\
 \cf0 \
 \pard\pardeftab560\sa40\partightenfactor0
 
-\f0\b\fs32 \cf0 Attr and Style:-\
+\f0\b\fs34 \cf0 Attr and Style:-\
 \pard\pardeftab560\slleading20\partightenfactor0
 
-\f1\b0\fs26 \cf0 const svg = document.getElementById("container")\
+\f1\b0\fs28 \cf0 const svg = document.getElementById("container")\
 let rectWidth = 50\
 \
 const s = d3.select(svg).selectAll('rect')\
@@ -90,10 +90,10 @@ const s = d3.select(svg).selectAll('rect')\
 \
 \pard\pardeftab560\sa40\partightenfactor0
 
-\f0\b\fs32 \cf0 Creating DOM elements from Data:-\
+\f0\b\fs34 \cf0 Creating DOM elements from Data:-\
 \pard\pardeftab560\slleading20\partightenfactor0
 
-\f1\b0\fs26 \cf0 If there is empty <svg></svg> with no DOM elements like rect/circle/line then by using append we can create a DOM elements based on the data we have.\
+\f1\b0\fs28 \cf0 If there is empty <svg></svg> with no DOM elements like rect/circle/line then by using append we can create a DOM elements based on the data we have.\
 \
 Example:-\
 D3.select(svg).selectAll(\'93rect\'94).data([1,2,3,4,5]).enter().append(\'93rect\'94);\
