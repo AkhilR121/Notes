@@ -1,6 +1,6 @@
 What is Spring Boot?
 Spring Boot provides a good platform for Java developers to develop a stand-alone and production-grade spring application that you can just run. You can get started with minimum configurations without the need for an entire Spring configuration setup.
-
+-> Spring will take care of object, so need to create an object seperately. For this dev need to communicate to spring using configurations.
 Dependency Injection:-
 In simple words, a bunch of variables is known as dependencies.
 
@@ -746,6 +746,74 @@ There we have a four different layers
 4. Database Layer (Actual Database)
 
 
+AutoWire:-
+1. Field Injection (Not recommended for best practice).
+2. Contructor Injection(Don't want to use @AutoWire)
+3. Setter Injection
+
+Note:- Mostly preferred contructor and setter injection.
+
+Cases:-
+1. To create an object of one class in another class.
+-> Using ApplicationContext from spring framework.
+ApplicationContext context = SpringApplication.run(AutowireDemoApplication.class, args);
+
+	Dev obj = context.getBean(Dev.class);
+	obj.DevBuild();
+
+
+public class Dev {
+    @Autowired
+    Laptop laptop;
+    public void DevBuild(){
+        laptop.build();
+    }
+}
+
+-> Using @Componet and @Autowired
+@Component
+public class Laptop {
+    @Override
+    public void build(){
+        System.out.print("Build Success in Laptop!");
+    }
+}
+
+2. Using interface autowire can be implemented.
+public class Dev {
+    @Autowired
+    Computer Computer;
+    public void DevBuild(){
+        Computer.build();
+    }
+}
+
+Here Laptop implements Computer interface
+public class Laptop implements Computer {
+    @Override
+    public void build(){
+        System.out.print("Build Success in Laptop!");
+    }
+}
+
+3. Whatif Computer interface implemented by two components?
+Spring will confused to select components
+@Primary will resolve the issue to select a specific component primarily.
+
+Spring Boot MVC:-
+In this architecture we have different layers, most importantly we have three
+1) Controller
+2) Service
+3) Repository
+
+Actual Flow:-
+1. Client sends request
+2. Controller receives the requests from client and respond it to the client.
+3. Service and Repositories are normal classes
+4. Finally,  DataBase.
+
+Note:-
+1) Here there is hidden layer before "Controller" caller "Front Controller". Front-Controller used to capture all the "request mappings" which is created by the spring. 
 
 
 
