@@ -809,12 +809,22 @@ In this architecture we have different layers, most importantly we have three
 Actual Flow:-
 1. Client sends request
 2. Controller receives the requests from client and respond it to the client.
+3. Where controller asks for data to services but not for DB's.
 3. Service and Repositories are normal classes
 4. Finally,  DataBase.
 
 Note:-
 1) Here there is hidden layer before "Controller" caller "Front Controller". Front-Controller used to capture all the "request mappings" which is created by the spring. 
 
+CRUD Operations Using Spring MVC:-
+(GET, POST, PUT, DELETE)
+Annotations:
+1. @GetMapping(""), @PathVariable
+	-- used for create a get api endpoint ("/products", Returns list of products in DB)
+	-- @PathVariable is used when there is a selection of entity by ID ("/products/101", Return an enity having ID 101 from DB only if exists)
+2. @PostMapping(""), @RequestBody
+	-- used to create a post api endpoints ("/products", Same endpoint with two different requests).
+	-- @RequestBody automatically detect the body from client side and add the entity into the DB.
 
 
 
