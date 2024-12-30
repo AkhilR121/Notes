@@ -810,7 +810,7 @@ Actual Flow:-
 1. Client sends request
 2. Controller receives the requests from client and respond it to the client.
 3. Where controller asks for data to services but not for DB's.
-3. Service and Repositories are normal classes
+3. Service(for bussiness logic) and Repositories(to make connection with DB) are normal classes
 4. Finally,  DataBase.
 
 Note:-
@@ -826,7 +826,17 @@ Annotations:
 	-- used to create a post api endpoints ("/products", Same endpoint with two different requests).
 	-- @RequestBody automatically detect the body from client side and add the entity into the DB.
 
+3. @PutMapping(""), @RequestBody
+	-- used to create a put api endpoints ("/porducts",), Where @Request body works same as post mapping.
+4. @DeleteMapping(""), @Pathvariable
+	-- the name itself is there whici is used to create a delete endpoints.
 
+Spring Data JPA:
+ORM:-
+Spring-ORM is a technique or a Design Pattern used to access a relational database from an object-oriented language. ORM (Object Relation Mapping) covers many persistence technologies. They are as follows: JPA(Java Persistence API): It is mainly used to persist data between Java objects and relational databases.
+
+Connecting with DateBase(DB):-
+Here we have to write all the bussiness logic in "Repository" layer which is used to connect with DB.
 
 
 
